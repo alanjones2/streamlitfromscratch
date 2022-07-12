@@ -138,7 +138,7 @@ The Streamlit library is imported with the name st so that all of the functions 
 
 There are two Streamlit functions that we use - ``st.title()`` which formats text in a large bold font and ``st.text()`` which formats text as a preformatted text.
 
-For those unfamiliar with Python, there are four ways of quoting a string. We can use single or  double quotes like this 'To be or not to be...', or "To be or not to be..." but these strings must be all on one line. Alternatively, we can use triple quotes like this:
+For those unfamiliar with Python, there are four ways of quoting a string. We can use single or  double quotes like this ``'To be or not to be...'``, or ``"To be or not to be..."`` but these strings must be all on one line. Alternatively, we can use triple quotes like this:
 
 ```` Python
 '''To be or not to be,
