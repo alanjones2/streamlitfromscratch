@@ -1,4 +1,4 @@
-Streamlit from Scratch
+# Streamlit from Scratch
 Streamlit is a framework for creating simple and elegant web applications in pure Python. It's mainly aimed at Data Scientists and Analysts but can also be used as a general-purpose framework for creating web applications.
  
 No knowledge of HTML or Javascript is needed. Indeed, you can create a simple web page with barely any knowledge of Python!
@@ -8,10 +8,11 @@ This is the first in a series of articles in which we will discover how Streamli
 First, we look at how to get started, downloading the tools that we will need (there aren't many) and how to edit and run your first Streamlit app.
 
 
-Getting started
+## Getting started
 
 Here is the code for a simple web page that consists only of text:
 
+```` Python
 import streamlit as st
 
 st.title("Hamlet said…")
@@ -22,9 +23,9 @@ The slings and arrows of outrageous fortune,
 Or to take arms against a sea of troubles
 And by opposing end them.
 """)
+````
 
-
-Listing 1 - hamlet.py
+_Listing 1 - hamlet.py_
 
 And it looks something like this:
 
