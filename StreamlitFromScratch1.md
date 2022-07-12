@@ -177,6 +177,37 @@ Try changing the text and then save it. In you browser you will see that you are
 
 Click on the _Rerun_ button and you will see an updated web page that reflects the changes that you made.
 
-We have used ``st.text()`` to display Hamlet's speech but there are other ways of displayinf text.
+We have used ``st.text()`` to display Hamlet's speech but there are other ways of displaying text. Here is an expanded version of the Hamlet program.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamlet2.png)
+It uses ``st.caption()`` to display a small-font caption under the quote and then uses ``st.header()``, ``st.subheader`` and ``st.write`` to display some comments about the quote.
+
+I'm certain that you can guess what these will do. A header has a large bold font, but smaller than a title; a subheader is similar but smaller; and ``st.write`` displays 'normal' text.
+
+One thing that you should note is that unlike ``st.text()``, ``st.write()`` does not preserve the layout of the text in a string.
+
+````Python
+import streamlit as st
+
+st.title("Hamlet")
+
+st.text("""
+To be, or not to be, that is the question:
+Whether 'tis nobler in the mind to suffer
+The slings and arrows of outrageous fortune,
+Or to take arms against a sea of troubles
+And by opposing end them.
+""")
+
+st.caption("Hamlet by William shakespeare, Act 3, Scene 1")
+
+st.header("Hamlet's soliloquy")
+st.subheader("The famous speech from the 'Nunnery scene'")
+st.write("""In the speech, Hamlet considers suicide, but considers that the 
+            alternative to his unhappy life might be even worse.""")
+````
+You can see the result in the screenshot, below.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshot.png)
+
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshotsmall.png)
