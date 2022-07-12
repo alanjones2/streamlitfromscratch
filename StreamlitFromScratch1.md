@@ -1,5 +1,8 @@
-# Streamlit from Scratch
-Streamlit is a framework for creating simple and elegant web applications in pure Python. It's mainly aimed at Data Scientists and Analysts but can also be used as a general-purpose framework for creating web applications.
+# Streamlit from Scratch, 1: Getting Started
+
+## Which tools do you need and how to use them; and how to create your first interactive web app in Python
+
+ Streamlit is a framework for creating simple and elegant web applications in pure Python. It's mainly aimed at Data Scientists and Analysts but can also be used as a general-purpose framework for creating web applications.
  
 No knowledge of HTML or Javascript is needed. Indeed, you can create a simple web page with barely any knowledge of Python!
 
@@ -37,7 +40,7 @@ In this series we will go quite a lot beyond this, though, creating web applicat
 
 But first, we need to install the tools.
 
-### Installing Python and Streamlit
+## Installing Python and Streamlit
 
 We need Python installed on our computer and, of course, Streamlit, too. We will also need an editor to create our apps and a browser to run them in.
 
@@ -57,7 +60,7 @@ From a command window (use the Anaconda one if that is what you have installed) 
 pip install streamlit
 ````
 
-### Which editor
+## Which editor
 Almost any editor is suitable for writing Streamlit apps. If you are already a Python programmer then you will already have your favourite, maybe one of the IDEs, VSCode or PyCharm, but a simple general-purpose editor such as __Sublime Text__ or __Notepad++__ is perfectly adequate, too.
 
 When we run normal Python programs we issue the following command:
@@ -107,15 +110,15 @@ There is one more tool that we need to run a Streamlit app and that is a browser
 
 So, now we have all the tools, we are ready to create our first Streamlit app.
 
-### Editing and running 'Hello World'
+## Editing and running 'Hello Hamlet'
 
-'Hello World' has been the traditional first program that anyone writes in any language for decades. The first time I came across it was in the book "The C Programming Language" by Briam W. Kernighan and Dennis M. Ritchie whose first edition came out in 1978 (although my copy was the second edition that was published 10 years later).
+'Hello World' has been the traditional first program that anyone writes in any language for decades - it just displays 'Hello World' on the screen. The first time I came across it was in the book "The C Programming Language" by Briam W. Kernighan and Dennis M. Ritchie whose first edition came out in 1978 (although my copy was the second edition that was published 10 years later).
 
 We've already seen our first program: it's Hamlet. But it is pretty much the equivalent of 'Hello World' as it just writes some text.
 
 I'll repeat it here so we can run through an explanation of how it works.
 
-````Python
+```` Python
 import streamlit as st
 
 st.title("Hamlet said…")
@@ -132,11 +135,11 @@ _Listing 1 - hamlet.py_
 
 This is one of the simplest Streamlit programs you can imagine. It just writes two strings - one formatted as a title and the other as pre-formatted text.
 
-The first line will be familiar to a Python programmer; it imports a Python library - the Streamlit library. As you may well know a Python library is a package of code that contains useful functions that can be incorporated into a Python program. In this case, it incorporates all of the functionality that turns a simple Python program into a web app and provides us with a large number of functions that allows us to structure that web app.
+The first line will be familiar to a Python programmer; it imports a Python library - the Streamlit library. As you may well know a Python library is a package of code that contains useful functions that can be incorporated into a Python program. In this case, the Streamlit library incorporates all of the functionality that turns a simple Python program into a web app and provides us with a large number of functions that allows us to build that web app.
 
-The Streamlit library is imported with the name st so that all of the functions that we use from that library are preceded with that name.
+The Streamlit library is imported with the name ``st`` so that all of the functions that we use from that library are preceded with that name.
 
-There are two Streamlit functions that we use - ``st.title()`` which formats text in a large bold font and ``st.text()`` which formats text as a preformatted text.
+There are two Streamlit functions that we use - ``st.title()`` which formats text in a large bold font and ``st.text()`` which displays preformatted text.
 
 For those unfamiliar with Python, there are four ways of quoting a string. We can use single or  double quotes like this ``'To be or not to be...'``, or ``"To be or not to be..."`` but these strings must be all on one line. Alternatively, we can use triple quotes like this:
 
@@ -168,3 +171,12 @@ Your default browser will then be started with the web page that has been genera
 
 One of the nice things about Streamlit is that it knows when you have made a change to the code. If you edit and save your program, then the web page will display the option to re-run the app. When you do so the new version is displayed.
 
+Try changing the text and then save it. In you browser you will see that you are ivited to re-run the app.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamletChanged.png)
+
+Click on the _Rerun_ button and you will see an updated web page that reflects the changes that you made.
+
+We have used ``st.text()`` to display Hamlet's speech but there are other ways of displayinf text.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamlet2.png)

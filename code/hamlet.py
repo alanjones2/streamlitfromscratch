@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("Hamlet, Act 3")
+st.title("Hamlet said...")
 st.text("""
 To be, or not to be, that is the question:
 Whether 'tis nobler in the mind to suffer
