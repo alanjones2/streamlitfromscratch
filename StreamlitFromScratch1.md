@@ -48,9 +48,9 @@ One of the easiest ways of getting Python is to install the Anaconda distributio
 
 The [Python](python.org) website always contains the latest version of Python. If you download [Anaconda](anaconda.com), you may not get the latest version. And that is not not a bad thing because you will be sure to get a version that works with all of the libraries that come with it. 
 
-When a new version of Python is released, it can sometimes take a while for the library distributions to catch up, so while installing from __python.org__ will give you the latest version, the Anaconda version may be the safest (although you can, of course, get older versions from __python.org__, too).
+When a new version of Python is released, it can sometimes take a while for the library distributions to catch up, so while installing from [python.org](python.org) will give you the latest version, the [Anaconda](anaconda.com) version may be the safest (although you can, of course, get older versions from [python.org](python.org), too).
 
-So, go to the Anaconda or Python websites and download and install the version for your machine. I would not advise installing both unless you want to confuse your operating system and yourself (it is possible to install both if you exercise some care but there is not much point. If you can't decide which to choose, go for Anaconda, it's what the Streamlit folk recommend).
+So, go to the Anaconda or Python websites and download and install the version for your machine. I would not advise installing both unless you want to confuse your operating system and yourself (it __is__ possible to install both if you exercise some care but there is not much point. If you can't decide which to choose, go for Anaconda - it's what the Streamlit folk recommend).
 
 Whichever you choose, you will still have to install Streamlit.
 
@@ -61,7 +61,7 @@ pip install streamlit
 ````
 
 ## Which editor
-Almost any editor is suitable for writing Streamlit apps. If you are already a Python programmer then you will already have your favourite, maybe one of the IDEs, VSCode or PyCharm, but a simple general-purpose editor such as __Sublime Text__ or __Notepad++__ is perfectly adequate, too.
+Almost any editor is suitable for writing Streamlit apps. If you are already a Python programmer then you will already have your favourite - maybe one of the IDEs, VSCode or PyCharm - but a simple general-purpose editor such as __Sublime Text__ or __Notepad++__ is perfectly adequate, too.
 
 When we run normal Python programs we issue the following command:
 
@@ -70,16 +70,16 @@ When we run normal Python programs we issue the following command:
 python myprogram.py 	
 ````
 
-
 And IDEs such as VSCode and PyCharm assume this when running any Python programs. However, the command we need to run a Streamlit app is:
 
 ````
+# This how to run a Streamlit app
 streamlit run myprogram.py
 ````
 
 The consequence of this is that the standard 'Run' command in VSCode or PyCharm doesn't work. 
 
-The easiest way around this is to issue the correct command in a command window which can be external to the editor, like the Anaconda prompt, or the built-in terminal window in your operating system. Alternatively, we can use a terminal window within the editor or IDE. In VSCode there is a Terminal menu option where you can open a new terminal
+The easiest way around this is to type the correct command in a command window. This can be external to the editor, like the Anaconda prompt, or the built-in terminal window in your operating system. Alternatively, we can use a terminal window within the editor or IDE. In VSCode there is a Terminal menu option where you can open a new terminal
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openVCSterminal.png)
 
@@ -95,7 +95,7 @@ Here are screenshots of the Sublime Text and Notepad++ editors side-by-side with
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sublimetext.png)
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openPynotepadpp.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/notepadpp.png)
 
 
 VSCode and Pycharm are quite sophisticated IDEs. VSCode is a general-purpose tool that can be customized with plugins in order to support many different languages. PyCharm is, if anything, more capable than VSCode but is dedicated to Python programming.
