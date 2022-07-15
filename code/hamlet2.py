@@ -9,10 +9,12 @@ The slings and arrows of outrageous fortune,
 Or to take arms against a sea of troubles
 And by opposing end them.
 """)
-
 st.caption("Hamlet by William shakespeare, Act 3, Scene 1")
 
 st.header("Hamlet's soliloquy")
 st.subheader("The famous speech from the 'Nunnery scene'")
 st.write("""In the speech, Hamlet considers suicide, but considers that the 
             alternative to his unhappy life might be even worse.""")
+
+
+st.latex(" \int f^{-1}(x-x_a)\,dx")

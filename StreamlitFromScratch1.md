@@ -104,7 +104,9 @@ Sublime Text is simple to use, quick to download and install but not free: you c
 
 The Notepad++ user interface is, perhaps a little busier than Sublime but it is also a perfectly capable editor and is entirely free.
 
-If you are already a VSCode or PyCharm user then the best bet is to carry on using these but if you don't, then Sublime Text or Notepad++ are probably an easier approach to start with.
+Both Sublime and Notepad++ support colour highlighting of Python code, which is nice. So too, of course, do VSCode and PyCharm.
+
+If you are already a VSCode or PyCharm user then the best bet is to carry on using these but if you don't, then Sublime Text or Notepad++ are probably easier to start with.
 
 There is one more tool that we need to run a Streamlit app and that is a browser such as Chrome, Firefox or Edge. But I assume that you have one of these already.
 
@@ -135,11 +137,11 @@ _Listing 1 - hamlet.py_
 
 This is one of the simplest Streamlit programs you can imagine. It just writes two strings - one formatted as a title and the other as pre-formatted text.
 
-The first line will be familiar to a Python programmer; it imports a Python library - the Streamlit library. As you may well know a Python library is a package of code that contains useful functions that can be incorporated into a Python program. In this case, the Streamlit library incorporates all of the functionality that turns a simple Python program into a web app and provides us with a large number of functions that allows us to build that web app.
+The first line will be familiar to a Python programmer; it imports a Python library - the Streamlit library. As you may well know a Python library is a package of code that contains useful functions that can be incorporated into a Python program. In this case, the Streamlit library incorporates all of the functionality that turns a simple Python program into a web app and provides us with a large number of functions that allows us to build that web app and make it look good.
 
 The Streamlit library is imported with the name ``st`` so that all of the functions that we use from that library are preceded with that name.
 
-There are two Streamlit functions that we use - ``st.title()`` which formats text in a large bold font and ``st.text()`` which displays preformatted text.
+There are two Streamlit functions that we use: ``st.title()`` which formats text in a large bold font and ``st.text()`` which displays pre-formatted text.
 
 For those unfamiliar with Python, there are four ways of quoting a string. We can use single or  double quotes like this ``'To be or not to be...'``, or ``"To be or not to be..."`` but these strings must be all on one line. Alternatively, we can use triple quotes like this:
 
@@ -171,7 +173,7 @@ Your default browser will then be started with the web page that has been genera
 
 One of the nice things about Streamlit is that it knows when you have made a change to the code. If you edit and save your program, then the web page will display the option to re-run the app. When you do so the new version is displayed.
 
-Try changing the text and then save it. In you browser you will see that you are ivited to re-run the app.
+Try changing the text and then save it. In you browser you will see that you are invited to re-run the app.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamletChanged.png)
 
@@ -209,5 +211,27 @@ You can see the result in the screenshot, below.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshot.png)
 
+For completeness, we should also mention the other ways of displaying text.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshotsmall.png)
+
+```` Python
+st.code("""
+if hamlet == "The Prince of Denmark":
+    print("That's our man!")
+else:
+    print("This is an imposter)
+""")
+````
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCode.png)
+
+This is a code block. You can see that certain words lik ``if`` and ``else`` are highlighted as keywords. The block has a coloured background and it also has an icon for copying the text.
+
+If you need to display Latex strings such as mathematical formulae then you can use ``st.latex()``, e.g.
+
+````Python
+st.latex(" \int f^{-1}(x-x_a)\,dx")
+````
+
+displays the following:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotLatex.png)
