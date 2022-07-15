@@ -222,7 +222,7 @@ else:
     print("This is an imposter)
 """)
 ````
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCode.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCodeBlock.png)
 
 This is a code block. You can see that certain words lik ``if`` and ``else`` are highlighted as keywords. The block has a coloured background and it also has an icon for copying the text.
 
