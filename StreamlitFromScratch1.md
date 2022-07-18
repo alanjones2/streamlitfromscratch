@@ -275,3 +275,17 @@ st.text(text)
 And this is what it looks like:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotQuotes.png)
+
+When the user selects either 'Hamlet' or 'Twelfth Night' the entire program is re-run so that the if statement is executed and the appropriate quote is displayed.
+
+This is an important aspect of Streamlit: whenever the user interacts with a program, it is run again from the beginning and the web page is reloaded.
+
+## Conclusion
+
+In this first article, we've seen how to set ourselves up to edit and run a Streamlit app and how to write an app that displays different types of text. As a bonus, and as a taste of things to come, we've also looked at some simple user interaction that allows the user to change the behaviour of the program.
+
+In future articles we will see more ways of interacting with the user, how to display images and graphs, how to design and lay out a Streamlit app using columns and containers and much more.
+
+Thanks for reading - I hope you have found it useful. You can find a link to the code for this article on my [Github page](alanjones2.github.io) as well as links to other articles.
+
+To keep up to date with what I am doing, you can subscribe to my occasional free newsletter [Technofle](technofile.substack.com)
