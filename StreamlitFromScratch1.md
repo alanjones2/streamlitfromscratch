@@ -179,6 +179,8 @@ Try changing the text and then save it. In you browser you will see that you are
 
 Click on the _Rerun_ button and you will see an updated web page that reflects the changes that you made.
 
+## More ways of displaying text
+
 We have used ``st.text()`` to display Hamlet's speech but there are other ways of displaying text. Here is an expanded version of the Hamlet program.
 
 It uses ``st.caption()`` to display a small-font caption under the quote and then uses ``st.header()``, ``st.subheader`` and ``st.write`` to display some comments about the quote.
@@ -207,12 +209,15 @@ st.subheader("The famous speech from the 'Nunnery scene'")
 st.write("""In the speech, Hamlet considers suicide, but considers that the 
             alternative to his unhappy life might be even worse.""")
 ````
+_Listing 2 - hamlet2.py_
+
 You can see the result in the screenshot, below.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshot.png)
 
-For completeness, we should also mention the other ways of displaying text.
+For completeness, we should also mention two other ways of displaying text.
 
+For programmers there is ``st.code()``. This will display text as if it were program code. For example:
 
 ```` Python
 st.code("""
@@ -224,7 +229,7 @@ else:
 ````
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCodeBlock.png)
 
-This is a code block. You can see that certain words lik ``if`` and ``else`` are highlighted as keywords. The block has a coloured background and it also has an icon for copying the text.
+You can see that certain words like ``if`` and ``else`` are highlighted as keywords. The block has a coloured background and, if you position your cursor over the block, you will see an icon for copying the text.
 
 If you need to display Latex strings such as mathematical formulae then you can use ``st.latex()``, e.g.
 
@@ -235,3 +240,38 @@ st.latex(" \int f^{-1}(x-x_a)\,dx")
 displays the following:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotLatex.png)
+
+## A little interaction
+
+Streamlit gives us a many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll Write a simple program to select a piece of Shakespeare to display.
+
+The code below use the value of a set of radio buttons to decide which quote to display. If 'Twelfth Night' is selected the the variable ``text`` is set to one quote and, otherwise, if 'Hamlet' is selcted ``text`` is set to a different quote.
+
+The function ``st.radio()`` is used to select a value. Its parameters are a string that is used as a prompt followed by a list of string values that will be used to label the radio buttons. The function retrns the value of the selection.
+
+```` Python
+import streamlit as st
+
+quote = st.radio("Select a quote from...",('Hamlet', 'Twelfth Night'))
+
+if quote == 'Twelfth Night':
+    text = """
+    If music be the food of love, play on;
+    Give me excess of it, that, surfeiting,
+    The appetite may sicken, and so die.
+    """
+elif quote == "Hamlet":
+    text = """
+    To be, or not to be, that is the question:
+    Whether 'tis nobler in the mind to suffer
+    The slings and arrows of outrageous fortune,
+    Or to take arms against a sea of troubles
+    And by opposing end them.
+    """
+
+st.title(quote)
+st.text(text)
+````
+And this is what it looks like:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotQuotes.png)
