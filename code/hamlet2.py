@@ -17,4 +17,14 @@ st.write("""In the speech, Hamlet considers suicide, but considers that the
             alternative to his unhappy life might be even worse.""")
 
 
+
+st.code("""
+if hamlet == "The Prince of Denmark":
+    print("That's our man!")
+else:
+    print("This is an imposter")
+""")
+
+
 st.latex(" \int f^{-1}(x-x_a)\,dx")
+

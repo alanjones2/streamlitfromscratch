@@ -46,7 +46,7 @@ We need Python installed on our computer and, of course, Streamlit, too. We will
 
 One of the easiest ways of getting Python is to install the Anaconda distribution. Anaconda consists of a fairly up-to-date version of Python plus a whole bunch of libraries. It's a fairly big installation but by using Anaconda you will save yourself the trouble of having to manually install those libraries later. The main alternative is to install the official Python distribution from their website.
 
-The [Python](python.org) website always contains the latest version of Python. If you download [Anaconda](anaconda.com), you may not get the latest version. And that is not not a bad thing because you will be sure to get a version that works with all of the libraries that come with it. 
+The [Python](python.org) website always contains the latest version of Python. If you download [Anaconda](anaconda.com), you may not get the latest version. But that is not not a bad thing because, while it might not be the most up-to-date, you will be sure to get a version that works with all of the libraries that come with it. 
 
 When a new version of Python is released, it can sometimes take a while for the library distributions to catch up, so while installing from [python.org](python.org) will give you the latest version, the [Anaconda](anaconda.com) version may be the safest (although you can, of course, get older versions from [python.org](python.org), too).
 
@@ -70,14 +70,14 @@ When we run normal Python programs we issue the following command:
 python myprogram.py 	
 ````
 
-And IDEs such as VSCode and PyCharm assume this when running any Python programs. However, the command we need to run a Streamlit app is:
+And IDEs such as VSCode and PyCharm assume this when running Python programs. However, the command we need to run a Streamlit app is:
 
 ````
 # This how to run a Streamlit app
 streamlit run myprogram.py
 ````
 
-The consequence of this is that the standard 'Run' command in VSCode or PyCharm doesn't work. 
+The consequence of this is that the standard 'Run' command in VSCode or PyCharm doesn't work for Streamlit apps. 
 
 The easiest way around this is to type the correct command in a command window. This can be external to the editor, like the Anaconda prompt, or the built-in terminal window in your operating system. Alternatively, we can use a terminal window within the editor or IDE. In VSCode there is a Terminal menu option where you can open a new terminal
 
@@ -219,7 +219,7 @@ st.code("""
 if hamlet == "The Prince of Denmark":
     print("That's our man!")
 else:
-    print("This is an imposter)
+    print("This is an imposter")
 """)
 ````
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCodeBlock.png)
