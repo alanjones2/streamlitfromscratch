@@ -1,4 +1,4 @@
-# Streamlit from Scratch, 1: Getting Started
+# Streamlit from Scratch: 1. Getting Started
 
 ## Which tools do you need and how to use them; and how to create your first interactive web app in Python
 
@@ -8,7 +8,7 @@ No knowledge of HTML or Javascript is needed. Indeed, you can create a simple we
 
 This is the first in a series of articles in which we will discover how Streamlit can be used to create anything from a simple text-based web page to a sophisticated, interactive dashboard with data visualizations. 
 
-First, we look at how to get started, downloading the tools that we will need (there aren't many) and how to edit and run your first Streamlit app.
+First, we look at how to get started, which tools we need to download (there aren't many) and how to edit and run your first Streamlit app.
 
 
 ## Getting started
@@ -46,7 +46,7 @@ We need Python installed on our computer and, of course, Streamlit, too. We will
 
 One of the easiest ways of getting Python is to install the Anaconda distribution. Anaconda consists of a fairly up-to-date version of Python plus a whole bunch of libraries. It's a fairly big installation but by using Anaconda you will save yourself the trouble of having to manually install those libraries later. The main alternative is to install the official Python distribution from their website.
 
-The [Python](python.org) website always contains the latest version of Python. If you download [Anaconda](anaconda.com), you may not get the latest version. But that is not not a bad thing because, while it might not be the most up-to-date, you will be sure to get a version that works with all of the libraries that come with it. 
+The [Python](python.org) website always contains the latest version of Python. If you download [Anaconda](anaconda.com), you may not get the latest version. But that is not a bad thing because, while it might not be the most up-to-date, you will be sure to get a version that works with all of the libraries that come with it. 
 
 When a new version of Python is released, it can sometimes take a while for the library distributions to catch up, so while installing from [python.org](python.org) will give you the latest version, the [Anaconda](anaconda.com) version may be the safest (although you can, of course, get older versions from [python.org](python.org), too).
 
@@ -87,7 +87,9 @@ The easiest way around this is to type the correct command in a command window. 
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openPyCharmterminal.png)
 
-So, to run your program from one of these IDEs type the run command into the into the terminal window.
+So, to run your program from one of these IDEs type the run command into the terminal window.
+
+_**Warning...** it's probably best to only use the built-in terminals if you are using a standard Python installation. If you have installed Anaconda, this may not work well with VSCode or PyCharm because the default terminal may not be able to find the Anaconda Python installation. There are ways around this but it's beyond our scope to go into that here. If you are using Anaconda it may be simplest to use the Anaconda prompt to run your apps._ 
 
 There is no terminal in Sublime Text as standard (although you can install one). Neither is there one in Notepad++ (although can set up a 'run' command that will appear in a menu). But with these simple editors, it might be easier just to use a separate command window.
 
@@ -98,7 +100,7 @@ Here are screenshots of the Sublime Text and Notepad++ editors side-by-side with
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/notepadpp.png)
 
 
-VSCode and Pycharm are quite sophisticated IDEs. VSCode is a general-purpose tool that can be customized with plugins in order to support many different languages. PyCharm is, if anything, more capable than VSCode but is dedicated to Python programming.
+VSCode and Pycharm are quite sophisticated IDEs. VSCode is a general-purpose tool that can be customized with plugins to support many different languages. PyCharm is, if anything, more capable than VSCode but is dedicated to Python programming.
 
 Sublime Text is simple to use, quick to download and install but not free: you can download a free trial version but are expected to pay for a license. Having said that, the trial never expires.
 
@@ -114,7 +116,7 @@ So, now we have all the tools, we are ready to create our first Streamlit app.
 
 ## Editing and running 'Hello Hamlet'
 
-'Hello World' has been the traditional first program that anyone writes in any language for decades - it just displays 'Hello World' on the screen. The first time I came across it was in the book "The C Programming Language" by Briam W. Kernighan and Dennis M. Ritchie whose first edition came out in 1978 (although my copy was the second edition that was published 10 years later).
+'Hello World' has been the traditional first program that anyone writes in any language for decades - it just displays 'Hello World' on the screen. The first time I came across it was in the book "The C Programming Language" by Brian W. Kernighan and Dennis M. Ritchie whose first edition came out in 1978 (although my copy was the second edition that was published 10 years later).
 
 We've already seen our first program: it's Hamlet. But it is pretty much the equivalent of 'Hello World' as it just writes some text.
 
@@ -173,7 +175,7 @@ Your default browser will then be started with the web page that has been genera
 
 One of the nice things about Streamlit is that it knows when you have made a change to the code. If you edit and save your program, then the web page will display the option to re-run the app. When you do so the new version is displayed.
 
-Try changing the text and then save it. In you browser you will see that you are invited to re-run the app.
+Try changing the text and then save it. In your browser, you will see that you are invited to re-run the app.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamletChanged.png)
 
@@ -202,7 +204,7 @@ Or to take arms against a sea of troubles
 And by opposing end them.
 """)
 
-st.caption("Hamlet by William shakespeare, Act 3, Scene 1")
+st.caption("Hamlet by William Shakespeare, Act 3, Scene 1")
 
 st.header("Hamlet's soliloquy")
 st.subheader("The famous speech from the 'Nunnery scene'")
@@ -243,11 +245,11 @@ displays the following:
 
 ## A little interaction
 
-Streamlit gives us a many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll Write a simple program to select a piece of Shakespeare to display.
+Streamlit gives us many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll Write a simple program to select a piece of Shakespeare to display.
 
-The code below use the value of a set of radio buttons to decide which quote to display. If 'Twelfth Night' is selected the the variable ``text`` is set to one quote and, otherwise, if 'Hamlet' is selcted ``text`` is set to a different quote.
+The code below uses the value of a set of radio buttons to decide which quote to display. If 'Twelfth Night' is selected the variable ``text`` is set to one quote, otherwise, if 'Hamlet' is selected ``text`` is set to a different quote.
 
-The function ``st.radio()`` is used to select a value. Its parameters are a string that is used as a prompt followed by a list of string values that will be used to label the radio buttons. The function retrns the value of the selection.
+The function ``st.radio()`` is used to select a value. Its parameters are a string that is used as a prompt followed by a list of string values that will be used to label the radio buttons. The function returns the value of the selection.
 
 ```` Python
 import streamlit as st
@@ -288,4 +290,4 @@ In future articles we will see more ways of interacting with the user, how to di
 
 Thanks for reading - I hope you have found it useful. You can find a link to the code for this article on my [Github page](alanjones2.github.io) as well as links to other articles.
 
-To keep up to date with what I am doing, you can subscribe to my occasional free newsletter [Technofle](technofile.substack.com)
+To keep up to date with what I am doing, you can subscribe to my occasional free newsletter [Technofile](technofile.substack.com)
