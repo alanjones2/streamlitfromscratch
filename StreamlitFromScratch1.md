@@ -2,6 +2,9 @@
 
 ## Which tools do you need and how to use them; and how to create your first interactive web app in Python
 
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/cover.png)
+
+
  Streamlit is a framework for creating simple and elegant web applications in pure Python. It's mainly aimed at Data Scientists and Analysts but can also be used as a general-purpose framework for creating web applications.
  
 No knowledge of HTML or Javascript is needed. Indeed, you can create a simple web page with barely any knowledge of Python!
