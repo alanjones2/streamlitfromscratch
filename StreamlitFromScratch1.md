@@ -2,7 +2,7 @@
 
 ## Which tools do you need and how to use them; and how to create your first interactive web app in Python
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/cover.png)
+![](https://raw.githubusercontent.com/alanjones2/streamlitfromscratch/main/images/cover.png)
 
 
  Streamlit is a framework for creating simple and elegant web applications in pure Python. It's mainly aimed at Data Scientists and Analysts but can also be used as a general-purpose framework for creating web applications.
@@ -63,7 +63,8 @@ From a command window (use the Anaconda one if that is what you have installed) 
 pip install streamlit
 ````
 
-## Which editor
+## Editors
+
 Almost any editor is suitable for writing Streamlit apps. If you are already a Python programmer then you will already have your favourite - maybe one of the IDEs, VSCode or PyCharm - but a simple general-purpose editor such as __Sublime Text__ or __Notepad++__ is perfectly adequate, too.
 
 When we run normal Python programs we issue the following command:
@@ -82,7 +83,18 @@ streamlit run myprogram.py
 
 The consequence of this is that the standard 'Run' command in VSCode or PyCharm doesn't work for Streamlit apps. 
 
-The easiest way around this is to type the correct command in a command window. This can be external to the editor, like the Anaconda prompt, or the built-in terminal window in your operating system. Alternatively, we can use a terminal window within the editor or IDE. In VSCode there is a Terminal menu option where you can open a new terminal
+The easiest way around this is to type the correct command in a command window. This can be external to the editor, like the Anaconda prompt, or the built-in terminal window in your operating system. 
+
+If you use a simple editor such as Sublime Text or Notepad++ this is the best approach. You can modify both of these editors to add a terminal window (Sublime) or add a commad to run your app (Notepad++) but the simplest method is to use the Anaconda Prompt (or Powershell Prompt) window, if you have installed Anaconda, or the standard terminal window for your operating system, if you've installed standard Python.
+
+Here are screenshots of the Sublime Text and Notepad++ editors side-by-side with an Anaconda Powershell prompt.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sublimetext.png)
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/notepadpp.png)
+
+
+If you are a seasoned Python programmer, already have your favourite version of Python installed and use VSCode or PyCharm, you can use a terminal window within the your IDE. In VSCode there is a Terminal menu option where you can open a new terminal
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openVCSterminal.png)
 
@@ -92,16 +104,9 @@ The easiest way around this is to type the correct command in a command window. 
 
 So, to run your program from one of these IDEs type the run command into the terminal window.
 
-_**Warning...** it's probably best to only use the built-in terminals if you are using a standard Python installation. If you have installed Anaconda, this may not work well with VSCode or PyCharm because the default terminal may not be able to find the Anaconda Python installation. There are ways around this but it's beyond our scope to go into that here. If you are using Anaconda it may be simplest to use the Anaconda prompt to run your apps._ 
+_**Warning...** it's probably best to only use the built-in terminals if you are using a standard Python installation. If you have installed Anaconda, this may not work well with VSCode or PyCharm because the default terminal may not be able to find the Anaconda Python installation. There are ways around this but it's beyond our scope to go into that here. If you are using Anaconda it may be simplest to use the Anaconda prompt to run your apps no matter which editor/IDE you use._ 
 
-There is no terminal in Sublime Text as standard (although you can install one). Neither is there one in Notepad++ (although can set up a 'run' command that will appear in a menu). But with these simple editors, it might be easier just to use a separate command window.
-
-Here are screenshots of the Sublime Text and Notepad++ editors side-by-side with an Anaconda Powershell prompt.
-
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sublimetext.png)
-
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/notepadpp.png)
-
+## Which editor should you use
 
 VSCode and Pycharm are quite sophisticated IDEs. VSCode is a general-purpose tool that can be customized with plugins to support many different languages. PyCharm is, if anything, more capable than VSCode but is dedicated to Python programming.
 
