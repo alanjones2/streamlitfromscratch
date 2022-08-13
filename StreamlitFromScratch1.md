@@ -251,6 +251,56 @@ displays the following:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotLatex.png)
 
+## Markdown
+
+Markdown gives us more control over the way our text is formatted. You may be familiar with it. As Wikipedia states, "Markdown is a lightweight markup language for creating formatted text using a plain-text editor". It allows you to define headers, code blocks, incorporate links and much else. It also let's you incorporate HTML.
+
+The Streamlit code to incorporate Markdown text in an app is, unsurprisingly ``st.markdown()``. Here is an example:
+
+```` Python
+st.markdown("""## This is a third level header
+               And this is normal text. 
+               *This is emphasized*.
+               """)
+````
+And it will render like this:
+    
+## &nbsp;&nbsp;&nbsp;&nbsp; This is a sub-header
+
+&nbsp; &nbsp; &nbsp; &nbsp; This is normal text. 
+*This is emphasized*.
+
+
+I'm not going to go into the details of the Markdown language as there is a good comprehensive guide [here](https://www.markdownguide.org/).
+
+Streamlit does not allow HTML to be embedded in the Markdown unless a particular parameter it set, e.g.
+
+````Python
+st.markdown("<h3>Header 3</h3>", unsafe_allow_html=True)
+````
+
+The idea of the parameter is to emphasize to the programmer that including HTML code could potentially insecure.
+
+But this means we can replace our ``st.text()`` quote with Markdown that incorporates HTML in order to get the format that we want.
+```` Python
+    st.markdown("""
+    "To be, or not to be, that is the question:<br/>
+    Whether 'tis nobler in the mind to suffer<br/>
+    The slings and arrows of outrageous fortune,<br/>
+    Or to take arms against a sea of troubles<br/>
+    And by opposing end them."
+    """, unsafe_allow_html=True)
+````
+
+The ``<br/>`` HTML tag inserts a line break and so gives us the same layout as before but using the standard font rahter than the monotype font used by ``st.text()``:
+
+"To be, or not to be, that is the question:<br/>
+Whether 'tis nobler in the mind to suffer<br/>
+The slings and arrows of outrageous fortune,<br/>
+Or to take arms against a sea of troubles<br/>
+And by opposing end them."
+
+
 ## A little interaction
 
 Streamlit gives us many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll Write a simple program to select a piece of Shakespeare to display.
@@ -299,3 +349,17 @@ In future articles we will see more ways of interacting with the user, how to di
 Thanks for reading - I hope you have found it useful. You can find a link to the code for this article on my [Github page](alanjones2.github.io) as well as links to other articles.
 
 To keep up to date with what I am doing, you can subscribe to my occasional free newsletter [Technofile](technofile.substack.com)
+
+### References
+
+The various Streamlit API references used in the article can be found below.
+
+[st.image](https://docs.streamlit.io/library/api-reference/media/st.title)
+
+[st.audio](https://docs.streamlit.io/library/api-reference/media/st.header)
+
+[st.video](https://docs.streamlit.io/library/api-reference/media/st.subheader)
+
+[st.markdown](https://docs.streamlit.io/library/api-reference/media/st.write)
+
+[st.columns](https://docs.streamlit.io/library/api-reference/layout/st.text)
