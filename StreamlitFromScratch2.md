@@ -10,11 +10,39 @@ Incorporating these media into a Streamlit app is a straightforward task. Stream
 
 The image is from Wikimedia and is a flyer for the play Hamlet.
 
-![](https://upload.wikimedia.org/wikipedia/commons/d/df/Hamlet.jpg)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamletflyer.png)
 
-The video is a 
+_Unknown source, Public domain, via Wikimedia Commons_
 
+You include it in your Streamlit app like this:
+```` Python
+    st.image('https://upload.wikimedia.org/wikipedia/commons/d/df/Hamlet.jpg', 
+        use_column_width=True,
+        caption = "Unknown source, Public domain, via Wikimedia Commons")
 
+````
+
+The video is a comical sketch with a number of well-known actors who try and tell each other how the famous 'To be, or not to be...' lines should be spoken. They are then, unexpectedly, upstaged by Prince Charles.
+
+![](https://youtu.be/sw_zDsAeqrI)
+
+_Video courtesy of the PBS and Youtube._
+
+```` Python
+    st.video('https://youtu.be/sw_zDsAeqrI')
+````
+
+(If you are in the UK and have access to the BBC iPlayer, seek out the original and longer version of this - it's very amusing.)
+
+Lastly, the audio is a musical piece by Tchaikovsky inspired by the play Hamlet
+
+https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg
+
+_Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in 1888. Public Domain via Wikimedia_
+
+```` Python
+st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg")
+````
 
 
 --- 

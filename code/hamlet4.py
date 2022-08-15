@@ -41,7 +41,7 @@ st.write("""If you are in the UK and have access to the BBC iPlayer,
 
 st.subheader("And now for some music...")
 
-st.write("Staying on our Shaespearean theme,         here is a musical piece by Tchaikovsky inspired by the play Hamlet")
+st.write("Staying on our Shakespearean theme,         here is a musical piece by Tchaikovsky inspired by the play Hamlet")
 st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg")
 
 st.caption("Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in 1888. Public Domain via Wikimedia")
