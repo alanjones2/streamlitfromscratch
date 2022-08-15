@@ -283,7 +283,7 @@ The idea of the parameter is to emphasize to the programmer that including HTML 
 
 But this means we can replace our ``st.text()`` quote with Markdown that incorporates HTML in order to get the format that we want.
 ```` Python
-    st.markdown("""
+st.markdown("""
     "To be, or not to be, that is the question:<br/>
     Whether 'tis nobler in the mind to suffer<br/>
     The slings and arrows of outrageous fortune,<br/>
@@ -292,7 +292,7 @@ But this means we can replace our ``st.text()`` quote with Markdown that incorpo
     """, unsafe_allow_html=True)
 ````
 
-The ``<br/>`` HTML tag inserts a line break and so gives us the same layout as before but using the standard font rahter than the monotype font used by ``st.text()``:
+The ``<br/>`` HTML tag inserts a line break and so gives us the same layout as before but using the standard font rather than the monotype font used by ``st.text()``:
 
 "To be, or not to be, that is the question:<br/>
 Whether 'tis nobler in the mind to suffer<br/>
@@ -354,12 +354,16 @@ To keep up to date with what I am doing, you can subscribe to my occasional free
 
 The various Streamlit API references used in the article can be found below.
 
-[st.image](https://docs.streamlit.io/library/api-reference/media/st.title)
+[st.title](https://docs.streamlit.io/library/api-reference/media/st.title)
 
-[st.audio](https://docs.streamlit.io/library/api-reference/media/st.header)
+[st.header](https://docs.streamlit.io/library/api-reference/media/st.header)
 
-[st.video](https://docs.streamlit.io/library/api-reference/media/st.subheader)
+[st.subheader](https://docs.streamlit.io/library/api-reference/media/st.subheader)
 
-[st.markdown](https://docs.streamlit.io/library/api-reference/media/st.write)
+[st.write](https://docs.streamlit.io/library/api-reference/media/st.write)
 
-[st.columns](https://docs.streamlit.io/library/api-reference/layout/st.text)
+[st.text](https://docs.streamlit.io/library/api-reference/layout/st.text)
+
+[st.caption](https://docs.streamlit.io/library/api-reference/layout/st.caption)
+
+[st.latext](https://docs.streamlit.io/library/api-reference/layout/st.latext)
