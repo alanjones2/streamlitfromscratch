@@ -2,7 +2,7 @@
 
 ### Media form the Apollo 11 Moon landing as a Streamlit app
 
-![]()
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/cover2.1.png)
 
 In the first part of this series we saw how to set up the Streamlit development environment and how easy it is to create a simple web app using different types of text.
 
@@ -31,7 +31,7 @@ You include it in your Streamlit app like this:
 
 The video is of the Moon walks and is poor quality by today's standards but it _was_ originally taken in 1969!
 
-![](https://youtu.be/sw_zDsAeqrI)
+![](https://youtu.be/hxPbnFc7iU8)
 
 _Footage from the Apollo 11 moonwalk that was partially restored in 2009_
 
@@ -66,7 +66,7 @@ st.video('https://youtu.be/hxPbnFc7iU8')
 st.audio("https://www.nasa.gov/mp3/569462main_eagle_has_landed.mp3")
 ````
 
-In the next article we will explore various ways of representing data in a Streamlit app, from data tables to visualisations using charts.
+That's all there is to it. In the future, we will look at how we can use Streamlit layout capabilities to produce an app that incorporates several elements in an efficient and pleasing way. But before that, in the next article, we will explore various ways of representing data in a Streamlit app, from data tables to visualizations using charts.
 
 --- 
 
