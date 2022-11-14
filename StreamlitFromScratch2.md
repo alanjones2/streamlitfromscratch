@@ -10,14 +10,19 @@ In the first part of this series, _Getting Started_, we saw how to set up the St
 
 This time we will look at how we can enhance our app with different media - images, video and sound - as well as learning a little bit about how to layout a Streamlit app.
 
-We'll create two different apps, the first one carries on with our Shakespeare theme from the first part and will look like this:
+We'll create two different apps. The first moves us forward a few centuries from our original Shakespeare theme to the moon landing of 1969; it is a simple compilation of an image, a video and an audio file
+
+It looks like this:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/eagleappborder.png)
+
+The second app reverts back to Shakespeare theme from the first part and also combines image, video and audio but with a slightly more complex layout. It will look like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/shakespearemediaapp.png)
 
-The second moves us forward a few centuries to the moon landing of 1969 and looks like this:
+## App 1: The Eagle has landed
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/eagleapp.png)
-
+## App 2: The Tragical Historie of Hamlet
 
 Last time we left Hamlet, Shakespeare's tragic hero, contemplating whether or not to end his life in his famous soliloquy. We are going to expand that app with some additional material - an image, a video and an audio track - and lay it out in two columns. The result will be similar to the image above.
 
@@ -57,6 +62,8 @@ _Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in
 ```` Python
 st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg")
 ````
+
+
 
 
 --- 
