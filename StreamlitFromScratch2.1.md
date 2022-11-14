@@ -4,6 +4,7 @@
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/cover2.1.png)
 
+
 In the first part of this series we saw how to set up the Streamlit development environment and how easy it is to create a simple web app using different types of text.
 
 This time we will look at how we can enhance our app with different media - images, video and sound.
@@ -26,10 +27,9 @@ You include it in your Streamlit app like this:
 ```` Python
     st.image('https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/images/464487main_AS11-40-5886_full.jpg',
         caption = "Public domain image, courtesy of NASA")
-
 ````
 
-The video is of the Moon walks and is poor quality by today's standards but it _was_ originally taken in 1969!
+The video is of the Moon walks and is poor quality by today's standards but then it _was_ originally taken in 1969!
 
 ![](https://youtu.be/hxPbnFc7iU8)
 

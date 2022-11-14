@@ -1,8 +1,23 @@
-## Streamlit from Scratch 2: Embedding images, video and audio into a Streamlit app
+# Streamlit from Scratch: Embedding images, video and audio into a Streamlit app
 
-In the first part of this series we saw how to set up the Streamlit development environment and how easy it is to create a simple web app using different types of text.
+## Streamlit was designed to help data scientists but it not just aboutr data, the addition of media helps to communicate your ideas
+
+![](https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/images/464487main_AS11-40-5886_full.jpg)
+
+_Public domain image, courtesy of NASA_
+
+In the first part of this series, _Getting Started_, we saw how to set up the Streamlit development environment and how easy it is to create a simple web app using different types of text.
 
 This time we will look at how we can enhance our app with different media - images, video and sound - as well as learning a little bit about how to layout a Streamlit app.
+
+We'll create two different apps, the first one carries on with our Shakespeare theme from the first part and will look like this:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/shakespearemediaapp.png)
+
+The second moves us forward a few centuries to the moon landing of 1969 and looks like this:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/eagleapp.png)
+
 
 Last time we left Hamlet, Shakespeare's tragic hero, contemplating whether or not to end his life in his famous soliloquy. We are going to expand that app with some additional material - an image, a video and an audio track - and lay it out in two columns. The result will be similar to the image above.
 
@@ -19,7 +34,6 @@ You include it in your Streamlit app like this:
     st.image('https://upload.wikimedia.org/wikipedia/commons/d/df/Hamlet.jpg', 
         use_column_width=True,
         caption = "Unknown source, Public domain, via Wikimedia Commons")
-
 ````
 
 The video is a comical sketch with a number of well-known actors who try and tell each other how the famous 'To be, or not to be...' lines should be spoken. They are then, unexpectedly, upstaged by Prince Charles.
@@ -32,7 +46,7 @@ _Video courtesy of the PBS and Youtube._
     st.video('https://youtu.be/sw_zDsAeqrI')
 ````
 
-(If you are in the UK and have access to the BBC iPlayer, seek out the original and longer version of this - it's very amusing.)
+(If you are in the UK and have access to the BBC iPlayer, seek out the original and longer version of this - it's highly entertaining.)
 
 Lastly, the audio is a musical piece by Tchaikovsky inspired by the play Hamlet
 

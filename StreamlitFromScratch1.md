@@ -1,4 +1,4 @@
-# Streamlit from Scratch: 1. Getting Started
+# Streamlit from Scratch: Getting Started
 
 ## Which tools do you need and how to use them; and how to create your first interactive web app in Python
 
@@ -303,7 +303,7 @@ And by opposing end them."
 
 ## A little interaction
 
-Streamlit gives us many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll Write a simple program to select a piece of Shakespeare to display.
+Streamlit gives us many ways to interact with the user by using menus, buttons, sliders and more. We'll look at these in more detail later but to give you a flavour we'll write a simple program to select a piece of Shakespeare to display.
 
 The code below uses the value of a set of radio buttons to decide which quote to display. If 'Twelfth Night' is selected the variable ``text`` is set to one quote, otherwise, if 'Hamlet' is selected ``text`` is set to a different quote.
 
@@ -367,3 +367,5 @@ The various Streamlit API references used in the article can be found below.
 [st.caption](https://docs.streamlit.io/library/api-reference/layout/st.caption)
 
 [st.latext](https://docs.streamlit.io/library/api-reference/layout/st.latext)
+
+[st.radio](https://docs.streamlit.io/library/api-reference/layout/st.radio)

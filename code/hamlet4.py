@@ -24,11 +24,11 @@ with col2:
     And by opposing end them."
     """, unsafe_allow_html=True)
     st.caption("Hamlet by William shakespeare, Act 3, Scene 1")
-    st.caption("Video courtesy of the PBS and Youtube.")
+
 
 #with col2:
     st.video('https://youtu.be/sw_zDsAeqrI')
-
+    st.caption("Video courtesy of the PBS and Youtube.")
 
 st.write("""In the video above several famous actors jokingly discuss
          how the famous lines should be spoken, only to 
