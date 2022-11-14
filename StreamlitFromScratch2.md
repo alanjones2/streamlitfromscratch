@@ -10,25 +10,80 @@ In the first part of this series, _Getting Started_, we saw how to set up the St
 
 This time we will look at how we can enhance our app with different media - images, video and sound - as well as learning a little bit about how to layout a Streamlit app.
 
-We'll create two different apps. The first moves us forward a few centuries from our original Shakespeare theme to the moon landing of 1969; it is a simple compilation of an image, a video and an audio file
+We'll create two different apps. The first moves us forward a few centuries from our original Shakespeare theme to the Moon landing of 1969; it is a simple compilation of an image, a video and an audio file with a little text. The layout just positions each element one above the other.
 
 It looks like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/eagleappborder.png)
 
-The second app reverts back to Shakespeare theme from the first part and also combines image, video and audio but with a slightly more complex layout. It will look like this:
+The second app reverts back to the Shakespeare theme and also combines image, video and audio but with a column layout. It will look like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/shakespearemediaappborder.png)
 
 ## App 1: The Eagle has landed
 
+On the morning of July 16, 1969, Apollo 11 astronauts Neil Armstrong, Buzz Aldrin and Michael Collins were about to be launched into space from the Kennedy Space Center. Their mission was to lead to one of the most famous events in history: the first Moon landing.
+
+Here we are going to see how various media files from that mission can be incorporated into a Streamlit app.
+
+Streamlit provides the functions ``st.image()`` to include graphics, ``st.video()`` for videos, including local or Youtube videos, and ``st.audio()`` for audio and they all support media in various formats.
+
+The image we will use shows Apollo 11 Commander Neil Armstrong working at an equipment storage area on the lunar module during the moonwalk.
+
+![](https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/images/464487main_AS11-40-5886_full.jpg)
+
+_Public domain image courtesy of NASA_
+
+
+You include it in your Streamlit app like this:
+```` Python
+    st.image('https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/images/464487main_AS11-40-5886_full.jpg',
+        caption = "Public domain image, courtesy of NASA")
+````
+
+The video is of the Moon walks and is poor quality by today's standards but that is not surpising as was originally taken in 1969!
+
+![](https://youtu.be/hxPbnFc7iU8)
+
+_Footage from the Apollo 11 moonwalk that was partially restored in 2009, public domain, courtesy of NASA and Youtube_
+
+```` Python
+    st.video('https://youtu.be/hxPbnFc7iU8')
+````
+
+Lastly, the audio is the famous "The Eagle has landed" message from Armstrong to the Houston mission base.
+
+https://soundcloud.com/nasa/apollo-11-eagle-has-landed-1?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing
+
+_The track here is from NASA's Soundcloud channel._
+
+The source file is shown in the ``st.audio()`` statement below.
+
+```` Python
+st.audio("https://www.nasa.gov/mp3/569462main_eagle_has_landed.mp3")
+````
+
+The entire code is only half a dozen lines and produces the app shown above.
+
+Full code:
+
+```` Python
+import streamlit as st
+
+st.title('The Eagle has Landed')
+st.header('Media from the Apollo 11 Moon landing')
+
+st.image('https://www.nasa.gov/sites/default/files/styles/ubernode_alt_horiz/public/images/464487main_AS11-40-5886_full.jpg')
+st.video('https://youtu.be/hxPbnFc7iU8')
+st.audio("https://www.nasa.gov/mp3/569462main_eagle_has_landed.mp3")
+````
+
+
 ## App 2: The Tragical Historie of Hamlet
 
-Last time we left Hamlet, Shakespeare's tragic hero, contemplating whether or not to end his life in his famous soliloquy. We are going to expand that app with some additional material - an image, a video and an audio track - and lay it out in two columns. The result will be similar to the image above.
+Last time we left Hamlet, Shakespeare's tragic hero, contemplating whether or not to end his life in his famous soliloquy. We are going to expand that app with some additional material - an image, a video and an audio track - and lay it out in two columns.
 
-Incorporating these media into a Streamlit app is a straightforward task. Streamlit provides the functions ``st.image()`` to include graphics, ``st.video()`` for videos, including Youtube videos, and ``st.audio()`` for audio and they all support media in various formats.
-
-The image is from Wikimedia and is a flyer for the play Hamlet.
+The image that we will use is from Wikimedia and is a flyer for the play Hamlet.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamletflyer.png)
 
@@ -41,7 +96,7 @@ You include it in your Streamlit app like this:
         caption = "Unknown source, Public domain, via Wikimedia Commons")
 ````
 
-The video is a comical sketch with a number of well-known actors who try and tell each other how the famous 'To be, or not to be...' lines should be spoken. They are then, unexpectedly, upstaged by Prince Charles.
+The video is a comical sketch with a number of well-known actors who try and tell each other how the famous 'To be, or not to be...' lines should be spoken. They are then, unexpectedly, upstaged by Prince Charles (as he was, then).
 
 ![](https://youtu.be/sw_zDsAeqrI)
 
@@ -63,7 +118,62 @@ _Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in
 st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg")
 ````
 
+The complete code is rather longer than the first app as there is more text and we use a column layout.
 
+We create two columns with line
+````Python
+col1, col2 =  st.columns(2)
+````
+The call to ``st.columns`` returns a list of columns that we assign to two variables ``col1`` and ``col2``. We use the columns in a ``with`` statement - all of the code within the ``with col1:``, for example, will be displayed in a column to the left of the screen. 
+
+In the code below, you can see that we first display a title and other text. This is followed by the code for the first column which contains the image and then the second column which contains the before the first column contains the
+
+````Python
+import streamlit as st
+import pandas as pd
+
+st.title('The Tragical Historie of Hamlet')
+st.header('Embedding images, video and audio into a Streamlit app')
+
+st.subheader("Hamlet's soliloquy")
+st.write("""In his speech, Hamlet considers suicide, but considers that the 
+            alternative to his unhappy life might be even worse.""")
+
+col1, col2 =  st.columns(2)
+
+with col1:
+    st.image('https://upload.wikimedia.org/wikipedia/commons/d/df/Hamlet.jpg', use_column_width=True,
+          caption = "Unknown source, Public domain, via Wikimedia Commons")
+
+with col2: 
+    st.markdown("""
+    "To be, or not to be, that is the question:<br/>
+    Whether 'tis nobler in the mind to suffer<br/>
+    The slings and arrows of outrageous fortune,<br/>
+    Or to take arms against a sea of troubles<br/>
+    And by opposing end them."
+    """, unsafe_allow_html=True)
+    st.caption("Hamlet by William shakespeare, Act 3, Scene 1")
+
+    st.video('https://youtu.be/sw_zDsAeqrI')
+    st.caption("Video courtesy of the PBS and Youtube.")
+
+st.write("""In the video above several famous actors jokingly discuss
+         how the famous lines should be spoken, only to 
+         be upstaged by Prince Charles who they seem to agree, 
+         gets it right.""")
+
+ 
+st.write("""If you are in the UK and have access to the BBC iPlayer,
+            seek out the original and longer version of this - it's very amusing.""")
+
+st.subheader("And now for some music...")
+
+st.write("Staying on our Shakespearean theme,         here is a musical piece by Tchaikovsky inspired by the play Hamlet")
+st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet_Op67_vs_Kosma-FeuillesMortes.ogg")
+
+st.caption("Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in 1888. Public Domain via Wikimedia")
+````
 
 
 --- 
