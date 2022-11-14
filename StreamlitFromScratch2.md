@@ -18,7 +18,7 @@ It looks like this:
 
 The second app reverts back to Shakespeare theme from the first part and also combines image, video and audio but with a slightly more complex layout. It will look like this:
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/shakespearemediaapp.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/shakespearemediaappborder.png)
 
 ## App 1: The Eagle has landed
 
