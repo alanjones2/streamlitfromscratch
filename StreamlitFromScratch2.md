@@ -65,7 +65,7 @@ st.audio("https://www.nasa.gov/mp3/569462main_eagle_has_landed.mp3")
 
 The entire code is only half a dozen lines and produces the app shown above.
 
-Full code:
+Here is the full code:
 
 ```` Python
 import streamlit as st
@@ -126,7 +126,13 @@ col1, col2 =  st.columns(2)
 ````
 The call to ``st.columns`` returns a list of columns that we assign to two variables ``col1`` and ``col2``. We use the columns in a ``with`` statement - all of the code within the ``with col1:``, for example, will be displayed in a column to the left of the screen. 
 
-In the code below, you can see that we first display a title and other text. This is followed by the code for the first column which contains the image and then the second column which contains the before the first column contains the
+In the code below, you can see that we first display a title and some other text. This is followed by the code for the first column which contains the image, and then the second column which contains the text of Hamlet's soliloquy and a video.
+
+Following the code for the columns, we have more text which is followed by the audio file.
+
+The complete code is here:
+
+https://gist.github.com/alanjones2/bb02937e471c768422d4d959da264457
 
 ````Python
 import streamlit as st
@@ -175,10 +181,11 @@ st.audio("https://upload.wikimedia.org/wikipedia/commons/3/3b/Tchaikovsky-Hamlet
 st.caption("Extracted from Pyotr Ilyich Tchaikovsky's 'Hamlet Op. 67' Overture, composed in 1888. Public Domain via Wikimedia")
 ````
 
+In future articles, we will look at how we can use Streamlit layout capabilities to produce an app that incorporates several elements in an efficient and pleasing way. And we will also explore various ways of representing data in a Streamlit app, from data tables to visualizations using charts.
 
 --- 
 
-Thanks for reading - I hope you have found it useful. You can find a link to the code for this article on my [Github page](alanjones2.github.io) as well as links to other articles.
+Thanks for reading - I hope you have found it useful. You will find a link to the code for this article on my [Github page](alanjones2.github.io) shortly after this article is published. There are also links to other articles and code on the website.
 
 To keep up to date with what I am doing, you can subscribe to my occasional free newsletter [Technofile](technofile.substack.com)
 
