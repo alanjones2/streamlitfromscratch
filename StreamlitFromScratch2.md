@@ -79,7 +79,7 @@ st.audio("https://www.nasa.gov/mp3/569462main_eagle_has_landed.mp3")
 ````
 
 
-## App 2: The Tragical Historie of Hamlet
+## App 2: _THE Tragicall Hiftorie of HAMLET_
 
 Last time we left Hamlet, Shakespeare's tragic hero, contemplating whether or not to end his life in his famous soliloquy. We are going to expand that app with some additional material - an image, a video and an audio track - and lay it out in two columns.
 
