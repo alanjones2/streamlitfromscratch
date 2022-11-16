@@ -42,7 +42,7 @@ TK how it works
 
 I've done much the same thing with Ethereum (ETH) and then combined the two _metrics_ with some text into three columns to provide a simple but effective presentation.
 
-It looks like this
+It looks like this:
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/metric-btc-eth.png)
 
 _Image by author_
@@ -63,7 +63,7 @@ col3.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal",
             help="Change in Ethereum dollar value since the year beginning")
 ````
 
-TK how it works
+TK how the columns work
 
 
 
