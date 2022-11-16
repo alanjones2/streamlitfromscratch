@@ -53,7 +53,7 @@ st.markdown('---')
 
 st.markdown("### Display a dataframe with ``st.dataframe()``")
 
-st.dataframe(df)
+st.dataframe(df, use_container_width= True)
 
 st.markdown('---')
 

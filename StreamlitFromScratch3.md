@@ -66,4 +66,15 @@ col3.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal",
 TK how the columns work
 
 
+You can also display data as a table or a dataframe. On the face of it there doesn't seem to be much difference between the two; they both display a table. However ``st.dataframe()`` is more flexible. Both take a Pandas dataframe (for example) as the source of the data but ``st.table()`` has no options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it is scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
+
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/table-btc-eth.png)
+
+_Image by author_
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/df-btc-eth.png)
+
+_Image by author_
+
 
