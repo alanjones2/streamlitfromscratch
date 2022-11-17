@@ -17,6 +17,14 @@ import streamlit as st
 ````
 A full description of how to get started and what tools you need is in my article _[Streamlit from Scratch: Getting Started](https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493)_.
 
+### Data
+
+A recent comment from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
+
+Yes, we are going to use data about cryptocurrencies to demonstrate Streamlit's data visualization capabilities.
+
+There is no formal source for this data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022).
+
 ### Text and tables
 
 We will get to Streamlit's charting capabilities shortly but presenting data is not always about charts. Sometimes a simple textual presentation or a table is a perfectly adequate way of getting your message across. 
@@ -72,8 +80,7 @@ Here is a table that displays a monthly view of BTC and ETH prices.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/table-btc-eth.png)
 
-_Image by author_
-
+_Image by author. Data source: Google_
 ````Python
 d = {'Month':[1,2,3,4,5,6,7,8,9,10,11],
      'Bitcoin':[47733,38777,44404,46296,38471,29788,19247,23273,20146,19315,20481],
@@ -88,7 +95,7 @@ And here is the dataframe version that has a highlighted cell.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/df-btc-eth.png)
 
-_Image by author_
+_Image by author. Data source: Google_
 
 I've kept it the same width as the table by setting the ``use_container_width`` parameter to ``True``.
 
@@ -96,13 +103,29 @@ I've kept it the same width as the table by setting the ``use_container_width`` 
 st.dataframe(df, use_container_width= True)
 ````
 
-The demise of cryptocurrency over the last year reminds me of a recent comment from someone on Twitter which went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". Who, indeed.
-
 ### Charts
 
 Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around the equivalent _Altair_ charts.
 
 The built-ins are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
 
-TK expand this: bar charts are stacked, y axis is one of: one column, a list of columns, all remaining columns (None)
+Here is a line chart that shows the drastic decline of Bitcoin and Ethereum over the last few months.
 
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.line-btc-eth.png)
+
+```` Python
+st.line_chart(df, x='Month')
+````
+
+In each case the built-in charts require a data source, ``df`` and a column to use as the x-axis. If the y-axis is left undefined then all of the remaing columns will be plotted. Otherwise, the y-axis should be a single column name, or a list of column names.
+
+Here is a bar chart of the same Bitcoin data.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.bar-btc.png)
+
+I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart.
+
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.area-btc.png)
+
+TK expand this: bar charts are stacked, y axis is one of: one column, a list of columns, all remaining columns (None)
