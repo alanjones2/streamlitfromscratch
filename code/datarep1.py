@@ -67,6 +67,8 @@ sales = {'Quarter':[1,2,3,4],
      'Wudgets':[200,150,100, 90]}
 st.bar_chart(sales, x='Quarter')
 
+st.area_chart(sales, x='Quarter')
+
 st.line_chart(df, y = 'Bitcoin', x = 'Month')
 st.bar_chart(df, y = 'Bitcoin', x='Month')
 st.area_chart(df, y = 'Bitcoin', x = 'Month')

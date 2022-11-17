@@ -144,9 +144,24 @@ I have only plotted one column, here, because the default behaviour of this char
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-bar.png)
 
-From this chart we can see that sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_ are holding up but the decline in the sales of _Wudgets_ should be of grave concern as is seriously impacting the bottom line.
+From this chart we can see that overall sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_ are holding up but the decline in the sales of _Wudgets_ should be of grave concern as it is seriously impacting the bottom line.
 
+Here is the code for that chart.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.area-btc.png)
+````Python
+sales = {'Quarter':[1,2,3,4],
+     'Widgets':[100,110,112,120],
+     'Wodgets':[50,100,120, 125],
+     'Wudgets':[200,150,100, 90]}
+st.bar_chart(sales, x='Quarter')
+````
+Notice that the y-axis is not defined, so all columns are plotted.
 
-TK expand this: bar charts are stacked, y axis is one of: one column, a list of columns, all remaining columns (None)
+The last built-in chart is the area chart. Here are the sales data again.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-area.png)
+
+````Python
+st.area_chart(sales, x='Quarter')
+````
+Here you can easily see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.
