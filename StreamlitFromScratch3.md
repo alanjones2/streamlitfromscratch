@@ -68,13 +68,41 @@ TK how the columns work
 
 You can also display data as a table or a dataframe. On the face of it there doesn't seem to be much difference between the two; they both display a table. However ``st.dataframe()`` is more flexible. Both take a Pandas dataframe (for example) as the source of the data but ``st.table()`` has no options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it is scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
 
+Here is a table that displays a monthly view of BTC and ETH prices.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/table-btc-eth.png)
 
 _Image by author_
 
+````Python
+d = {'Month':[1,2,3,4,5,6,7,8,9,10,11],
+     'Bitcoin':[47733,38777,44404,46296,38471,29788,19247,23273,20146,19315,20481],
+     'Ethereum':[3767,2796,2973,3448,2824,1816,1057,1630,1587,1311,1579]}
+
+df = pd.DataFrame(data = d)
+
+st.table(df)
+````
+
+And here is the dataframe version that has a highlighted cell.
+
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/df-btc-eth.png)
 
 _Image by author_
 
+I've kept it the same width as the table by setting the ``use_container_width`` parameter to ``True``.
+
+````Python
+st.dataframe(df, use_container_width= True)
+````
+
+The demise of cryptocurrency over the last year reminds me of a recent comment from someone on Twitter which went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". Who, indeed.
+
+### Charts
+
+Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around the equivalent _Altair_ charts.
+
+The built-ins are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
+
+TK expand this: bar charts are stacked, y axis is one of: one column, a list of columns, all remaining columns (None)
 

@@ -42,9 +42,6 @@ d = {'Month':[1,2,3,4,5,6,7,8,9,10,11],
 
 df = pd.DataFrame(data = d)
 
-
-
-
 st.markdown("### Display a dataframe with ``st.table()``")
 
 st.table(df)
@@ -60,7 +57,9 @@ st.markdown('---')
 st.markdown("### Built-in charts ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``")
 
 st.line_chart(df, x='Month')
-st.line_chart(df, y = 'Ethereum', x = 'Month')
+st.bar_chart(df, x='Month')
+st.area_chart(df, x='Month')
+st.line_chart(df, y = 'Bitcoin', x = 'Month')
 st.bar_chart(df, y = 'Bitcoin', x='Month')
 st.area_chart(df, y = 'Bitcoin', x = 'Month')
 
@@ -92,6 +91,10 @@ ax.set_title("Bitcoin")
 plt.grid(axis='y')
 st.pyplot(fig)
 
+fig, ax = plt.subplots()
+df.plot.bar(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
+st.pyplot(fig)
+
 st.markdown('---')
 
 st.markdown('### Here are a couple of Altair charts:')
@@ -107,3 +110,20 @@ c = alt.Chart(df).mark_bar().encode(
     x='Month:O', y='Bitcoin')
 
 st.altair_chart(c, use_container_width=True)
+
+
+df1 = pd.melt(df, 
+              value_vars=['Bitcoin','Ethereum'], 
+              id_vars=['Month'],
+              var_name='Name'
+              )
+df1
+
+c = alt.Chart(df1).mark_bar().encode(
+    x='Name:O', 
+    y='value:Q', 
+    color = 'Name:N', 
+    column = 'Month:N')
+
+st.altair_chart(c, use_container_width=False)
+
