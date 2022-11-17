@@ -59,6 +59,14 @@ st.markdown("### Built-in charts ``st.line_chart()``, ``st.bar_chart()`` and ``s
 st.line_chart(df, x='Month')
 st.bar_chart(df, x='Month')
 st.area_chart(df, x='Month')
+
+# A stacked bar chart of sales figures
+sales = {'Quarter':[1,2,3,4],
+     'Widgets':[100,110,112,120],
+     'Wodgets':[50,100,120, 125],
+     'Wudgets':[200,150,100, 90]}
+st.bar_chart(sales, x='Quarter')
+
 st.line_chart(df, y = 'Bitcoin', x = 'Month')
 st.bar_chart(df, y = 'Bitcoin', x='Month')
 st.area_chart(df, y = 'Bitcoin', x = 'Month')

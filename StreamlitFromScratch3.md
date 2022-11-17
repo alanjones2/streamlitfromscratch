@@ -6,22 +6,24 @@
 
 Streamlit was designed for Data Scientists and so data presentation is fundamental to it.
 
+Streamlit supports several charting packages, like Plotly, Altair and Bokeh, as well as ways of textually presenting data. We will look at them all.
+
 In previous articles, I've looked at how to get started with Streamlit and how to include various forms of text, images, video and audio in a Streamlit application. Now we get to the nitty gritty of how to represent the data that you have painstakingly discovered, processed and analysed.
 
-We are going to explore various ways of data visualization and I will be presenting snippets of code that you can copy. Additionally, the entire code will be available for download from my web site. I'll put a link at the end of the article and it should be live shortly after this article is published.
+We are going to explore several ways of data visualization and I will be presenting snippets of code that you can copy. Additionally, the entire code will be available for download from my web site. I'll put a link at the end of the article and it should be live shortly after this article is published.
 
 If you want to follow along with the coding the first thing you need to do include the Streamlit package.
 
 ```` Python
 import streamlit as st
 ````
-A full description of how to get started and what tools you need is in my article _[Streamlit from Scratch: Getting Started](https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493)_.
+A full description of how to get started with Streamlit and what tools you need is in my article _[Streamlit from Scratch: Getting Started](https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493)_.
 
 ### Data
 
-A recent comment from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
+A recent comment I enjoyed from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
 
-Yes, we are going to use data about cryptocurrencies to demonstrate Streamlit's data visualization capabilities.
+We are going to use data about cryptocurrencies, and their awful performance this year, to demonstrate Streamlit's data visualization capabilities.
 
 There is no formal source for this data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022).
 
@@ -73,8 +75,13 @@ col3.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal",
 
 TK how the columns work
 
+You can also display data as a _table_ or a _dataframe_. 
 
-You can also display data as a table or a dataframe. On the face of it there doesn't seem to be much difference between the two; they both display a table. However ``st.dataframe()`` is more flexible. Both take a Pandas dataframe (for example) as the source of the data but ``st.table()`` has no options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it is scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
+Tables are easily interpreted by readers as they are so ubiquitous. Run your finger down the rows until you find the one you are interested in and then run it across until you find the correct column.
+
+On the face of it there doesn't seem to be much difference between the two; they both display a table. However ``st.dataframe()`` is more flexible. 
+
+Both can take a Pandas dataframe as the source of the data but ``st.table()`` has no options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it will be scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
 
 Here is a table that displays a monthly view of BTC and ETH prices.
 
@@ -103,13 +110,19 @@ I've kept it the same width as the table by setting the ``use_container_width`` 
 st.dataframe(df, use_container_width= True)
 ````
 
+Tables provide easy access to data if you know what you are looking for. But it is not particulary easy to detect trends or correlations.
+
+For that you need charts.
+
 ### Charts
 
-Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around the equivalent _Altair_ charts.
+Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around their equivalent _Altair_ charts.
+
+We'll look at the built-in ones first and then explore the other supported packages.
 
 The built-ins are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
 
-Here is a line chart that shows the drastic decline of Bitcoin and Ethereum over the last few months.
+Here is a line chart that shows the decline of Bitcoin and Ethereum over most of 2022.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.line-btc-eth.png)
 
@@ -117,13 +130,21 @@ Here is a line chart that shows the drastic decline of Bitcoin and Ethereum over
 st.line_chart(df, x='Month')
 ````
 
-In each case the built-in charts require a data source, ``df`` and a column to use as the x-axis. If the y-axis is left undefined then all of the remaing columns will be plotted. Otherwise, the y-axis should be a single column name, or a list of column names.
+The built-in charts require a data source, ``df`` and a data column to use as the x-axis. If the y-axis is left undefined then all of the remaining columns will be plotted. Otherwise, the y-axis should be a single column name, or a list of column names.
 
 Here is a bar chart of the same Bitcoin data.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.bar-btc.png)
 
-I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart.
+```` Python
+st.bar_chart(df, y = 'Bitcoin', x='Month')
+````
+
+I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart which means that we are adding one or more sets of values in order to construct the bar. This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-bar.png)
+
+From this chart we can see that sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_ are holding up but the decline in the sales of _Wudgets_ should be of grave concern as is seriously impacting the bottom line.
 
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.area-btc.png)
