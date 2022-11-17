@@ -165,3 +165,8 @@ The last built-in chart is the area chart. Here are the sales data again.
 st.area_chart(sales, x='Quarter')
 ````
 Here you can easily see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.
+
+I have to say, though, I am not a great fan of the colour scheme.
+
+### Pyplot
+
