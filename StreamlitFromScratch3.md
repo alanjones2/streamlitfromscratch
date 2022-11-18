@@ -2,7 +2,7 @@
 
 ### From text and tables to sophistcated charts. From Pandas dataframes, to Matplotlib, Plotly, Altair and other charts. Streamlit provides a comprehensive set of tools for presenting your data
 
-ST add image
+TK add image
 
 Streamlit was designed for Data Scientists and so data presentation is fundamental to it.
 
@@ -209,4 +209,13 @@ This is better. Pyplot charts are highly cutomizable but you could end up writin
 
 A compromise is to use the plotting methods from Pandas which will provide a slightly more sophisticated chart with the minimum of coding.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-bar-btc-eth.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pandas-plot-bar-btc-eth.png)
+
+```` Python
+fig, ax = plt.subplots()
+df.plot.bar(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
+st.pyplot(fig)
+````
+
+Notice that here we can easily plot both BTC and ETH by specifiying them in a list. It is also important to note that we need to pass ``ax`` to the plot function call - in this way the new plot is added to the figure.
+

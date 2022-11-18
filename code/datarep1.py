@@ -114,6 +114,9 @@ fig, ax = plt.subplots()
 df.plot.bar(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
 st.pyplot(fig)
 
+fig, ax = plt.subplots()
+df.plot.area(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
+st.pyplot(fig)
 st.markdown('---')
 
 st.markdown('### Here are a couple of Altair charts:')
