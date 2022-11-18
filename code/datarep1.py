@@ -72,10 +72,10 @@ st.area_chart(df, y = 'Bitcoin', x = 'Month')
 st.markdown("#### Some made-up sales data shows a use of the built-in bar chart")
 
 # A stacked bar chart of sales figures
-sales = {'Quarter':[1,2,3,4],
+sales = pd.DataFrame({'Quarter':[1,2,3,4],
      'Widgets':[100,110,112,120],
      'Wodgets':[50,100,120, 125],
-     'Wudgets':[200,150,100, 90]}
+     'Wudgets':[200,150,100, 90]})
 st.table(sales)
 st.bar_chart(sales, x='Quarter')
 
@@ -110,17 +110,26 @@ ax.set_title("Bitcoin")
 plt.grid(axis='y')
 st.pyplot(fig)
 
+st.markdown('---')
+
+st.markdown("### Here are some Pandas plotted charts")
 fig, ax = plt.subplots()
 df.plot.bar(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
 st.pyplot(fig)
 
 fig, ax = plt.subplots()
-df.plot.area(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
+sales.plot.bar(x = 'Quarter', y=['Widgets','Wodgets','Wudgets'],stacked = True, ax=ax)
 st.pyplot(fig)
+
+fig, ax = plt.subplots()
+sales.plot.area(x = 'Quarter', y=['Widgets','Wodgets','Wudgets'],ax=ax)
+st.pyplot(fig)
+
 st.markdown('---')
 
-st.markdown('### Here are a couple of Altair charts:')
+st.markdown('### Here are some Altair charts:')
 
+st.write("First a line and bar chart for Bitcoin performance")
 df = pd.DataFrame(d)
 
 c = alt.Chart(df).mark_line().encode(
@@ -133,7 +142,7 @@ c = alt.Chart(df).mark_bar().encode(
 
 st.altair_chart(c, use_container_width=True)
 
-
+st.write("To compare more than one value, it's easier to transform the data")
 df1 = pd.melt(df, 
               value_vars=['Bitcoin','Ethereum'], 
               id_vars=['Month'],
@@ -149,3 +158,33 @@ c = alt.Chart(df1).mark_bar().encode(
 
 st.altair_chart(c, use_container_width=False)
 
+sales1 = pd.melt(sales, 
+              value_vars=['Widgets','Wodgets','Wudgets'], 
+              id_vars=['Quarter'],
+              var_name='Name'
+              )
+sales1
+
+c = alt.Chart(sales1).mark_bar().encode(
+    x='Name:O', 
+    y='value:Q', 
+    color = 'Name:N', 
+    column = 'Quarter:N')
+
+st.altair_chart(c, use_container_width=False)
+
+c = alt.Chart(sales1).mark_line().encode(
+    x='Quarter', 
+    y='value', 
+    color = 'Name:N'
+    )
+
+st.altair_chart(c, use_container_width=False)
+
+c = alt.Chart(sales1).mark_circle().encode(
+    x='Quarter', 
+    y='value', 
+    color = 'Name'
+    )
+
+st.altair_chart(c, use_container_width=False)

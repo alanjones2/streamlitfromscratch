@@ -8,9 +8,9 @@ Streamlit was designed for Data Scientists and so data presentation is fundament
 
 In previous articles, I've looked at how to get started with Streamlit and how to include various forms of text, images, video and audio in a Streamlit application. Now we get to the nitty gritty of how to represent the data that you have painstakingly discovered, processed and analysed.
 
-ST add image of grid of charts from the various packages
-
 Streamlit supports several charting packages, like Plotly, Altair and Bokeh, as well as ways of textually presenting data. We will look at them all.
+
+TK add image of grid of charts from the various packages
 
 We are going to explore these various packages, as well as the built-in methods of data visualization that Streamlit provides.
 
@@ -27,9 +27,11 @@ A full description of how to get started with Streamlit and what tools you need 
 
 A recent comment I enjoyed from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
 
-That was meant ironically, of course, and was a comment on crytocurrencies. We are going to use data about cryptocurrencies, and their awful performance this year, to demonstrate Streamlit's data visualization capabilities.
+That was meant ironically, of course, and was a comment on cryptocurrencies. We are going to use cryptocurrency data (which shows their awful performance this year) to demonstrate Streamlit's data visualization capabilities.
 
 There is no formal source for this data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022).
+
+Later, I'll also introduce some invented sales data to show other aspects of data visualization.
 
 ### Text and tables
 
@@ -118,13 +120,15 @@ Tables provide easy access to data if you know what you are looking for. But it 
 
 For that you need charts.
 
-### Charts
+## Charts
 
 Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around their equivalent _Altair_ charts.
 
 We'll look at the built-in ones first and then explore the other supported packages.
 
-The built-ins are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
+### Streamlit charts
+
+The built-in charts are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
 
 Here is a line chart that shows the decline of Bitcoin and Ethereum over most of 2022.
 
@@ -144,19 +148,23 @@ Here is a bar chart of the same Bitcoin data.
 st.bar_chart(df, y = 'Bitcoin', x='Month')
 ````
 
-I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart which means that we are adding one or more sets of values in order to construct the bar. This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one.
+I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart which means that we are adding one or more sets of values in order to construct the bar. 
+
+This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one that tracks the sales of items manufactured by the _The Formidable Widget Company_ over a year. Their flagship product is the _Widget_ but they have two other products, the _Wodget_ and the _Wudget_ and we can see how well they are selling, below.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-bar.png)
 
-From this chart we can see that overall sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_ are holding up but the decline in the sales of _Wudgets_ should be of grave concern as it is seriously impacting the bottom line.
+From this chart we can see that overall sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_, their staple product, are holding up but the decline in the sales of _Wudgets_ is letting the company down badly.
 
 Here is the code for that chart.
 
 ````Python
-sales = {'Quarter':[1,2,3,4],
-     'Widgets':[100,110,112,120],
-     'Wodgets':[50,100,120, 125],
-     'Wudgets':[200,150,100, 90]}
+sales = pd.DataFrame(
+     {'Quarter':[1,2,3,4],
+      'Widgets':[100,110,112,120],
+      'Wodgets':[50,100,120, 125],
+      'Wudgets':[200,150,100, 90]})
+
 st.bar_chart(sales, x='Quarter')
 ````
 Notice that the y-axis is not defined, so all columns are plotted.
@@ -168,9 +176,9 @@ The last built-in chart is the area chart. Here are the sales data again.
 ````Python
 st.area_chart(sales, x='Quarter')
 ````
-Here you can easily see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.
+Here you can see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.
 
-I have to say, though, I am not a great fan of the colour scheme.
+I have to say, I am not a great fan of this default colour scheme.
 
 ### Pyplot
 
@@ -190,7 +198,7 @@ This is the resuting chart.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-line-basic-btc.png)
 
-It's pretty basic but we can customize it with some additional commands. Here we add labels to the axes, a title and draw y-axis grid lines.
+It's pretty basic but we can customize it with some additional commands. Here we add labels to the axes, a title and draw y-axis grid lines on a bar chart.
 
 ```` Python
 # Pyplot charts are customizable
@@ -205,7 +213,7 @@ st.pyplot(fig)
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-bar-labels-btc.png)
 
-This is better. Pyplot charts are highly cutomizable but you could end up writing quite a lot of code.
+This is better. Pyplot charts are highly cutomizable but to get them exactly how you want them, you could end up writing quite a lot of code.
 
 A compromise is to use the plotting methods from Pandas which will provide a slightly more sophisticated chart with the minimum of coding.
 
@@ -219,3 +227,12 @@ st.pyplot(fig)
 
 Notice that here we can easily plot both BTC and ETH by specifiying them in a list. It is also important to note that we need to pass ``ax`` to the plot function call - in this way the new plot is added to the figure.
 
+### Altair
+
+
+
+### Vega-lite
+
+### Bokeh
+
+### Conclusion
