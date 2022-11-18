@@ -2,15 +2,19 @@
 
 ### From text and tables to sophistcated charts. From Pandas dataframes, to Matplotlib, Plotly, Altair and other charts. Streamlit provides a comprehensive set of tools for presenting your data
 
-
+ST add image
 
 Streamlit was designed for Data Scientists and so data presentation is fundamental to it.
 
-Streamlit supports several charting packages, like Plotly, Altair and Bokeh, as well as ways of textually presenting data. We will look at them all.
-
 In previous articles, I've looked at how to get started with Streamlit and how to include various forms of text, images, video and audio in a Streamlit application. Now we get to the nitty gritty of how to represent the data that you have painstakingly discovered, processed and analysed.
 
-We are going to explore several ways of data visualization and I will be presenting snippets of code that you can copy. Additionally, the entire code will be available for download from my web site. I'll put a link at the end of the article and it should be live shortly after this article is published.
+ST add image of grid of charts from the various packages
+
+Streamlit supports several charting packages, like Plotly, Altair and Bokeh, as well as ways of textually presenting data. We will look at them all.
+
+We are going to explore these various packages, as well as the built-in methods of data visualization that Streamlit provides.
+
+I will be presenting snippets of code that you can copy. Additionally, the entire code will be available for download from my web site. I'll put a link at the end of the article and it should be live shortly after this article is published.
 
 If you want to follow along with the coding the first thing you need to do include the Streamlit package.
 
@@ -23,7 +27,7 @@ A full description of how to get started with Streamlit and what tools you need 
 
 A recent comment I enjoyed from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
 
-We are going to use data about cryptocurrencies, and their awful performance this year, to demonstrate Streamlit's data visualization capabilities.
+That was meant ironically, of course, and was a comment on crytocurrencies. We are going to use data about cryptocurrencies, and their awful performance this year, to demonstrate Streamlit's data visualization capabilities.
 
 There is no formal source for this data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022).
 
@@ -170,3 +174,39 @@ I have to say, though, I am not a great fan of the colour scheme.
 
 ### Pyplot
 
+The first supported charting package we will look at is _Pytlot_ - essentially this is support for the Python Matplotlib package but we can also use the Pandas plotting methods.
+
+Here is a the code for a line plot of the crypto data.
+
+```` Python
+fig, ax = plt.subplots()
+plt.plot(df['Bitcoin'])
+st.pyplot(fig)
+````
+
+The first line of the code initializes the figure, ``fig``, and axis, ``ax``, variables. In this example ``ax`` is not used but we must initialize ``fig`` so that we can pass it to the ``st.plot()``.
+
+This is the resuting chart.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-line-basic-btc.png)
+
+It's pretty basic but we can customize it with some additional commands. Here we add labels to the axes, a title and draw y-axis grid lines.
+
+```` Python
+# Pyplot charts are customizable
+fig, ax = plt.subplots()
+plt.bar(df.Month, df.Bitcoin)
+ax.set_ylabel("Value in dollars")
+ax.set_xlabel("Month 2022")
+ax.set_title("Bitcoin")
+plt.grid(axis='y')
+st.pyplot(fig)
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-bar-labels-btc.png)
+
+This is better. Pyplot charts are highly cutomizable but you could end up writing quite a lot of code.
+
+A compromise is to use the plotting methods from Pandas which will provide a slightly more sophisticated chart with the minimum of coding.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-bar-btc-eth.png)

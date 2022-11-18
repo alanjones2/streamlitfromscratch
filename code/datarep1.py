@@ -56,31 +56,41 @@ st.markdown('---')
 
 st.markdown("### Built-in charts ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``")
 
+st.markdown("#### Built-in charts for the crypto data")
 st.line_chart(df, x='Month')
 st.bar_chart(df, x='Month')
+st.warning("The bar chart doesn't do what we want - it shouldn't be stacked for this type of data")
 st.area_chart(df, x='Month')
+
+st.markdown("#### Built-in charts for Bitcoin data, only")
+
+st.line_chart(df, y = 'Bitcoin', x = 'Month')
+st.bar_chart(df, y = 'Bitcoin', x='Month')
+st.area_chart(df, y = 'Bitcoin', x = 'Month')
+
+
+st.markdown("#### Some made-up sales data shows a use of the built-in bar chart")
 
 # A stacked bar chart of sales figures
 sales = {'Quarter':[1,2,3,4],
      'Widgets':[100,110,112,120],
      'Wodgets':[50,100,120, 125],
      'Wudgets':[200,150,100, 90]}
+st.table(sales)
 st.bar_chart(sales, x='Quarter')
+
+
 
 st.area_chart(sales, x='Quarter')
 
-st.line_chart(df, y = 'Bitcoin', x = 'Month')
-st.bar_chart(df, y = 'Bitcoin', x='Month')
-st.area_chart(df, y = 'Bitcoin', x = 'Month')
-
 st.markdown('---')
 
-st.markdown('### Built-in charts are not very flexible')
-st.markdown('#### but there are plenty of others to choose from')
+st.info("""### Built-in charts are not very flexible
+but there are plenty of others to choose from""")
 
 
 st.markdown('### PyPlot Charts')
-st.write("This is used for all Matplotlib-based charting libraries")
+st.write("This is used for Matplotlib-based charts so we can use it for Pandas plots, too")
 
 import matplotlib.pyplot as plt
 
@@ -88,12 +98,11 @@ import matplotlib.pyplot as plt
 # # a figure object must be passed to st.pyplot() 
 fig, ax = plt.subplots()
 
-plt.plot(df)
+plt.plot(df['Bitcoin'])
 st.pyplot(fig)
 
-fig, ax = plt.subplots()
-
 # Pyplot charts are customizable
+fig, ax = plt.subplots()
 plt.bar(df.Month, df.Bitcoin)
 ax.set_ylabel("Value in dollars")
 ax.set_xlabel("Month 2022")
