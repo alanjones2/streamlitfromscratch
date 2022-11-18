@@ -188,3 +188,5 @@ c = alt.Chart(sales1).mark_circle().encode(
     )
 
 st.altair_chart(c, use_container_width=False)
+
+

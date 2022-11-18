@@ -213,7 +213,7 @@ st.pyplot(fig)
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/pyplot-bar-labels-btc.png)
 
-This is better. Pyplot charts are highly cutomizable but to get them exactly how you want them, you could end up writing quite a lot of code.
+This is better. Matplotlib charts are highly cutomizable but to get them exactly how you want them, you could end up writing quite a lot of code.
 
 A compromise is to use the plotting methods from Pandas which will provide a slightly more sophisticated chart with the minimum of coding.
 
@@ -227,11 +227,21 @@ st.pyplot(fig)
 
 Notice that here we can easily plot both BTC and ETH by specifiying them in a list. It is also important to note that we need to pass ``ax`` to the plot function call - in this way the new plot is added to the figure.
 
-### Altair
-
-
+### Plotly
 
 ### Vega-lite
+
+Vega-Lite is a grammar of graphics specification for interactive visualizations. It is platform neutral and you specify a Vega-lite graphic as a JSON structure.
+
+We are not going to deal with Vega-Lite directly here because Altair is an  implementation of Vega-Lie in Python.
+
+For more information on the specification, please refer to the [Vega-Lite website](http://vega.github.io/vega-lite/).
+
+### Altair
+
+As just mentioned, Altair charts are based on the Vega-Lite specification, so the graphics produced by Altair will be the same as Vega-Lite.
+
+
 
 ### Bokeh
 
