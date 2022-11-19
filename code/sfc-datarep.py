@@ -25,10 +25,12 @@ d = {'Month':[1,2,3,4,5,6,7,8,9,10,11],
 cryptodf = pd.DataFrame(data = d)
 
 # The Original Widget Company
-salesdf = pd.DataFrame({'Quarter':[1,2,3,4],
+d = {'Quarter':[1,2,3,4],
      'Widgets':[100,110,112,120],
      'Wodgets':[50,100,120, 125],
-     'Wudgets':[200,150,100,90]})
+     'Wudgets':[200,150,100,90]}
+     
+salesdf = pd.DataFrame(d)
 
 col1, col2 = st.columns(2)
 col1.info("Crypto currencies, Jan to Nov. 2022")
