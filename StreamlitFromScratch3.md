@@ -21,17 +21,15 @@ If you want to follow along with the coding the first thing you need to do inclu
 ```` Python
 import streamlit as st
 ````
-A full description of how to get started with Streamlit and what tools you need is in my article _[Streamlit from Scratch: Getting Started](https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493)_.
+If you need a primer on how to get started with Streamlit and what tools you need, see the first article in this series,  _[Streamlit from Scratch: Getting Started](https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493)_.
 
 ### Data
 
-A recent comment I enjoyed from someone on Twitter went something like "Who'd have thought that something that has no instrinsic value would end up being worthless?". 
+We are going to use two small data sets. The first is real cryptocurrency data for this year to date (Nov. 2022) ans the second is some fictional sales data. 
 
-That was meant ironically, of course, and was a comment on cryptocurrencies. We are going to use cryptocurrency data (which shows their awful performance this year) to demonstrate Streamlit's data visualization capabilities.
+There is no formal source for the crypto data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022) and I invented the sales data for this article.
 
-There is no formal source for this data, I just Googled the value in USD of Bitcoin and Ethereum for the first day of each month this year, so far (Jan to Nov, 2022).
-
-Later, I'll also introduce some invented sales data to show other aspects of data visualization.
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/data-tables.png)
 
 ### Text and tables
 
