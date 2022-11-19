@@ -50,7 +50,7 @@ d = {'Quarter':[1,2,3,4],
 salesdf = pd.DataFrame(d)
 ````
 
-### Text and tables
+### Text
 
 We will get to Streamlit's charting capabilities shortly but presenting data is not always about charts. Sometimes a simple textual presentation or a table is a perfectly adequate way of getting your message across. 
 
@@ -73,20 +73,19 @@ st.metric("Bitcoin", btcCurrent, delta=btcdelta, delta_color="normal",
 
 TK how it works
 
-I've done much the same thing with Ethereum (ETH) and then combined the two _metrics_ with some text into three columns to provide a simple but effective presentation.
-
-It looks like this:
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/metric-btc-eth.png)
-
-_Image by author_
-
-Here is the code:
+I've done much the same thing with Ethereum (ETH) and then combined the two _metrics_ with some text into three columns to provide a simple but effective presentation. Here is the code requred for Ethereum.
 
 ```` Python
 ethCurrent = 1225
 ethYrBeg = 3767
 ethdelta = ethCurrent - ethYrBeg
+````
 
+
+
+Here is the code to display the data in columns:
+
+```` Python
 # Use columns to display them together
 col1, col2, col3 = st.columns([50,25,25])
 col1.write("The value of crytocurrencies has dropped considerably since the beginning of the year")
@@ -95,61 +94,65 @@ col2.metric("Bitcoin", btcCurrent, delta=btcdelta, delta_color="normal",
 col3.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal", 
             help="Change in Ethereum dollar value since the year beginning")
 ````
+The result looks like this:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/metric-btc-eth.png)
+
+_Image by author_
 
 TK how the columns work
 
+
+### Tables and dataframes
+
 You can also display data as a _table_ or a _dataframe_. 
 
-Tables are easily interpreted by readers as they are so ubiquitous. Run your finger down the rows until you find the one you are interested in and then run it across until you find the correct column.
+Tables are easily interpreted by readers as they are so ubiquitous. Run your finger down the rows until you find the one you are interested in and then run it across until you find the correct column and there is the figure you are looking for!
 
-On the face of it there doesn't seem to be much difference between the two; they both display a table. However ``st.dataframe()`` is more flexible. 
+On the face of it there doesn't seem to be much difference between the two methods; they both display a table. However ``st.dataframe()`` is more flexible. 
 
-Both can take a Pandas dataframe as the source of the data but ``st.table()`` has no options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it will be scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
+Both can take a Pandas dataframe as the source of the data but ``st.table()`` has no other options, it simple displays the data in a table that fits the page (or container). ``st.dataframe()`` is more flexible, you can specify the height and width, or fill the width of the container and if the dataframe is too large it will be scrollable. ``st.dataframe()`` is also interactive - click on a cell and it will be highlighted; click on a column and the data will be ordered by that column.
 
 Here is a table that displays a monthly view of BTC and ETH prices.
+
+````Python
+st.table(cryptodf)
+````
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/table-btc-eth.png)
 
 _Image by author. Data source: Google_
+
+
+And here is the dataframe version that has a user highlighted cell.
+
 ````Python
-d = {'Month':[1,2,3,4,5,6,7,8,9,10,11],
-     'Bitcoin':[47733,38777,44404,46296,38471,29788,19247,23273,20146,19315,20481],
-     'Ethereum':[3767,2796,2973,3448,2824,1816,1057,1630,1587,1311,1579]}
-
-df = pd.DataFrame(data = d)
-
-st.table(df)
+st.dataframe(cryptodf, use_container_width=True)
 ````
-
-And here is the dataframe version that has a highlighted cell.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/df-btc-eth.png)
 
 _Image by author. Data source: Google_
 
-I've kept it the same width as the table by setting the ``use_container_width`` parameter to ``True``.
-
-````Python
-st.dataframe(df, use_container_width= True)
-````
+I've kept the dataframe the same width as the table by setting the ``use_container_width`` parameter to ``True``.
 
 Tables provide easy access to data if you know what you are looking for. But it is not particulary easy to detect trends or correlations.
 
 For that you need charts.
 
-## Charts
+## Streamlit charts
 
 Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around their equivalent _Altair_ charts.
 
 We'll look at the built-in ones first and then explore the other supported packages.
 
-### Streamlit charts
-
-The built-in charts are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not very flexible - you need to explore one of the other supported packages for that.
+The built-in charts are ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``. They are attractive and easy to use but not flexible.
 
 Here is a line chart that shows the decline of Bitcoin and Ethereum over most of 2022.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.line-btc-eth.png)
+
+And here is the code that produced it. 
 
 ```` Python
 st.line_chart(df, x='Month')
@@ -157,7 +160,7 @@ st.line_chart(df, x='Month')
 
 The built-in charts require a data source, ``df`` and a data column to use as the x-axis. If the y-axis is left undefined then all of the remaining columns will be plotted. Otherwise, the y-axis should be a single column name, or a list of column names.
 
-Here is a bar chart of the same Bitcoin data.
+Here is a bar chart of the just the Bitcoin data.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.bar-btc.png)
 
@@ -167,22 +170,16 @@ st.bar_chart(df, y = 'Bitcoin', x='Month')
 
 I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart which means that we are adding one or more sets of values in order to construct the bar. 
 
-This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one that tracks the sales of items manufactured by the _The Formidable Widget Company_ over a year. Their flagship product is the _Widget_ but they have two other products, the _Wodget_ and the _Wudget_ and we can see how well they are selling, below.
+This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one that tracks the sales of items manufactured by the _The Incredible Widget Company_ over a year. Their flagship product is the _Widget_ but they have two other products, the _Wodget_ and the _Wudget_ and we can see how well they are selling, below. (We saw how to construct the data earlier.)
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-bar.png)
 
 From this chart we can see that overall sales are not improving despite the apparent popularity of _Wodgets_. Sales of _Widgets_, their staple product, are holding up but the decline in the sales of _Wudgets_ is letting the company down badly.
 
-Here is the code for that chart.
+Here is the code to produce that chart.
 
 ````Python
-sales = pd.DataFrame(
-     {'Quarter':[1,2,3,4],
-      'Widgets':[100,110,112,120],
-      'Wodgets':[50,100,120, 125],
-      'Wudgets':[200,150,100, 90]})
-
-st.bar_chart(sales, x='Quarter')
+st.bar_chart(salesdf, x='Quarter')
 ````
 Notice that the y-axis is not defined, so all columns are plotted.
 
@@ -191,7 +188,7 @@ The last built-in chart is the area chart. Here are the sales data again.
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-area.png)
 
 ````Python
-st.area_chart(sales, x='Quarter')
+st.area_chart(salesdf, x='Quarter')
 ````
 Here you can see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.
 
@@ -199,7 +196,7 @@ I have to say, I am not a great fan of this default colour scheme.
 
 ### Pyplot
 
-The first supported charting package we will look at is _Pytlot_ - essentially this is support for the Python Matplotlib package but we can also use the Pandas plotting methods.
+The first supported charting package we will look at is _Pyplot_ - essentially this is support for the Python Matplotlib package but we can also use the Pandas plotting methods as they are built on the Matplotlib package.
 
 Here is a the code for a line plot of the crypto data.
 
@@ -250,9 +247,9 @@ Notice that here we can easily plot both BTC and ETH by specifiying them in a li
 
 Vega-Lite is a grammar of graphics specification for interactive visualizations. It is platform neutral and you specify a Vega-lite graphic as a JSON structure.
 
-We are not going to deal with Vega-Lite directly here because Altair is an  implementation of Vega-Lie in Python.
+We are not going to deal with Vega-Lite directly here because Altair is an  implementation of Vega-Lite in Python and, unless you already have Vega-Lite data that you need to use, it is easier to use Altair.
 
-For more information on the specification, please refer to the [Vega-Lite website](http://vega.github.io/vega-lite/).
+For more information on the Vega-Lite specification, please refer to the [Vega-Lite website](http://vega.github.io/vega-lite/).
 
 ### Altair
 
