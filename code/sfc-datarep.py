@@ -8,7 +8,7 @@
 
 import streamlit as st
 import pandas as pd
-import altair as alt
+
 
 st.title("Presenting data in Streamlit")
 
@@ -29,7 +29,7 @@ d = {'Quarter':[1,2,3,4],
      'Widgets':[100,110,112,120],
      'Wodgets':[50,100,120, 125],
      'Wudgets':[200,150,100,90]}
-     
+
 salesdf = pd.DataFrame(d)
 
 col1, col2 = st.columns(2)
@@ -152,7 +152,31 @@ st.pyplot(fig)
 
 st.markdown('---')
 
+### Vega-Lite
+st.markdown('### A Vega-Lite chart')
+c = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "values": [
+      {"a": "A", "b": 28}, {"a": "B", "b": 55}, {"a": "C", "b": 43},
+      {"a": "D", "b": 91}, {"a": "E", "b": 81}, {"a": "F", "b": 53},
+      {"a": "G", "b": 19}, {"a": "H", "b": 87}, {"a": "I", "b": 52}
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "a", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "b", "type": "quantitative"}
+  }
+}
+
+st.vega_lite_chart(c)
+
+st.markdown('---')
+
 ### Altair
+import altair as alt
 
 st.markdown('### Here are some Altair charts:')
 

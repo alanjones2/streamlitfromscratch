@@ -245,9 +245,38 @@ Notice that here we can easily plot both BTC and ETH by specifiying them in a li
 
 ### Vega-lite
 
-Vega-Lite is a grammar of graphics specification for interactive visualizations. It is platform neutral and you specify a Vega-lite graphic as a JSON structure.
+Vega-Lite is a platform neutral grammar of graphics specification for interactive visualizations. 
 
-We are not going to deal with Vega-Lite directly here because Altair is an  implementation of Vega-Lite in Python and, unless you already have Vega-Lite data that you need to use, it is easier to use Altair.
+A Vega-Lite graphic is specified as a JSON structure, like this one from the Vaga-Lite examples web page.
+
+```` JSON
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "values": [
+      {"a": "A", "b": 28}, {"a": "B", "b": 55}, {"a": "C", "b": 43},
+      {"a": "D", "b": 91}, {"a": "E", "b": 81}, {"a": "F", "b": 53},
+      {"a": "G", "b": 19}, {"a": "H", "b": 87}, {"a": "I", "b": 52}
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "a", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "b", "type": "quantitative"}
+  }
+}
+````
+[_Listing courtesy of the Vega-Lite examples web page_](https://vega.github.io/vega-lite/examples/line.html)
+
+This also is a valid declaration for a Python list and so we can assign it to a variable and plot it like this.
+````Python
+st.vega_lite_chart(c)
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/vega-lite-bar.png)
+
+To my mind this is a rather long-winded way of creating a graphic and because Altair is an  implementation of Vega-Lite in Python, we will pass on this particular feature of Streamlit and move on to Altair.
 
 For more information on the Vega-Lite specification, please refer to the [Vega-Lite website](http://vega.github.io/vega-lite/).
 
@@ -255,8 +284,76 @@ For more information on the Vega-Lite specification, please refer to the [Vega-L
 
 As just mentioned, Altair charts are based on the Vega-Lite specification, so the graphics produced by Altair will be the same as Vega-Lite.
 
+To plot an altair chart we first need to import the library:
+```` Python
+import altair as alt
+````
 
+We then define a chart and use ``st.altair_chart(c)``, where ``c`` is the chart, to plot it.
 
+The syntax to define an altair chart is quite different to what we have so far encountered. It is a declarative system and we start by defining a chart object.
+```` Python
+c = alt.Chart(cryptodf)
+````
+This creates a chart from the dataframe ``cryptodf`` but it doesn't do much for us as it is. We now need to declare _marks_ and _encodings_.
+
+_Marks_ are how the chart should be visualized, they may be lines, points, bars, etc. E.g.
+
+```` Python
+c = alt.Chart(cryptodf).mark_line()
+````
+
+Means that we want to draw a line chart.
+
+Then to visually make sense of the data we can map various encoding channels to columns in the dataset. 
+
+We could encode the column ``'Month'`` of the data with the ``x`` channel, for example, which represents the x-axis position of the points. That gives us one axis. Then we could encode the column ``'Bitcoin'`` to the ``y``.
+
+```` Python
+c = alt.Chart(cryptodf).mark_line().encode(
+    x='Month:O', y='Bitcoin')
+````
+
+The strange ``:O`` in the code tells Altair that ``'Month'`` is an ordinal value and so it will be displayed as a list of integers (otherwise they would be displayed as real number and representing _January_ with the number 1.0 is a bit odd).
+
+To draw the chart we call the ``st.altair_chart()`` method:
+
+```` Python
+st.altair_chart(c, use_container_width=True)
+````
+And this results in a neat line chart of the BTC value over the last 11 months.
+
+You'd prefer a bar chart? Easy. Just substitute ``mark_line()`` with ``mark_bar()``.
+
+Here are the two charts.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/altair-btc-line-bar.png)
+
+This works well for charting a single column but if we wanted to have both BTC and ETH on the same graph, we need to manipulate the data a little - well quite a lot, really.
+
+In terms of the crypto chart, we need to put both BTC and ETH values in the same column. But as we need to distinguish between them, we need another column that labels them _BTC_ or _ETH_.
+
+Similarly, with the sales data, each value must be in the same column and this time we need a new column that labels the values as _Widget_, _Wodget_ or _Wudget_.
+
+We can transform our current dataframes with the Pandas ``melt()`` method. Here is the code:
+
+```` Python
+cryptodf1 = pd.melt(cryptodf, 
+              value_vars=['Bitcoin','Ethereum'], 
+              id_vars=['Month'],
+              var_name='Name'
+              )
+salesdf1 = pd.melt(salesdf, 
+              value_vars=['Widgets','Wodgets','Wudgets'], 
+              id_vars=['Quarter'],
+              var_name='Name'
+              )
+````
+Now we have two new dataframes that look like this:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/crypto1-sales1.png)
+
+Sa
 ### Bokeh
 
 ### Conclusion
