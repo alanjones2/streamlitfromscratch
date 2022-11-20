@@ -355,6 +355,21 @@ Now we have two new dataframes that look like this:
 
 Same data, different format.
 
+Which means we can do this:
+
+```` Python
+c = alt.Chart(cryptodf1).mark_line().encode(
+    x='Month', 
+    y='value', 
+    color = 'Name:N'
+    )
+
+st.altair_chart(c)
+````
+The y-axis is now mapped onto the _value_ column which contains thevalues for both BTC and ETH. But now we have a third encoding ``color`` which is mapped onto the _Name_ column. So we have two lines of different colours on the same chart.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/altair-line-btc-eth.png)
+
 ### Bokeh
 
 ### Conclusion
