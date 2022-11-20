@@ -241,7 +241,7 @@ st.pyplot(fig)
 
 Notice that here we can easily plot both BTC and ETH by specifiying them in a list. It is also important to note that we need to pass ``ax`` to the plot function call - in this way the new plot is added to the figure.
 
-### Plotly
+
 
 ### Vega-lite
 
@@ -368,8 +368,14 @@ st.altair_chart(c)
 ````
 The y-axis is now mapped onto the _value_ column which contains thevalues for both BTC and ETH. But now we have a third encoding ``color`` which is mapped onto the _Name_ column. So we have two lines of different colours on the same chart.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/altair-line-btc-eth.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/altair-crypto-line-btc-eth.png)
+
+
 
 ### Bokeh
+
+
+
+### Plotly
 
 ### Conclusion

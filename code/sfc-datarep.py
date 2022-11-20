@@ -152,26 +152,51 @@ st.pyplot(fig)
 
 st.markdown('---')
 
-### Vega-Lite
-st.markdown('### A Vega-Lite chart')
-c = {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "A simple bar chart with embedded data.",
-  "data": {
-    "values": [
-      {"a": "A", "b": 28}, {"a": "B", "b": 55}, {"a": "C", "b": 43},
-      {"a": "D", "b": 91}, {"a": "E", "b": 81}, {"a": "F", "b": 53},
-      {"a": "G", "b": 19}, {"a": "H", "b": 87}, {"a": "I", "b": 52}
-    ]
-  },
-  "mark": "bar",
-  "encoding": {
-    "x": {"field": "a", "type": "nominal", "axis": {"labelAngle": 0}},
-    "y": {"field": "b", "type": "quantitative"}
-  }
-}
+st.write("To compare more than one value, it's often easier to transform the data")
+cryptodf1 = pd.melt(cryptodf, 
+              value_vars=['Bitcoin','Ethereum'], 
+              id_vars=['Month'],
+              var_name='Name'
+              )
+salesdf1 = pd.melt(salesdf, 
+              value_vars=['Widgets','Wodgets','Wudgets'], 
+              id_vars=['Quarter'],
+              var_name='Name'
+              )
+col3,col4 = st.columns(2)
+col3.table(cryptodf1)
+col4.table(salesdf1)
 
-st.vega_lite_chart(c)
+st.markdown('---')
+
+### Plotly
+
+import plotly.express as px
+
+c = px.line(cryptodf1, x="Month", y="value",
+             color='Name', 
+             height=400)
+
+st.plotly_chart(c)
+
+c = px.bar(cryptodf1, x="Month", y="value",
+             color='Name', barmode='group',
+             height=400)
+
+st.plotly_chart(c)
+
+c = px.bar(salesdf1, x="Quarter", y="value",
+             color='Name', barmode='group',
+             height=400)
+
+st.plotly_chart(c)
+
+c = px.bar(salesdf1, x="Quarter", y="value",
+             color='Name', barmode='stack',
+             height=400)
+c.update_layout(paper_bgcolor="white", plot_bgcolor="white", yaxis_gridcolor= "black",yaxis_linecolor= "black",xaxis_linecolor= "black")
+st.plotly_chart(c)
+
 
 st.markdown('---')
 
@@ -191,21 +216,6 @@ c = alt.Chart(cryptodf).mark_bar().encode(
     x='Month:O', y='Bitcoin')
 
 st.altair_chart(c, use_container_width=True)
-
-st.write("To compare more than one value, it's easier to transform the data")
-cryptodf1 = pd.melt(cryptodf, 
-              value_vars=['Bitcoin','Ethereum'], 
-              id_vars=['Month'],
-              var_name='Name'
-              )
-salesdf1 = pd.melt(salesdf, 
-              value_vars=['Widgets','Wodgets','Wudgets'], 
-              id_vars=['Quarter'],
-              var_name='Name'
-              )
-col3,col4 = st.columns(2)
-col3.table(cryptodf1)
-col4.table(salesdf1)
 
 st.info("A grouped bar chart for crypto")
 c = alt.Chart(cryptodf1).mark_bar().encode(
@@ -253,4 +263,75 @@ c = alt.Chart(salesdf1).mark_circle().encode(
     )
 
 st.altair_chart(c, use_container_width=False)
+
+st.markdown('---')
+
+### Bokeh
+
+from bokeh.plotting import figure
+
+# create a new plot with a title and axis labels
+p = figure(title="Simple line example", 
+           x_axis_label="Month", 
+           y_axis_label="value")
+
+# add a line renderer with legend and line thickness
+p.line(cryptodf['Month'], 
+       cryptodf['Bitcoin'], 
+       legend_label="BTC", 
+       color = 'blue',
+       line_width=2)
+p.line(cryptodf['Month'], 
+       cryptodf['Ethereum'], 
+       legend_label="ETH", 
+       color = "green",
+       line_width=2)
+
+st.bokeh_chart(p)
+
+# create a new plot with a title and axis labels
+p = figure(title="Simple line example", 
+           x_axis_label="Month", 
+           y_axis_label="value")
+
+p.vbar(x=cryptodf['Month'], 
+       top=sum(zip(cryptodf['Bitcoin'], cryptodf['Ethereum']), ()), 
+       legend_label="BTC", 
+       width=0.5, 
+       bottom=0, 
+       color="blue")
+
+p.vbar(x=cryptodf['Month'], 
+       top=cryptodf['Ethereum'], 
+       legend_label="ETH", 
+       width=0.5, 
+       bottom=0, 
+       color="green")
+
+st.bokeh_chart(p)
+
+st.markdown('---')
+
+
+
+### Vega-Lite
+st.markdown('### A Vega-Lite chart')
+c = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A simple bar chart with embedded data.",
+  "data": {
+    "values": [
+      {"a": "A", "b": 28}, {"a": "B", "b": 55}, {"a": "C", "b": 43},
+      {"a": "D", "b": 91}, {"a": "E", "b": 81}, {"a": "F", "b": 53},
+      {"a": "G", "b": 19}, {"a": "H", "b": 87}, {"a": "I", "b": 52}
+    ]
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "a", "type": "nominal", "axis": {"labelAngle": 0}},
+    "y": {"field": "b", "type": "quantitative"}
+  }
+}
+
+st.vega_lite_chart(c)
 
