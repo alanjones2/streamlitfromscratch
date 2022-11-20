@@ -353,7 +353,8 @@ Now we have two new dataframes that look like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/crypto1-sales1.png)
 
-Sa
+Same data, different format.
+
 ### Bokeh
 
 ### Conclusion
