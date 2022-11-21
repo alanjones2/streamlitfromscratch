@@ -3,7 +3,8 @@
 #
 # MIT License
 #
-# Copyright (c) 2022 Alan Jones - see LICENCE.md
+# Copyright (c) 2022 Alan Jones 
+# - see LICENCE.md in parent directory
 #
 
 import streamlit as st
@@ -43,7 +44,7 @@ st.markdown('---')
 ### st.metric()
 
 # Bitcoin value at the beginning of the year and now 
-st.markdown("### Using ``st.metric()`` we can display a neat textual representation of a change in value")
+st.info("### Using ``st.metric()`` we can display a neat textual representation of a change in value")
 
 btcCurrent = 16080
 btcYrBeg = 47733
@@ -62,7 +63,7 @@ st.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal",
 
 st.markdown('---')
 
-st.markdown("### Combining ``st.metric()`` with text in columns:")
+st.info("### Combining ``st.metric()`` with text in columns:")
 
 # Use columns to display them together
 col1, col2, col3 = st.columns([50,25,25])
@@ -74,11 +75,11 @@ col3.metric("Ethereum", ethCurrent, delta=ethdelta, delta_color="normal",
 
 st.markdown('---')
 
-st.markdown("### Display a dataframe with ``st.table()``")
+st.info("### Display a dataframe with ``st.table()``")
 
 st.table(cryptodf)
 
-st.markdown("### Display a dataframe with ``st.dataframe()``")
+st.info("### Display a dataframe with ``st.dataframe()``")
 
 st.dataframe(cryptodf, use_container_width= True)
 
@@ -86,22 +87,22 @@ st.markdown('---')
 
 ### Streamlit charts
 
-st.markdown("### Streamlit charts ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``")
+st.info("### Streamlit charts ``st.line_chart()``, ``st.bar_chart()`` and ``st.area_chart()``")
 
-st.markdown("#### Built-in charts for the crypto data")
+st.info("#### Built-in charts for the crypto data")
 
 st.line_chart(cryptodf, x='Month')
 st.bar_chart(cryptodf, x='Month')
 st.warning("The bar chart doesn't do what we want - it shouldn't be stacked for this type of data")
 st.area_chart(cryptodf, x='Month')
 
-st.markdown("#### Built-in charts for Bitcoin data, only")
+st.info("#### Built-in charts for Bitcoin data, only")
 
 st.line_chart(cryptodf, y = 'Bitcoin', x = 'Month')
 st.bar_chart(cryptodf, y = 'Bitcoin', x='Month')
 st.area_chart(cryptodf, y = 'Bitcoin', x = 'Month')
 
-st.markdown("#### Some made-up sales data shows a use of the built-in bar chart")
+st.info("#### Some made-up sales data shows a use of the built-in bar chart")
 
 # A stacked bar chart of sales figures
 st.bar_chart(salesdf, x='Quarter')
@@ -114,7 +115,7 @@ but there are plenty of others to choose from""")
 
 ### Pyplot
 
-st.markdown('### PyPlot Charts')
+st.info('### PyPlot Charts')
 st.write("This is used for Matplotlib-based charts so we can use it for Pandas plots, too")
 
 import matplotlib.pyplot as plt
@@ -137,7 +138,7 @@ st.pyplot(fig)
 
 st.markdown('---')
 
-st.markdown("### Here are some Pandas plotted charts")
+st.info("### Here are some Pandas plotted charts")
 fig, ax = plt.subplots()
 cryptodf.plot.bar(x = 'Month', y=['Bitcoin','Ethereum'],ax=ax)
 st.pyplot(fig)
@@ -152,7 +153,7 @@ st.pyplot(fig)
 
 st.markdown('---')
 
-st.write("To compare more than one value, it's often easier to transform the data")
+st.info("### To compare more than one value, it's often easier to transform the data")
 cryptodf1 = pd.melt(cryptodf, 
               value_vars=['Bitcoin','Ethereum'], 
               id_vars=['Month'],
@@ -172,6 +173,8 @@ st.markdown('---')
 ### Plotly
 
 import plotly.express as px
+
+st.info("### Plotly charts")
 
 c = px.line(cryptodf1, x="Month", y="value",
              color='Name', 
@@ -194,16 +197,19 @@ st.plotly_chart(c)
 c = px.bar(salesdf1, x="Quarter", y="value",
              color='Name', barmode='stack',
              height=400)
-c.update_layout(paper_bgcolor="white", plot_bgcolor="white", yaxis_gridcolor= "black",yaxis_linecolor= "black",xaxis_linecolor= "black")
+c.update_layout(paper_bgcolor="white", 
+                plot_bgcolor="white", 
+                yaxis_gridcolor= "black",
+                yaxis_linecolor= "black",
+                xaxis_linecolor= "black")
 st.plotly_chart(c)
-
 
 st.markdown('---')
 
 ### Altair
 import altair as alt
 
-st.markdown('### Here are some Altair charts:')
+st.info('### Here are some Altair charts:')
 
 st.write("First a line and bar chart for Bitcoin performance")
 
@@ -255,21 +261,13 @@ c = alt.Chart(cryptodf1).mark_line().encode(
 
 st.altair_chart(c, use_container_width=False)
 
-# scatter plot using circles
-c = alt.Chart(salesdf1).mark_circle().encode(
-    x='Quarter', 
-    y='value', 
-    color = 'Name'
-    )
-
-st.altair_chart(c, use_container_width=False)
-
 st.markdown('---')
 
 ### Bokeh
 
 from bokeh.plotting import figure
 
+st.info("### Bokeh charts")
 # create a new plot with a title and axis labels
 p = figure(title="Simple line example", 
            x_axis_label="Month", 
@@ -290,23 +288,17 @@ p.line(cryptodf['Month'],
 st.bokeh_chart(p)
 
 # create a new plot with a title and axis labels
-p = figure(title="Simple line example", 
+p = figure(title="Simple bar example", 
            x_axis_label="Month", 
            y_axis_label="value")
 
 p.vbar(x=cryptodf['Month'], 
-       top=sum(zip(cryptodf['Bitcoin'], cryptodf['Ethereum']), ()), 
+       top=cryptodf['Bitcoin'], 
        legend_label="BTC", 
        width=0.5, 
        bottom=0, 
        color="blue")
 
-p.vbar(x=cryptodf['Month'], 
-       top=cryptodf['Ethereum'], 
-       legend_label="ETH", 
-       width=0.5, 
-       bottom=0, 
-       color="green")
 
 st.bokeh_chart(p)
 
@@ -315,7 +307,7 @@ st.markdown('---')
 
 
 ### Vega-Lite
-st.markdown('### A Vega-Lite chart')
+st.info('### A Vega-Lite chart')
 c = {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "description": "A simple bar chart with embedded data.",
