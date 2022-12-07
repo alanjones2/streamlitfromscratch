@@ -39,5 +39,5 @@ fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
                     color="Annual CO₂ emissions",
                     hover_name="Entity",
                     range_color=(0,max),
-                    color_continuous_scale=px.colors.sequential.Reds)
+                    color_continuous_scale=px.colors.sequential.Blues)
 st.plotly_chart(fig, use_container_width=True)

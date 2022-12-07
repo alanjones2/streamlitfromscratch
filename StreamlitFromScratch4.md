@@ -103,12 +103,17 @@ We are going to use the year value in a Plotly choropleth which wil gives us a f
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)
 
+The detail of this figure is a little difficult to see but if you use the expander control (which exanps the image to fullscreen) and/or the zoom facility individual countries can be easily seen.
+
+
+
 ```` Python
 max = df_countries['Annual CO₂ emissions'].max()
 
 year = st.slider('Select year',1850,2020)
 
-fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+fig = px.choropleth(df_countries[df_countries['Year']==year],
+                    locations="Code",
                     color="Annual CO₂ emissions",
                     hover_name="Entity",
                     range_color=(0,max),
