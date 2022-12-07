@@ -32,10 +32,12 @@ df_continents
 df_world
 df_groups
 
+max = df_countries['Annual CO₂ emissions'].max()
+
 year = st.slider('Select year',1850,2020)
 fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
                     color="Annual CO₂ emissions",
                     hover_name="Entity",
-                    range_color=(0,12000000000),
+                    range_color=(0,max),
                     color_continuous_scale=px.colors.sequential.Reds)
 st.plotly_chart(fig, use_container_width=True)

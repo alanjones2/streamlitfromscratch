@@ -88,12 +88,33 @@ Sliders are very easy to use:
 year = st.slider('Select year',1850,2020)
 ````
 
-The ``st.slider`` method takes three parameters, a prompt string and two numerical limits. The return value is a value between the limits corresonding to the position of the slider. In the image below the range is between 1850 and 2020 and the return value will be 1978.
+The ``st.slider`` method requires three parameters, a prompt string and two numerical limits. The return value is a value between the limits corresonding to the position of the slider. In the image below the range is between 1850 and 2020 and the return value will be 1978.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/slider.png)
 
+Remember that when a UI control changes, the whole of the app is re-run. Only when the slider is moved will the return value be updated.
 
+A fourth parameter can be given to set a default value for the slider, e.g.
 
+```Python
+year = st.slider('Select year',1850,2020,1950)
+````
+We are going to use the year value in a Plotly choropleth which wil gives us a figure like this one, below.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)
+
+```` Python
+max = df_countries['Annual CO₂ emissions'].max()
+
+year = st.slider('Select year',1850,2020)
+
+fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+                    color="Annual CO₂ emissions",
+                    hover_name="Entity",
+                    range_color=(0,max),
+                    color_continuous_scale=px.colors.sequential.Reds)
+st.plotly_chart(fig, use_container_width=True)
+````
 
 
 
