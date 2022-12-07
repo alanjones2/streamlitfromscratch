@@ -65,8 +65,35 @@ In our functions there are no parameters and so the the functions will only ever
 
 The dataframes look like this:
 
-![](![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)
 )
+
+They contain columns for the 
+- _Entity_: country, continent, income group or 'World'
+- _Code_: the ISO country code (where applicable)
+- _Year_
+- _Annual CO2 Emissions_: from burning fossil fuel and industrial processes
+- _Annual CO2 Emissions including land-use change_: the sum of the previous column and next one
+- _Annual CO2 Emissions from land-use change_
+
+We'll be using the first, third and fourth columns in each table to show the emissions over time for each of the entity-types.
+
+Our first focus will be the World. We'll show the how emissions have changed in all countries of the world on a map. The user will select a year and the countries will be shaded according to the level of their emissions.
+
+This is where we come across our first Streamlit UI component. We will use a slider to allow the user to select a year.
+
+Sliders are very easy to use:
+
+```Python
+year = st.slider('Select year',1850,2020)
+````
+
+The ``st.slider`` method takes three parameters, a prompt string and two numerical limits. The return value is a value between the limits corresonding to the position of the slider. In the image below the range is between 1850 and 2020 and the return value will be 1978.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/slider.png)
+
+
+
 
 
 
