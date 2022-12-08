@@ -4,7 +4,7 @@
 
 TK image
 
-We are going to explore the layout and user interface aspects of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.
+We are going to explore some of the layout and user interface features of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.
 
 TK image of app
 
@@ -16,9 +16,9 @@ But first we need some data to work with.
 
 The code below gets four data files from my Github repository [CO2](https://github.com/alanjones2/CO2). They contain data on world-wide carbon dioxide emissions over the last couple of hundred years. The original data comes from Our World in Data[1] and I have simply broken that down into four different subsets. The first contains data for each country in the world, the second breaks it down by continent, the third is for the whole world and the last one represents groups of countries by income type.
 
-I've also included all of teh libraries that we will use in this article.
+I've also included all of the libraries that we will use in this article.
 
-## Get the data
+## Fetch the data and cache it
 
 ````Python
 import streamlit as st
@@ -49,28 +49,26 @@ df_world = get_world_data()
 df_groups = get_group_data()
 ````
 
-TK Explain caching
+You may wonder why I've written functions to download and create a dataframe for each of the files. There is a reason for this and this is indicated by the Python decorator ``@st.cache``.
 
-You may think that I have gone a little over the top in writing functions to download and create a dataframe for each of the files. There is a reason for this and this is indicated by the Python decorator ``@st.cache``.
+Whenever the user interacts with a Streamlit app, to enter a value, or change a setting, for example, the entire Streamlit app is re-run from the beginning. This may appear to be inefficient but it is the way that Streamlit works and doesn't normally impact the user experience too badly.
 
-Whenever the user interacts with a Streamlit app, to enter a value, or change a setting, for example, the entire Streamlit app is re-run from the beginning. This may appear to be inefficient but it is the way that Streamlit works and doesn't really impact too much on the use experience.
-
-Except that there are occasions when it does and that imapact could be significant.
+Except that there are occasions when it does and that impact could be significant.
 
 If a lot of data is downloaded from an external source, this will take time. And while this maybe acceptable when the app first starts up, you don't really want a long pause in the middle of the user changing something. And this is what the ``@st.cache`` decorator is all about. 
 
 Marking a function in this way tells Streamlit to cache any resulting data and stops the function being called again unless the parameters passed to it have changed. Instead the cached data is returned to the caller.
 
-In our functions there are no parameters and so the the functions will only ever be called once. This is exactly what we want as the data is not going to change and so the data will only be fetched the first time the functions are called and, thereafter, the cached data will be used.
+In our functions there are no parameters and so the the functions will only ever be called once. This is exactly what we want as the data is not going to change and so it will only be fetched the first time the functions are called and, thereafter, the cached data will be used.
 
-The dataframes look like this:
+The dataframes all look something like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)
 )
 
 They contain columns for the 
 - _Entity_: country, continent, income group or 'World'
-- _Code_: the ISO country code (where applicable)
+- _Code_: the ISO country code (if it is a country)
 - _Year_
 - _Annual CO2 Emissions_: from burning fossil fuel and industrial processes
 - _Annual CO2 Emissions including land-use change_: the sum of the previous column and next one
@@ -82,7 +80,7 @@ Our first focus will be the World. We'll show the how emissions have changed in 
 
 This is where we come across our first Streamlit UI component. We will use a slider to allow the user to select a year.
 
-### Sliders
+## Sliders
 
 Sliders are very easy to use:
 
@@ -109,21 +107,15 @@ We are going to use the year value in a Plotly choropleth which will give us a f
 Here is the code. There is nothing particularly difficult in creating the choropleth. Plotly does all the hard work for you, we just have to provide the appropriate values.
 
 ```` Python
-def map():
-    max = df_countries['Annual CO₂ emissions'].max()
+max = df_countries['Annual CO₂ emissions'].max()
 
-    year = st.slider('Select year',1850,2020)
-    fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
-                        color="Annual CO₂ emissions",
-                        hover_name="Entity",
-                        range_color=(0,max),
-                        color_continuous_scale=px.colors.sequential.Blues)
-    st.plotly_chart(fig, use_container_width=True)
-````
-The code is written as a function because this will make it clearer when we re-use it in later examples. You run it like this (of course):
-
-```` Python
-map()
+year = st.slider('Select year',1850,2020)
+fig1 = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+                    color="Annual CO₂ emissions",
+                    hover_name="Entity",
+                    range_color=(0,max),
+                    color_continuous_scale=px.colors.sequential.Blues)
+st.plotly_chart(fig1)
 ````
 
 In the code we have used the value of ``year`` to filter the dataframe and that is the data that the choropleth will use. We have also calculated the maximum value of CO2 emissions in tha table and this is used to set the range of colours that will be used on the map. In addition to the data, the other parameters are:
@@ -154,26 +146,22 @@ This lets the user select the beginning and end of a list of months with the def
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png)
 
-### Select boxes
+## Select boxes
 
 Streamlit provides two _selectbox_ methods: one for selecting a single item and another for selecting multiple items.
 
-Below is an example of the single _selectbox_. Again it is written as a function and it let's you select a continent and shows the CO2 emissions for that continent as a line graph. First, we need to create a list of continents and store that in ``continents`` then we see the _selectbox_ which will let the user choose a continent. Using that value we filter the dataframe and plot a line chart with Plotly.
+Below is an example of the single _selectbox_. It let's you select a continent and shows the CO2 emissions for that continent as a line graph. First, we need to create a list of continents and store that in ``continents`` then we see the _selectbox_ which will let the user choose a continent. Using that value we filter the dataframe and plot a line chart with Plotly.
 
 ```` Python
-def one_continent_line_graph():
+continents = df_continents['Entity'].unique()
 
-    continents = df_continents['Entity'].unique()
+selected_continent = st.selectbox('Select country or group',continents)
 
-    selected_continent = st.selectbox('Select country or group',continents)
+df = df_continents[df_continents['Entity'] == selected_continent]
 
-    df = df_continents[df_continents['Entity'] == selected_continent]
+fig2 = px.line(df,"Year","Annual CO₂ emissions")
 
-    fig = px.line(df,"Year","Annual CO₂ emissions")
-
-    st.plotly_chart(fig, use_container_width=True)
-
-one_continent_line_graph()
+st.plotly_chart(fig2, use_container_width=True)
 ````
 The result looks like this.
 
@@ -185,27 +173,45 @@ If we want to run something similar but where we can compare countries then the 
 
 Here is a similar function that uses ``st.multiselect()``. This lets the user select from a drop-down menu in a similar way but once selected the value is kept in a list which is displayed in box above the menu. To remove an item from the list you click _x_ for that item and it will reappear in the menu.
 
-The code is very similar to the previous function except that instead of filtering the dataframe on a single value, we use the ``isin()`` method to check if the continent name is in the selected list.
+The code is very similar to the previous function except that instead of filtering the dataframe on a single value, we use the ``isin()`` method to check if the continent name is in the selected list. I've also restricted the number of years so that the figure is more readable.
 
 ````Python
-def continents_bar_graph():
+continents = df_continents['Entity'].unique()
 
-    continents = df_continents['Entity'].unique()
+selected_continents = st.multiselect('Select country or group',
+                                      continents, continents)
 
-    selected_continents = st.multiselect('Select country or group',
-                                          continents, continents)
+df = df_continents[df_continents['Year'] >= 2010]
 
-    df = df_continents[df_continents['Year'] >= 2010]
+df = df[df_continents['Entity'].isin(selected_continents)]
 
-    df = df[df_continents['Entity'].isin(selected_continents)]
+fig = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
 
-    fig = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
-
-    st.plotly_chart(fig, use_container_width=True)
+st.plotly_chart(fig, use_container_width=True)
 ````
 Here is the result with five continents selected.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/multiple_select_box_continents.png)
+
+
+## Radio buttons
+
+
+```` Python
+chart = st.radio(
+    "Select the chart that you would like to display",
+    ('World Map', 'Continent Emissions', 'Comparing continents'))
+
+if chart == 'World Map': 
+    st.plotly_chart(fig1)
+if chart == 'Continent Emissions': 
+    st.plotly_chart(fig2)
+if chart == 'Comparing continents': 
+    st.plotly_chart(fig3)
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/radio_button_example.png)
+
 
 
 ---
