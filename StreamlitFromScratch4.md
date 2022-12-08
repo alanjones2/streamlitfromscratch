@@ -176,10 +176,16 @@ def one_continent_line_graph():
 one_continent_line_graph()
 ````
 The result looks like this.
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box.png)
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box_continents.png)
 
 Clicking in the field that displays the continent will bring down a menu from which other values can be selected.
 
+If we want to run something similar but where we can compare countries then the _muliple selectbox_ is what we need.
+
+Here is a similar function that uses ``st.multiselect()``. This lets the user select from a drop-down menu in a similar way but once selected the value is kept in a list which is displayed in box above the menu. To remove an item from the list you click _x_ for that item and it will reappear in the menu.
+
+The code is very similar to the previous function except that instead of filtering the dataframe on a single value, we use the ``isin()`` method to check if the continent name is in the selected list.
 
 ````Python
 def continents_bar_graph():
@@ -197,6 +203,9 @@ def continents_bar_graph():
 
     st.plotly_chart(fig, use_container_width=True)
 ````
+Here is the result with five continents selected.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/multiple_select_box_continents.png)
 
 
 ---
