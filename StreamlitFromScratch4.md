@@ -180,13 +180,10 @@ continents = df_continents['Entity'].unique()
 
 selected_continents = st.multiselect('Select country or group',
                                       continents, continents)
-
 df = df_continents[df_continents['Year'] >= 2010]
-
 df = df[df_continents['Entity'].isin(selected_continents)]
 
 fig = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
-
 st.plotly_chart(fig, use_container_width=True)
 ````
 Here is the result with five continents selected.
@@ -196,6 +193,9 @@ Here is the result with five continents selected.
 
 ## Radio buttons
 
+The next UI component that we will look at is one that implemements radio buttons.
+
+The code should look familiar, first a propmpt and then a list of items that can be selected. Following this is a set of ``if`` statements that test the value of ``chart`` and display the correct chart from the ones that we created earlier.
 
 ```` Python
 chart = st.radio(
@@ -210,7 +210,13 @@ if chart == 'Comparing continents':
     st.plotly_chart(fig3)
 ````
 
+The result looks like this.
+
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/radio_button_example.png)
+
+## Layout
+
+There are several other UI components that Streamlit provides but we'll leave it at that for now because in order to create an app, we need to know how to layout the components that we have seen so far.
 
 
 
