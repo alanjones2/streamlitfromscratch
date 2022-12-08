@@ -87,12 +87,12 @@ with col4:
     emissions mid-twentieth century.
     """)
 with col5:
-    default_countries = ['United States','United Kingdom','China', 'Australia']
-    countries = df_countries['Entity'].unique()
+    default_continents = ['Africa','North America','Asia', 'Europe']
+    continents = df_continents['Entity'].unique()
 
-    selected_countries = st.multiselect('Select country or group',countries,default_countries)
+    selected_continents = st.multiselect('Select country or group',continents,default_countries)
 
-    df3 = df_countries.query('Entity in @selected_countries' )
+    df5 = df_continents.query('Entity in @selected_countries' )
 
     fig2 = px.line(df3,"Year","Annual CO₂ emissions",color="Entity")
 
@@ -100,11 +100,11 @@ with col5:
 
 with col6:
     default_countries = ['United States','United Kingdom','China', 'Australia']
-    countries = df_co2['Entity'].unique()
+    countries = df_countries['Entity'].unique()
 
     selected_countries = st.multiselect('Select country or group',countries,default_countries)
 
-    df3 = df_co2.query('Entity in @selected_countries' )
+    df6 = df_countries.query('Entity in @selected_countries' )
 
     fig2 = px.line(df3,"Year","Annual CO₂ emissions",color="Entity")
 

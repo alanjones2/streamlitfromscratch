@@ -32,12 +32,31 @@ df_continents
 df_world
 df_groups
 
-max = df_countries['Annual CO₂ emissions'].max()
+def map():
+    max = df_countries['Annual CO₂ emissions'].max()
 
-year = st.slider('Select year',1850,2020)
-fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
-                    color="Annual CO₂ emissions",
-                    hover_name="Entity",
-                    range_color=(0,max),
-                    color_continuous_scale=px.colors.sequential.Blues)
-st.plotly_chart(fig, use_container_width=True)
+    year = st.slider('Select year',1850,2020)
+    fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+                        color="Annual CO₂ emissions",
+                        hover_name="Entity",
+                        range_color=(0,max),
+                        color_continuous_scale=px.colors.sequential.Blues)
+    st.plotly_chart(fig, use_container_width=True)
+
+map()
+
+def continents_bar_graph():
+
+    continents = df_continents['Entity'].unique()
+
+    selected_continents = st.multiselect('Select country or group',continents,continents)#,default_continents)
+
+    df = df_continents[df_continents['Year'] >= 2010]
+
+    df = df[df_continents['Entity'].isin(selected_continents)]
+
+    fig = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
+
+    st.plotly_chart(fig, use_container_width=True)
+
+continents_bar_graph()

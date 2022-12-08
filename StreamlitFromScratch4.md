@@ -76,11 +76,13 @@ They contain columns for the
 - _Annual CO2 Emissions including land-use change_: the sum of the previous column and next one
 - _Annual CO2 Emissions from land-use change_
 
-We'll be using the first, third and fourth columns in each table to show the emissions over time for each of the entity-types.
+We'll be using the first four columns in each table to show the emissions over time for each of the entity-types.
 
 Our first focus will be the World. We'll show the how emissions have changed in all countries of the world on a map. The user will select a year and the countries will be shaded according to the level of their emissions.
 
 This is where we come across our first Streamlit UI component. We will use a slider to allow the user to select a year.
+
+### Sliders
 
 Sliders are very easy to use:
 
@@ -99,32 +101,61 @@ A fourth parameter can be given to set a default value for the slider, e.g.
 ```Python
 year = st.slider('Select year',1850,2020,1950)
 ````
-We are going to use the year value in a Plotly choropleth which wil gives us a figure like this one, below.
+We are going to use the year value in a Plotly choropleth which will give us a figure like this one, below.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)
 
 The detail of this figure is a little difficult to see but if you use the expander control (which exanps the image to fullscreen) and/or the zoom facility individual countries can be easily seen.
 
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png)
 
+Here is the code. There is nothing particularly difficult in creating the choropleth. Plotly does all the hard work for you, we just have to provide the appropriate values.
 
 ```` Python
-max = df_countries['Annual CO₂ emissions'].max()
+def map():
+    max = df_countries['Annual CO₂ emissions'].max()
 
-year = st.slider('Select year',1850,2020)
+    year = st.slider('Select year',1850,2020)
+    fig = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+                        color="Annual CO₂ emissions",
+                        hover_name="Entity",
+                        range_color=(0,max),
+                        color_continuous_scale=px.colors.sequential.Blues)
+    st.plotly_chart(fig, use_container_width=True)
+````
+The code is written as a function because this will make it clearer when we re-use it in later examples. You run it like this (of course):
 
-fig = px.choropleth(df_countries[df_countries['Year']==year],
-                    locations="Code",
-                    color="Annual CO₂ emissions",
-                    hover_name="Entity",
-                    range_color=(0,max),
-                    color_continuous_scale=px.colors.sequential.Reds)
-st.plotly_chart(fig, use_container_width=True)
+```` Python
+map()
+````
+
+In the code we have used the value of ``year`` to filter the dataframe and that is the data that the choropleth will use. We have also calculated the maximum value of CO2 emissions in tha table and this is used to set the range of colours that will be used on the map. In addition to the data, the other parameters are:
+
+- ``locations``: the ISO codes that will be used to identify areas on the map
+- ``color``: the value that wil be used to set the colour
+- ``hover_name``: the string that will be shown when hovering over the map, i.e. the country name
+- ``range_color``: the range of values that will be mapped onto the colours
+- ``color_continuous_scale``: the list of colours that will be used (in this case a range of continuous blues provided in Plotly Express)
+
+````Python
+def continents_bar_graph():
+
+    continents = df_continents['Entity'].unique()
+
+    selected_continents = st.multiselect('Select country or group',
+                                          continents, continents)
+
+    df = df_continents[df_continents['Year'] >= 2010]
+
+    df = df[df_continents['Entity'].isin(selected_continents)]
+
+    fig = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
+
+    st.plotly_chart(fig, use_container_width=True)
 ````
 
 
-
-
-
+---
 
 ### Notes
 
