@@ -60,3 +60,11 @@ def continents_bar_graph():
     st.plotly_chart(fig, use_container_width=True)
 
 continents_bar_graph()
+
+start_month, end_month = st.select_slider(
+    'Select a range of months',
+    options=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    value=('Jan', 'Dec'))
+    
+st.write('You selected months between', start_month, 'and', end_month)

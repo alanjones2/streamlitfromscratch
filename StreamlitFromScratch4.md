@@ -105,9 +105,6 @@ We are going to use the year value in a Plotly choropleth which will give us a f
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)
 
-The detail of this figure is a little difficult to see but if you use the expander control (which exanps the image to fullscreen) and/or the zoom facility individual countries can be easily seen.
-
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png)
 
 Here is the code. There is nothing particularly difficult in creating the choropleth. Plotly does all the hard work for you, we just have to provide the appropriate values.
 
@@ -136,6 +133,26 @@ In the code we have used the value of ``year`` to filter the dataframe and that 
 - ``hover_name``: the string that will be shown when hovering over the map, i.e. the country name
 - ``range_color``: the range of values that will be mapped onto the colours
 - ``color_continuous_scale``: the list of colours that will be used (in this case a range of continuous blues provided in Plotly Express)
+
+The detail of this figure is a little difficult to see but if you use the expander control (which expands the image to fullscreen) and/or the zoom facility individual countries can be easily seen.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png)
+
+Sliders can also be used for categorical values and these also support a range. For example:
+
+```` Python
+start_month, end_month = st.select_slider(
+    'Select a range of months',
+    options=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    value=('Jan', 'Dec'))
+    
+st.write('You selected months between', start_month, 'and', end_month)
+````
+
+This lets the user select the beginning and end of a list of months with the default result being 'Jan' and 'Dec'. Here is the result:
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png)
 
 ````Python
 def continents_bar_graph():
