@@ -154,6 +154,33 @@ This lets the user select the beginning and end of a list of months with the def
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png)
 
+### Select boxes
+
+Streamlit provides two _selectbox_ methods: one for selecting a single item and another for selecting multiple items.
+
+Below is an example of the single _selectbox_. Again it is written as a function and it let's you select a continent and shows the CO2 emissions for that continent as a line graph. First, we need to create a list of continents and store that in ``continents`` then we see the _selectbox_ which will let the user choose a continent. Using that value we filter the dataframe and plot a line chart with Plotly.
+
+```` Python
+def one_continent_line_graph():
+
+    continents = df_continents['Entity'].unique()
+
+    selected_continent = st.selectbox('Select country or group',continents)
+
+    df = df_continents[df_continents['Entity'] == selected_continent]
+
+    fig = px.line(df,"Year","Annual CO₂ emissions")
+
+    st.plotly_chart(fig, use_container_width=True)
+
+one_continent_line_graph()
+````
+The result looks like this.
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box.png)
+
+Clicking in the field that displays the continent will bring down a menu from which other values can be selected.
+
+
 ````Python
 def continents_bar_graph():
 
