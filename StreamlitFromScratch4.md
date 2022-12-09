@@ -239,7 +239,7 @@ Both of these examples work in the same way and produce the same results. Using 
 
 One of the first layout components that featured in Streamlit was the sidebar. This allowed you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
 
-Here is a simple illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three images to be displayed in the main window. 
+Here is a simple illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three images to be displayed in the main window. (Note that for simplicity, these are static images of charts we created earlier. You could, of course, put any code in the ``if`` blocks, including the code that we previously used to create the interactive charts.)
 
 ```` Python
 import streamlit as st
@@ -270,6 +270,8 @@ And this is what it looks like.
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_example.png)
 
 As you can see this is a very conventional layout - simple and effective. Note that the sidebar can be closed with the _x_ in the top right corner. It can, of course be re-opened.
+
+## Columns
 
 
 
