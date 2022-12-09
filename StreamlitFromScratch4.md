@@ -239,19 +239,23 @@ Both of these examples work in the same way and produce the same results. Using 
 
 One of the first layout components that featured in Streamlit was the sidebar. This allowed you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
 
-Here is a simple illustration of how it can be used.
+Here is a simple illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three images to be displayed in the main window. 
 
 ```` Python
 import streamlit as st
 
+# The title will be displayed at the top of the main window
 st.title('Demonstration of the sidebar')
 
+# Everything in the 'with' block will be in the sidebar
 with st.sidebar:
     st.header('Select an image to be displayed')
     chart = st.radio(
-    "Select the chart that you would like to display",
+    "Select the image that you would like to display",
     ('World Map', 'Continent Emissions', 'Comparing continents'))
 
+# The following is outside of the 'with' block and so will 
+# execute in the main window
 if chart == 'World Map': 
     st.image('../images/choropleth.png')
 
@@ -264,6 +268,14 @@ if chart == 'Comparing continents':
 And this is what it looks like.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_example.png)
+
+As you can see this is a very conventional layout - simple and effective. Note that the sidebar can be closed with the _x_ in the top right corner. It can, of course be re-opened.
+
+
+
+
+
+
 
 
 ---
