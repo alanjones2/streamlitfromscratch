@@ -216,8 +216,54 @@ The result looks like this.
 
 ## Layout
 
-There are several other UI components that Streamlit provides but we'll leave it at that for now because in order to create an app, we need to know how to layout the components that we have seen so far.
+There are several other UI components that Streamlit provides but we'll leave it at that for now because in order to construct an effective app, we need to know how to layout the components that we have seen so far.
 
+### Object notation or ``with:``
+
+Layout components can be programmed using object notation or with the ``with:`` keyword. Here is a piece of fictional code that shows the difference.
+
+```` Python
+# Object notation
+layoutcomponent1.write('This will be written inside component 1')
+layoutcomponent1.write('This will also be written inside component 1')
+
+# 'with' notation
+with layoutcomponent2:
+    st.write('This will be written inside component 2')
+    st.write('This will also be written inside component 2')
+````
+
+Both of these examples work in the same way and produce the same results. Using ``with:`` lets you group the operations on the layout component together, whereas object notation gives you the freedom to scatter those operation throughout the code. It's entirely up to you to decide which to use but I tend to go for the ``with:`` option where possible - I think it is more rational to keep the code together in a block, if you can.
+
+## Sidebar
+
+One of the first layout components that featured in Streamlit was the sidebar. This allowed you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
+
+Here is a simple illustration of how it can be used.
+
+```` Python
+import streamlit as st
+
+st.title('Demonstration of the sidebar')
+
+with st.sidebar:
+    st.header('Select an image to be displayed')
+    chart = st.radio(
+    "Select the chart that you would like to display",
+    ('World Map', 'Continent Emissions', 'Comparing continents'))
+
+if chart == 'World Map': 
+    st.image('../images/choropleth.png')
+
+if chart == 'Continent Emissions': 
+    st.image('../images/single_select_box_continents.png')
+
+if chart == 'Comparing continents': 
+    st.image('../images/multiple_select_box_continents.png')
+````
+And this is what it looks like.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_example.png)
 
 
 ---
