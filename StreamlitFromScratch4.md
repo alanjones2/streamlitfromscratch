@@ -1,12 +1,12 @@
-## Streamlit from Scratch: Build a Dashboard with Streamlit's Layout and UI features
+# Streamlit from Scratch: Build a Dashboard with Streamlit's Layout and UI features
 
-### Streamlit has simple but effective components for user interaction and layout which let us build effective and attractive dashboard applications
+## Streamlit has simple but effective components for user interaction and layout which let us build effective and attractive dashboard applications
 
 TK image
 
 We are going to explore some of the layout and user interface features of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.
 
-TK image of app
+TK image of app(s)
 
 Streamlit tries to make life simple for the app developer and so does not have the vast number of UI options that are available in other technologies such as HTML and Javascript UI libraries. But using its layout components you can easily design an attractive and capable web page.
 
@@ -49,7 +49,7 @@ df_world = get_world_data()
 df_groups = get_group_data()
 ````
 
-You may wonder why I've written functions to download and create a dataframe for each of the files. There is a reason for this and this is indicated by the Python decorator ``@st.cache``.
+You may wonder why I've written functions to download and create a dataframe for each of the files. The reason for this is indicated by the Python decorator ``@st.cache``.
 
 Whenever the user interacts with a Streamlit app, to enter a value, or change a setting, for example, the entire Streamlit app is re-run from the beginning. This may appear to be inefficient but it is the way that Streamlit works and doesn't normally impact the user experience too badly.
 
@@ -64,7 +64,7 @@ In our functions there are no parameters and so the the functions will only ever
 The dataframes all look something like this:
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)
-)
+
 
 They contain columns for the 
 - _Entity_: country, continent, income group or 'World'
@@ -218,7 +218,11 @@ The result looks like this.
 
 There are several other UI components that Streamlit provides but we'll leave it at that for now because in order to construct an effective app, we need to know how to layout the components that we have seen so far.
 
-### Object notation or ``with:``
+We'll now turn our attention to layout. Streamlit provides a number of layout elements, containers, columns and a sidebar. We are going to use these features to construct two versions of a dashboard application based on the data that we have been looking at.
+
+However, before we start let's look at the two methods of using layput components - object notation and ``with``.
+
+### Using object notation or ``with:``
 
 Layout components can be programmed using object notation or with the ``with:`` keyword. Here is a piece of fictional code that shows the difference.
 
@@ -233,11 +237,21 @@ with layoutcomponent2:
     st.write('This will also be written inside component 2')
 ````
 
-Both of these examples work in the same way and produce the same results. Using ``with:`` lets you group the operations on the layout component together, whereas object notation gives you the freedom to scatter those operation throughout the code. It's entirely up to you to decide which to use but I tend to go for the ``with:`` option where possible - I think it is more rational to keep the code together in a block, if you can.
+Both of these examples work in the same way and produce the same results.
+
+With object notation, the name of the layout object replaces ``st`` so where you might write ``st.write("stuff")`` to write something that is not contained in a layout component, when writing inside such a component you replace ``st`` with the component name.
+
+When using ``with`` notation you open a block using ``with component_name``. Anything written inside the block is displayed in the layout component and the normal ``st`` prfix is used.
+
+ Using ``with:`` lets you group the operations on the layout component together, whereas object notation gives you the freedom to scatter those operation throughout the code. It's entirely up to you to decide which to use but I tend to go for the ``with:`` option where possible - I think it is more rational to keep the code together in a block, if you can.
+
+ If this is not entirely clear, it will become so when we deal with some concrete examples.
+
+ Let's do just that.
 
 ## Sidebar
 
-One of the first layout components that featured in Streamlit was the sidebar. This allowed you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
+The sidebar was one of the first layout components that featured in Streamlit. This allows you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
 
 Here is a simple illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three images to be displayed in the main window. (Note that for simplicity, these are static images of charts we created earlier. You could, of course, put any code in the ``if`` blocks, including the code that we previously used to create the interactive charts.)
 
@@ -272,6 +286,41 @@ And this is what it looks like.
 As you can see this is a very conventional layout - simple and effective. Note that the sidebar can be closed with the _x_ in the top right corner. It can, of course be re-opened.
 
 ## Columns
+
+
+```` Python
+#
+# Code to import libraries and get the data goes here
+#
+
+# The side bar that contains radio buttons for selection of charts
+with st.sidebar:
+    st.header('Select an chart to be displayed')
+    chart = st.radio(
+    "Select the image that you would like to display",
+    ('World Map', 'Continent Emissions', 'Comparing continents'))
+
+# The main window
+
+st.title("A Simple CO2 Emissions Dashboard")
+st.write("an example of a Streamlit layout using a sidebar")
+
+with st.container():
+    
+    if chart == 'World Map': 
+
+        # code to draw the choropleth
+
+    if chart == 'Continent Emissions': 
+        
+        # code to draw a bar chart
+
+    if chart == 'Comparing continents': 
+
+        # code to draw the multiple bar chart
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_app.png)
 
 
 
