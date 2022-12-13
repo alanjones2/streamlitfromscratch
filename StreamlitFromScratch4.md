@@ -249,44 +249,11 @@ When using ``with`` notation you open a block using ``with component_name``. Any
 
  Let's do just that.
 
-## Sidebar
+## Sidebar layout
 
 The sidebar was one of the first layout components that featured in Streamlit. This allows you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.
 
-Here is a simple illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three images to be displayed in the main window. (Note that for simplicity, these are static images of charts we created earlier. You could, of course, put any code in the ``if`` blocks, including the code that we previously used to create the interactive charts.)
-
-```` Python
-import streamlit as st
-
-# The title will be displayed at the top of the main window
-st.title('Demonstration of the sidebar')
-
-# Everything in the 'with' block will be in the sidebar
-with st.sidebar:
-    st.header('Select an image to be displayed')
-    chart = st.radio(
-    "Select the image that you would like to display",
-    ('World Map', 'Continent Emissions', 'Comparing continents'))
-
-# The following is outside of the 'with' block and so will 
-# execute in the main window
-if chart == 'World Map': 
-    st.image('../images/choropleth.png')
-
-if chart == 'Continent Emissions': 
-    st.image('../images/single_select_box_continents.png')
-
-if chart == 'Comparing continents': 
-    st.image('../images/multiple_select_box_continents.png')
-````
-And this is what it looks like.
-
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_example.png)
-
-As you can see this is a very conventional layout - simple and effective. Note that the sidebar can be closed with the _x_ in the top right corner. It can, of course be re-opened.
-
-## Columns
-
+Here is an illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three charts to be displayed in the main window. (For brevity, I have put comments where the code that we have already seen would go. The downloadable code is, however, complete.)
 
 ```` Python
 #
@@ -319,10 +286,23 @@ with st.container():
 
         # code to draw the multiple bar chart
 ````
+You can see that I have used ``with`` blocks to contain the display code: one for the sidebar and another, that will be displayed in the main window, for a ``st.container()`` which is just a general-purpose container that does really do anything very special.
+
+The result is actually a simple but complete dashboard app and it looks like this.
 
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_app.png)
 
 
+### Column layout
+
+Columns allow you place othe components side-by-side on the screen. There are two ways of creating them. The simplest is this:
+
+```` Python
+
+col1, col2 = st.column(2)
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_app.png)
 
 
 
