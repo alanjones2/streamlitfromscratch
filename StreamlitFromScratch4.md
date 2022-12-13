@@ -295,13 +295,50 @@ The result is actually a simple but complete dashboard app and it looks like thi
 
 ### Column layout
 
-Columns allow you place othe components side-by-side on the screen. There are two ways of creating them. The simplest is this:
+Columns allow you place the components side-by-side on the screen. There are two ways of creating them; the simplest is this:
 
 ```` Python
-
 col1, col2 = st.column(2)
 ````
+The call to ``st.column()`` returns a list of column objects which will be displayed next to each other in the main window or in another layout component.
 
+You can also adjust the gap between the columns with an additional parameter, e.g.
+
+```` Python
+    col1, col2 = st.columns(2, gap="large")
+````
+
+We will use the _large_ gap in our example but it can also be _small_ (the default) or _medium_.
+
+
+
+
+```` Python
+# Code to import libraries and get the data goes here
+
+st.set_page_config(layout = "wide")
+
+# The main window
+
+st.title("A Simple CO2 Emissions Dashboard")
+st.info("An example of a Streamlit layout using columns")
+
+with st.container():
+    col1, col2 = st.columns(2, gap="large")
+
+    with col1:
+        # code to draw the choropleth
+    with col2:
+        st.header("Continental emissions since 1850")  
+        st.info("Select a single continent or compare continents")
+
+        tab1, tab2 = st.tabs(["Continental emissions since 1850", 
+                              "Continental emissions compared since 1850"])
+        with tab1:
+            # code to draw the single continent data
+        with tab2:
+            # code to draw the compared continent data
+````
 ![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_app.png)
 
 
