@@ -295,12 +295,13 @@ The result is actually a simple but complete dashboard app and it looks like thi
 
 ### Column layout
 
-Columns allow you place the components side-by-side on the screen. There are two ways of creating them; the simplest is this:
+Columns allow you place the components side-by-side on the screen and we will see how we can create a column-based version of our emissions app.
+ The simplest way of creating columns is this:
 
 ```` Python
 col1, col2 = st.column(2)
 ````
-The call to ``st.column()`` returns a list of column objects which will be displayed next to each other in the main window or in another layout component.
+The call to ``st.column()`` returns a list of column objects the number of which is determined by the value of the parameter. They will be displayed next to each other in the main window or in another layout component.
 
 You can also adjust the gap between the columns with an additional parameter, e.g.
 
@@ -308,8 +309,11 @@ You can also adjust the gap between the columns with an additional parameter, e.
     col1, col2 = st.columns(2, gap="large")
 ````
 
-We will use the _large_ gap in our example but it can also be _small_ (the default) or _medium_.
+We will use the _large_ gap in our example app but the value can also be _small_ (the default) or _medium_.
 
+### Tabs
+
+Another layout feature that we shall use is the tabs components. 
 
 
 
@@ -343,6 +347,7 @@ with st.container():
 
 
 
+### Conclusion
 
 
 
