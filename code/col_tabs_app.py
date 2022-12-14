@@ -40,9 +40,9 @@ st.info("An example of a Streamlit layout using columns")
 
 
 with st.container():
-    col1, col2, col3 = st.columns((25,50,25))
+    col1, col2 = st.columns(2, gap="large")
 
-    with col2:
+    with col1:
         st.header("Global emissions since 1850")
         st.info("""Select a year with the slider to see the intensity
                 of emissions change in each country""")
@@ -58,29 +58,31 @@ with st.container():
                             color_continuous_scale=px.colors.sequential.Blues)
         st.plotly_chart(fig1, use_container_width=True)
     
-with st.container():
-    col1, col2 = st.columns(2, gap="large")
-    with col1:
+    with col2:
         st.header("Continental emissions since 1850")  
         st.info("Select a single continent or compare continents")
+
+        tab1, tab2 = st.tabs(["Continental emissions since 1850", 
+                              "Continental emissions compared since 1850"])
+
+        with tab1:
             
-        selected_continent = st.selectbox('Select continent',continents)
+            selected_continent = st.selectbox('Select continent',continents)
 
-        df = df_continents[df_continents['Entity'] == selected_continent]
-        fig2 = px.line(df,"Year","Annual CO₂ emissions")
-        st.plotly_chart(fig2, use_container_width=True)
+            df = df_continents[df_continents['Entity'] == selected_continent]
+            fig2 = px.line(df,"Year","Annual CO₂ emissions")
+            st.plotly_chart(fig2, use_container_width=True)
 
-    with col2:
-        st.header("Continental emissions since 1850")
-        st.info("To add a continent select it from the menu. You can also delete one, too")
+        with tab2:
+            st.info("To add a continet select it from the menu. You can also delete one, too")
 
-        selected_continents = st.multiselect('Select continent',continents,continents)
+            selected_continents = st.multiselect('Select continent',continents,continents)
 
-        df = df_continents[df_continents['Year'] >= 2010]
-        df = df[df_continents['Entity'].isin(selected_continents)]
+            df = df_continents[df_continents['Year'] >= 2010]
+            df = df[df_continents['Entity'].isin(selected_continents)]
 
-        fig3 = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
-        st.plotly_chart(fig3, use_container_width=True)
+            fig3 = px.bar(df,"Year","Annual CO₂ emissions",color="Entity", barmode='group')
+            st.plotly_chart(fig3, use_container_width=True)
 
 
 st.info("Data source: _Our World in Data_")

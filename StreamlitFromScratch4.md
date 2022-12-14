@@ -311,6 +311,8 @@ You can also adjust the gap between the columns with an additional parameter, e.
 
 We will use the _large_ gap in our example app but the value can also be _small_ (the default) or _medium_.
 
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_app.png)
+
 ### Tabs
 
 Another layout feature that we shall use is the tabs components. 
@@ -343,13 +345,13 @@ with st.container():
         with tab2:
             # code to draw the compared continent data
 ````
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_app.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tabs_app.png)
 
 
 
 ### Conclusion
 
-
+TK Deployment
 
 ---
 
