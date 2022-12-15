@@ -26,5 +26,19 @@ The code for each article can be found in the [code](./code) directory.
     - Vega-Lite
     - All of the code is in a single file, code/datarep.py
 
+4. Build a Data Dashboard with Streamlit's Layout and UI features
+
+    We build three simple dashboard apps using different UI and layout features
+    - Getting and caching data
+    - User interface
+        - Sliders
+        - Select boxes
+        - Radio buttons
+    - Layout
+        - Object notation or ``with``
+        - Sidebar
+        - Columns
+        - Tabs
+
 If you find this content useful, please consider this... <br/><br/>
 <a href='https://ko-fi.com/M4M64THKG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>

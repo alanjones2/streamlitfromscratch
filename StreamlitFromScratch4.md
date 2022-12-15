@@ -311,7 +311,42 @@ You can also adjust the gap between the columns with an additional parameter, e.
 
 We will use the _large_ gap in our example app but the value can also be _small_ (the default) or _medium_.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_app.png)
+```` Python
+st.set_page_config(layout = "wide")
+
+# Code to import libraries and get the data goes here
+
+# The main window
+st.title("A Simple CO2 Emissions Dashboard")
+st.info("An example of a Streamlit layout using columns")
+
+with st.container():
+    col1, col2, col3 = st.columns((25,50,25))
+
+    with col2:
+        st.header("Global emissions since 1850")
+        st.info("""Select a year with the slider to see the intensity
+                of emissions change in each country""")
+
+        # code to draw the choropleth
+    
+with st.container():
+    col1, col2 = st.columns(2, gap="large")
+    with col1:
+        st.header("Continental emissions since 1850")  
+        st.info("Select a single continent or compare continents")
+        
+        # code to draw the single continent data
+
+    with col2:
+        st.header("Continental emissions since 1850")
+        st.info("To add a continent select it from the menu. You can also delete one, too")
+
+        # code to draw the compared continent data
+
+````
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/column_app.png)
 
 ### Tabs
 
@@ -345,7 +380,7 @@ with st.container():
         with tab2:
             # code to draw the compared continent data
 ````
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tabs_app.png)
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png)
 
 
 
