@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>streamlitfromscratch1</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 80%;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="streamlit-from-scratch-getting-started">Streamlit from Scratch:
+Getting Started</h1>
+<h2
+id="which-tools-do-you-need-and-how-to-use-them-and-how-to-create-your-first-interactive-web-app-in-python">Which
+tools do you need and how to use them; and how to create your first
+interactive web app in Python</h2>
+<p><img
+src="https://raw.githubusercontent.com/alanjones2/streamlitfromscratch/main/images/cover.png" /></p>
+<p>Streamlit is a framework for creating simple and elegant web
+applications in pure Python. It’s mainly aimed at Data Scientists and
+Analysts but can also be used as a general-purpose framework for
+creating web applications.</p>
+<p>No knowledge of HTML or Javascript is needed. Indeed, you can create
+a simple web page with barely any knowledge of Python!</p>
+<p>This is the first in a series of articles in which we will discover
+how Streamlit can be used to create anything from a simple text-based
+web page to a sophisticated, interactive dashboard with data
+visualizations.</p>
+<p>First, we look at how to get started, which tools we need to download
+(there aren’t many) and how to edit and run your first Streamlit
+app.</p>
+<h2 id="getting-started">Getting started</h2>
+<p>Here is the code for a simple web page that consists only of
+text:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">&quot;Hamlet said…&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>st.text(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="st">To be, or not to be, that is the question:</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="st">Whether &#39;tis nobler in the mind to suffer</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">The slings and arrows of outrageous fortune,</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">Or to take arms against a sea of troubles</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">And by opposing end them.</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><em>Listing 1 - hamlet.py</em></p>
+<p>And it looks something like this:</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlettextscreenshot.png" /></p>
+<p>Not particularly exciting but it shows just how easy it is to produce
+a simple web page.</p>
+<p>In this series we will go quite a lot beyond this, though, creating
+web applications that are interactive and include data visualizations in
+Pandas, Plotly and more.</p>
+<p>But first, we need to install the tools.</p>
+<h2 id="installing-python-and-streamlit">Installing Python and
+Streamlit</h2>
+<p>We need Python installed on our computer and, of course, Streamlit,
+too. We will also need an editor to create our apps and a browser to run
+them in.</p>
+<p>One of the easiest ways of getting Python is to install the Anaconda
+distribution. Anaconda consists of a fairly up-to-date version of Python
+plus a whole bunch of libraries. It’s a fairly big installation but by
+using Anaconda you will save yourself the trouble of having to manually
+install those libraries later. The main alternative is to install the
+official Python distribution from their website.</p>
+<p>The <a href="python.org">Python</a> website always contains the
+latest version of Python. If you download <a
+href="anaconda.com">Anaconda</a>, you may not get the latest version.
+But that is not a bad thing because, while it might not be the most
+up-to-date, you will be sure to get a version that works with all of the
+libraries that come with it.</p>
+<p>When a new version of Python is released, it can sometimes take a
+while for the library distributions to catch up, so while installing
+from <a href="python.org">python.org</a> will give you the latest
+version, the <a href="anaconda.com">Anaconda</a> version may be the
+safest (although you can, of course, get older versions from <a
+href="python.org">python.org</a>, too).</p>
+<p>So, go to the Anaconda or Python websites and download and install
+the version for your machine. I would not advise installing both unless
+you want to confuse your operating system and yourself (it
+<strong>is</strong> possible to install both if you exercise some care
+but there is not much point. If you can’t decide which to choose, go for
+Anaconda - it’s what the Streamlit folk recommend).</p>
+<p>Whichever you choose, you will still have to install Streamlit.</p>
+<p>From a command window (use the Anaconda one if that is what you have
+installed) run the command:</p>
+<pre><code>pip install streamlit</code></pre>
+<h2 id="editors">Editors</h2>
+<p>Almost any editor is suitable for writing Streamlit apps. If you are
+already a Python programmer then you will already have your favourite -
+maybe one of the IDEs, VSCode or PyCharm - but a simple general-purpose
+editor such as <strong>Sublime Text</strong> or
+<strong>Notepad++</strong> is perfectly adequate, too.</p>
+<p>When we run normal Python programs we issue the following
+command:</p>
+<pre><code># This won&#39;t work with Streamlit
+python myprogram.py     </code></pre>
+<p>And IDEs such as VSCode and PyCharm assume this when running Python
+programs. However, the command we need to run a Streamlit app is:</p>
+<pre><code># This how to run a Streamlit app
+streamlit run myprogram.py</code></pre>
+<p>The consequence of this is that the standard ‘Run’ command in VSCode
+or PyCharm doesn’t work for Streamlit apps.</p>
+<p>The easiest way around this is to type the correct command in a
+command window. This can be external to the editor, like the Anaconda
+prompt, or the built-in terminal window in your operating system.</p>
+<p>If you use a simple editor such as Sublime Text or Notepad++ this is
+the best approach. You can modify both of these editors to add a
+terminal window (Sublime) or add a commad to run your app (Notepad++)
+but the simplest method is to use the Anaconda Prompt (or Powershell
+Prompt) window, if you have installed Anaconda, or the standard terminal
+window for your operating system, if you’ve installed standard
+Python.</p>
+<p>Here are screenshots of the Sublime Text and Notepad++ editors
+side-by-side with an Anaconda Powershell prompt.</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sublimetext.png" /></p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/notepadpp.png" /></p>
+<p>If you are a seasoned Python programmer, already have your favourite
+version of Python installed and use VSCode or PyCharm, you can use a
+terminal window within the your IDE. In VSCode there is a Terminal menu
+option where you can open a new terminal</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openVCSterminal.png" /></p>
+<p>and in PyCharm, go to the Views menu and find the Terminal option in
+Tool Windows.</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/openPyCharmterminal.png" /></p>
+<p>So, to run your program from one of these IDEs type the run command
+into the terminal window.</p>
+<p><em><strong>Warning…</strong> it’s probably best to only use the
+built-in terminals if you are using a standard Python installation. If
+you have installed Anaconda, this may not work well with VSCode or
+PyCharm because the default terminal may not be able to find the
+Anaconda Python installation. There are ways around this but it’s beyond
+our scope to go into that here. If you are using Anaconda it may be
+simplest to use the Anaconda prompt to run your apps no matter which
+editor/IDE you use.</em></p>
+<h2 id="which-editor-should-you-use">Which editor should you use</h2>
+<p>VSCode and Pycharm are quite sophisticated IDEs. VSCode is a
+general-purpose tool that can be customized with plugins to support many
+different languages. PyCharm is, if anything, more capable than VSCode
+but is dedicated to Python programming.</p>
+<p>Sublime Text is simple to use, quick to download and install but not
+free: you can download a free trial version but are expected to pay for
+a license. Having said that, the trial never expires.</p>
+<p>The Notepad++ user interface is, perhaps a little busier than Sublime
+but it is also a perfectly capable editor and is entirely free.</p>
+<p>Both Sublime and Notepad++ support colour highlighting of Python
+code, which is nice. So too, of course, do VSCode and PyCharm.</p>
+<p>If you are already a VSCode or PyCharm user then the best bet is to
+carry on using these but if you don’t, then Sublime Text or Notepad++
+are probably easier to start with.</p>
+<p>There is one more tool that we need to run a Streamlit app and that
+is a browser such as Chrome, Firefox or Edge. But I assume that you have
+one of these already.</p>
+<p>So, now we have all the tools, we are ready to create our first
+Streamlit app.</p>
+<h2 id="editing-and-running-hello-hamlet">Editing and running ‘Hello
+Hamlet’</h2>
+<p>‘Hello World’ has been the traditional first program that anyone
+writes in any language for decades - it just displays ‘Hello World’ on
+the screen. The first time I came across it was in the book “The C
+Programming Language” by Brian W. Kernighan and Dennis M. Ritchie whose
+first edition came out in 1978 (although my copy was the second edition
+that was published 10 years later).</p>
+<p>We’ve already seen our first program: it’s Hamlet. But it is pretty
+much the equivalent of ‘Hello World’ as it just writes some text.</p>
+<p>I’ll repeat it here so we can run through an explanation of how it
+works.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">&quot;Hamlet said…&quot;</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>st.text(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">To be, or not to be, that is the question:</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">Whether &#39;tis nobler in the mind to suffer</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="st">The slings and arrows of outrageous fortune,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">Or to take arms against a sea of troubles</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="st">And by opposing end them.</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><em>Listing 1 - hamlet.py</em></p>
+<p>This is one of the simplest Streamlit programs you can imagine. It
+just writes two strings - one formatted as a title and the other as
+pre-formatted text.</p>
+<p>The first line will be familiar to a Python programmer; it imports a
+Python library - the Streamlit library. As you may well know a Python
+library is a package of code that contains useful functions that can be
+incorporated into a Python program. In this case, the Streamlit library
+incorporates all of the functionality that turns a simple Python program
+into a web app and provides us with a large number of functions that
+allows us to build that web app and make it look good.</p>
+<p>The Streamlit library is imported with the name <code>st</code> so
+that all of the functions that we use from that library are preceded
+with that name.</p>
+<p>There are two Streamlit functions that we use:
+<code>st.title()</code> which formats text in a large bold font and
+<code>st.text()</code> which displays pre-formatted text.</p>
+<p>For those unfamiliar with Python, there are four ways of quoting a
+string. We can use single or double quotes like this
+<code>'To be or not to be...'</code>, or
+<code>"To be or not to be..."</code> but these strings must be all on
+one line. Alternatively, we can use triple quotes like this:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">&#39;&#39;&#39;To be or not to be,</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">   that is the question&#39;&#39;&#39;</span></span></code></pre></div>
+<p>or</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;To be or not to be,</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">   that is the question&quot;&quot;&quot;</span></span></code></pre></div>
+<p>The triple quoted strings can run over more than one line.</p>
+<p>To run the program, type in the text exactly as you see it above and
+then, in a terminal, run</p>
+<pre><code>streamlit run hamlet.py</code></pre>
+<p>The terminal will respond with a message similar to this:</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/strunninginterminal.png" /></p>
+<p>Your default browser will then be started with the web page that has
+been generated by Streamlit. (If for some reason it does not start
+automatically then simply cut and paste the URL given in the terminal
+window into the address bar of your browser.)</p>
+<p>One of the nice things about Streamlit is that it knows when you have
+made a change to the code. If you edit and save your program, then the
+web page will display the option to re-run the app. When you do so the
+new version is displayed.</p>
+<p>Try changing the text and then save it. In your browser, you will see
+that you are invited to re-run the app.</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotHamletChanged.png" /></p>
+<p>Click on the <em>Rerun</em> button and you will see an updated web
+page that reflects the changes that you made.</p>
+<h2 id="more-ways-of-displaying-text">More ways of displaying text</h2>
+<p>We have used <code>st.text()</code> to display Hamlet’s speech but
+there are other ways of displaying text. Here is an expanded version of
+the Hamlet program.</p>
+<p>It uses <code>st.caption()</code> to display a small-font caption
+under the quote and then uses <code>st.header()</code>,
+<code>st.subheader</code> and <code>st.write</code> to display some
+comments about the quote.</p>
+<p>I’m certain that you can guess what these will do. A header has a
+large bold font, but smaller than a title; a subheader is similar but
+smaller; and <code>st.write</code> displays ‘normal’ text.</p>
+<p>One thing that you should note is that unlike <code>st.text()</code>,
+<code>st.write()</code> does not preserve the layout of the text in a
+string.</p>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>st.title(<span class="st">&quot;Hamlet&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>st.text(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">To be, or not to be, that is the question:</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">Whether &#39;tis nobler in the mind to suffer</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">The slings and arrows of outrageous fortune,</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">Or to take arms against a sea of troubles</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">And by opposing end them.</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>st.caption(<span class="st">&quot;Hamlet by William Shakespeare, Act 3, Scene 1&quot;</span>)</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>st.header(<span class="st">&quot;Hamlet&#39;s soliloquy&quot;</span>)</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>st.subheader(<span class="st">&quot;The famous speech from the &#39;Nunnery scene&#39;&quot;</span>)</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>st.write(<span class="st">&quot;&quot;&quot;In the speech, Hamlet considers suicide, but considers that the </span></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="st">            alternative to his unhappy life might be even worse.&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><em>Listing 2 - hamlet2.py</em></p>
+<p>You can see the result in the screenshot, below.</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/hamlet2textscreenshot.png" /></p>
+<p>For completeness, we should also mention two other ways of displaying
+text.</p>
+<p>For programmers there is <code>st.code()</code>. This will display
+text as if it were program code. For example:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>st.code(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="st">if hamlet == &quot;The Prince of Denmark&quot;:</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">    print(&quot;That&#39;s our man!&quot;)</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">else:</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">    print(&quot;This is an imposter&quot;)</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;&quot;&quot;</span>)</span></code></pre></div>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotCodeBlock.png" /></p>
+<p>You can see that certain words like <code>if</code> and
+<code>else</code> are highlighted as keywords. The block has a coloured
+background and, if you position your cursor over the block, you will see
+an icon for copying the text.</p>
+<p>If you need to display Latex strings such as mathematical formulae
+then you can use <code>st.latex()</code>, e.g.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>st.latex(<span class="st">&quot; \int f^{-1}(x-x_a)\,dx&quot;</span>)</span></code></pre></div>
+<p>displays the following:</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotLatex.png" /></p>
+<h2 id="markdown">Markdown</h2>
+<p>Markdown gives us more control over the way our text is formatted.
+You may be familiar with it. As Wikipedia states, “Markdown is a
+lightweight markup language for creating formatted text using a
+plain-text editor”. It allows you to define headers, code blocks,
+incorporate links and much else. It also let’s you incorporate HTML.</p>
+<p>The Streamlit code to incorporate Markdown text in an app is,
+unsurprisingly <code>st.markdown()</code>. Here is an example:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>st.markdown(<span class="st">&quot;&quot;&quot;## This is a third level header</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">               And this is normal text. </span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">               *This is emphasized*.</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">               &quot;&quot;&quot;</span>)</span></code></pre></div>
+<p>And it will render like this:</p>
+<h2 id="this-is-a-sub-header">     This is a sub-header</h2>
+<p>        This is normal text. <em>This is emphasized</em>.</p>
+<p>I’m not going to go into the details of the Markdown language as
+there is a good comprehensive guide <a
+href="https://www.markdownguide.org/">here</a>.</p>
+<p>Streamlit does not allow HTML to be embedded in the Markdown unless a
+particular parameter it set, e.g.</p>
+<div class="sourceCode" id="cb13"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>st.markdown(<span class="st">&quot;&lt;h3&gt;Header 3&lt;/h3&gt;&quot;</span>, unsafe_allow_html<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<p>The idea of the parameter is to emphasize to the programmer that
+including HTML code could potentially insecure.</p>
+<p>But this means we can replace our <code>st.text()</code> quote with
+Markdown that incorporates HTML in order to get the format that we
+want.</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>st.markdown(<span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;To be, or not to be, that is the question:&lt;br/&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="st">    Whether &#39;tis nobler in the mind to suffer&lt;br/&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="st">    The slings and arrows of outrageous fortune,&lt;br/&gt;</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="st">    Or to take arms against a sea of troubles&lt;br/&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="st">    And by opposing end them.&quot;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span>, unsafe_allow_html<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<p>The <code>&lt;br/&gt;</code> HTML tag inserts a line break and so
+gives us the same layout as before but using the standard font rather
+than the monotype font used by <code>st.text()</code>:</p>
+<p>“To be, or not to be, that is the question:<br/> Whether ’tis nobler
+in the mind to suffer<br/> The slings and arrows of outrageous
+fortune,<br/> Or to take arms against a sea of troubles<br/> And by
+opposing end them.”</p>
+<h2 id="a-little-interaction">A little interaction</h2>
+<p>Streamlit gives us many ways to interact with the user by using
+menus, buttons, sliders and more. We’ll look at these in more detail
+later but to give you a flavour we’ll write a simple program to select a
+piece of Shakespeare to display.</p>
+<p>The code below uses the value of a set of radio buttons to decide
+which quote to display. If ‘Twelfth Night’ is selected the variable
+<code>text</code> is set to one quote, otherwise, if ‘Hamlet’ is
+selected <code>text</code> is set to a different quote.</p>
+<p>The function <code>st.radio()</code> is used to select a value. Its
+parameters are a string that is used as a prompt followed by a list of
+string values that will be used to label the radio buttons. The function
+returns the value of the selection.</p>
+<div class="sourceCode" id="cb15"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>quote <span class="op">=</span> st.radio(<span class="st">&quot;Select a quote from...&quot;</span>,(<span class="st">&#39;Hamlet&#39;</span>, <span class="st">&#39;Twelfth Night&#39;</span>))</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> quote <span class="op">==</span> <span class="st">&#39;Twelfth Night&#39;</span>:</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="st">    If music be the food of love, play on;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="st">    Give me excess of it, that, surfeiting,</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="st">    The appetite may sicken, and so die.</span></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> quote <span class="op">==</span> <span class="st">&quot;Hamlet&quot;</span>:</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    text <span class="op">=</span> <span class="st">&quot;&quot;&quot;</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="st">    To be, or not to be, that is the question:</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="st">    Whether &#39;tis nobler in the mind to suffer</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="st">    The slings and arrows of outrageous fortune,</span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="st">    Or to take arms against a sea of troubles</span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="st">    And by opposing end them.</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="st">    &quot;&quot;&quot;</span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>st.title(quote)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>st.text(text)</span></code></pre></div>
+<p>And this is what it looks like:</p>
+<p><img
+src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/ScreenshotQuotes.png" /></p>
+<p>When the user selects either ‘Hamlet’ or ‘Twelfth Night’ the entire
+program is re-run so that the if statement is executed and the
+appropriate quote is displayed.</p>
+<p>This is an important aspect of Streamlit: whenever the user interacts
+with a program, it is run again from the beginning and the web page is
+reloaded.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this first article, we’ve seen how to set ourselves up to edit and
+run a Streamlit app and how to write an app that displays different
+types of text. As a bonus, and as a taste of things to come, we’ve also
+looked at some simple user interaction that allows the user to change
+the behaviour of the program.</p>
+<p>In future articles we will see more ways of interacting with the
+user, how to display images and graphs, how to design and lay out a
+Streamlit app using columns and containers and much more.</p>
+<p>Thanks for reading - I hope you have found it useful. You can find a
+link to the code for this article on my <a
+href="alanjones2.github.io">Github page</a> as well as links to other
+articles.</p>
+<p>To keep up to date with what I am doing, you can subscribe to my
+occasional free newsletter <a
+href="technofile.substack.com">Technofile</a></p>
+<h3 id="references">References</h3>
+<p>The various Streamlit API references used in the article can be found
+below.</p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/media/st.title">st.title</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/media/st.header">st.header</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/media/st.subheader">st.subheader</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/media/st.write">st.write</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/layout/st.text">st.text</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/layout/st.caption">st.caption</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/layout/st.latext">st.latext</a></p>
+<p><a
+href="https://docs.streamlit.io/library/api-reference/layout/st.radio">st.radio</a></p>
+</body>
+</html>
