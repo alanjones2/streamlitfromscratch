@@ -1,0 +1,97 @@
+
+<html>
+<head>
+
+    <link rel="stylesheet" href="./prism/prism.css">
+    <script src="./prism/prism.js"></script>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/main.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    
+</head>
+<body data-prismjs-copy-timeout="500" data-prismjs-copy="Copy code">
+<div class="container">
+<p>﻿</p>
+<h1>Streamlit Text Gets Colourful</h1>
+<h2>Your Streamlit text no longer has to be boring. Version 1.16 lets you colour markdown text.</h2>
+<p><img alt="Photo by Robert Katzki on Unsplash" src="./images/katzki.jfif" /></p>
+<p><em>Photo by <a href="https://unsplash.com/@ro_ka?">Robert Katzki</a> on <a href="https://unsplash.com">Unsplash</a></em></p>
+<p>You've been able to use coloured text in Streamlit Markdown strings for a long time but it has required using HTML embedded in the Markdown text.</p>
+<p>And that can get a little clumsy:</p>
+<pre><code class="language-Python">    st.markdown(&quot;The next word is &lt;span style='color:red'&gt;red&lt;/span&gt;&quot;,
+                 unsafe_allow_html=True)
+</code></pre>
+<p>All that just to make one word red.</p>
+<p>Streamlit maintains that <a href="https://github.com/streamlit/streamlit/issues/152">embedding HTML in your text can be insecure</a> which is why you have to set a special argument to allow it. The rest of the extra code is an HTML <span>tag. This tag is a container that does nothing but enables us to make changes to the style of the content and that's what we see in the code style='color:red'.</p>
+<p>You can, of course, do much more with embedded HTML than just change the colour of text but that is the focus of this article.</p>
+<p>Now, in version 1.16 of Streamlit, they have introduced some new syntax that lets you colour your text while avoiding the use of HTML. It's not as flexible as using HTML but it is definitely neater.</p>
+<pre><code class="language-Python">    st.markdown(&quot;The next word is :red[red]&quot;)
+</code></pre>
+<p>That's a little more concise.</p>
+<p>The syntax for specifying a colour for some text begins with a colon, the name of the colour, followed by the text enclosed in square brackets.</p>
+<pre><code class="language-Python">    :*color*[*your text here*]
+</code></pre>
+<p>That's probably about as short as you could make it. But there are some peculiarities.</p>
+<p>For example, the two methods are not exact equivalents. Let's look at some examples.</p>
+<p>If you want to code along with me, don't forget to add this first:</p>
+<pre><code class="language-Python">    import streamlit as st
+</code></pre>
+<p>Let's look at the code to display this.</p>
+<pre><code class="language-Python">![](./images/example1.webp)
+</code></pre>
+<p>Using the new syntax we have this:</p>
+<pre><code class="language-Python">    st.markdown(&quot;&quot;&quot;This text is :red[colored red], 
+                and this is **:blue[colored blue]** and bold.&quot;&quot;&quot;)
+    st.markdown(&quot;&quot;&quot;This text is :red[colored red], 
+                   and this is :blue[colored blue] and not bold.&quot;&quot;&quot;)
+</code></pre>
+<p>The old HTML way would look like this:</p>
+<pre><code class="language-Python">    st.markdown(&quot;&quot;&quot;This text is &lt;span style='color:red'&gt;colored red&lt;/span&gt;, 
+                   and this is &lt;b&gt;&lt;span style='color:blue'&gt;colored blue&lt;/span&gt;&lt;/b&gt; and bold.&quot;&quot;&quot;, 
+                   unsafe_allow_html=True)
+    st.markdown(&quot;&quot;&quot;This text is &lt;span style='color:red'&gt;colored red&lt;/span&gt;, 
+                   and this is &lt;span style='color:blue'&gt;colored blue&lt;/span&gt; and not bold.&quot;&quot;&quot;, 
+                   unsafe_allow_html=True)
+</code></pre>
+<p>I've used triple quotes so I can run the string over more than one line for readability.</p>
+<p>That code gives us this:</p>
+<p><img alt="" src="./images/example2.webp" /></p>
+<p>Same thing, right? Actually not, but pretty similar. You'll be forgiven if you don't see any difference between the two images ' I've put them much too far apart for you to be able to notice-but they aren't quite the same colours.</p>
+<p>Look at this:</p>
+<p><img alt="" src="./images/example3.webp" /></p>
+<p>Ok, there's not much in it but why are they different? Odd. Here's the code so you can see that they ought to be the same colours:</p>
+<pre><code class="language-Python">    st.markdown(&quot;&quot;&quot;**This text is :blue[blue], 
+                                :green[green], 
+                                :orange[orange], 
+                                :red[red], 
+                                :violet[violet] 
+                                using Streamlit colors.**&quot;&quot;&quot;)
+
+    st.markdown(&quot;&quot;&quot;**This text is &lt;span style='color:blue'&gt;blue&lt;/span&gt;, 
+                                &lt;span style='color:green'&gt;green&lt;/span&gt;, 
+                                &lt;span style='color:orange'&gt;orange&lt;/span&gt;, 
+                                &lt;span style='color:red'&gt;red&lt;/span&gt;, 
+                                &lt;span style='color:violet'&gt;violet&lt;/span&gt; using HTML/CSS colors.**&quot;&quot;&quot;, 
+                                unsafe_allow_html=True)
+</code></pre>
+<p>There's another slight oddity. Only the colours blue, green, orange, red, and violet are supported by the new syntax. You would think, then, that specifying a different colour would cause an error. Let's see:</p>
+<pre><code class="language-Python">    st.markdown(&quot;#### Using Streamlit coloring:&quot;)
+    st.markdown(&quot;This text is :pink[colored pink], and this is **:violet[purple-colored]** and bold.&quot;)
+
+    st.markdown(&quot;#### Using HTML/CSS coloring:&quot;)
+    st.markdown(&quot;This text is &lt;span style='color:pink'&gt;colored pink&lt;/span&gt;, and this is **&lt;span style='color:violet'&gt;purple-colored&lt;/span&gt;** and bold.&quot;, unsafe_allow_html=True)
+</code></pre>
+<p>The result:</p>
+<p><img alt="" src="./images/example4.webp" /></p>
+<p>Now that's a strange result! No syntax or any other error but instead an odd, uncoloured result, that has new lines inserted around the (non-)coloured text.</p>
+<p>So, what's the verdict on this new feature?</p>
+<p>Get the syntax right and use the right colours, and you will get a very similar result to using HTML but with neater code and a lot less typing. All in all, then, a welcome addition. But catching those errors would have made it a better one.</p>
+<p>As always, thanks for reading, I hope you've found it helpful. </p>
+<p><a href="https://raw.githubusercontent.com/alanjones2/streamlitfromscratch/main/code/md_color.py">This is a link to a Streamlit program that contains all of the code above.</a></p>
+<h2><a href="https://alanjones2.github.io/streamlitfromscratch/">Back to <em>Streamlit from Scratch</em></a></h2>
+</div>
+</body>
+</html>
