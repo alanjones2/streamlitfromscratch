@@ -1,222 +1,151 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <title>Streamlit from Scratch</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta property="og:image"
-        content="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png">
-    <meta name="twitter:image:src"
-        content="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="article:author" content="https://alanjones2.github.io">
-    <meta name="twitter:creator" content="@MrAlanJones">
-    <meta name="author" content="Alan Jones">
-
-
-    <meta content="Streamlit resources and tutorials" name="description">
-    <meta content="https://alanjones2.github.io/streamlitfromscratch" property="og:url">
-    <meta content="Streamlit from Scratch: building data science data visualization apps in Python" property="og:title">
-
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162801372-1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
+    <link rel="stylesheet" href="./prism/prism.css">
+    <script src="./prism/prism.js"></script>
 
-        gtag('config', 'UA-162801372-1');
-    </script>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3208991186670959"
-        crossorigin="anonymous"></script>
-
+    <style>
+        pre {width:80%}
+    </style>
 </head>
 
-<body>
-    <script>fetch("https://alanjones.pythonanywhere.com/lg?url=alanjones2.github.io/streamlitfromscratch")
-            .then(data => console.log(data));
-    </script>
+<body  class = "p5 text-dark">
+
     <div class="jumbotron" style="padding:2rem">
         <h1 class="display-6" style="font-weight:bolder">Streamlit<span style="font-weight:lighter"> from Scratch</span>
             <span class="text-secondary" style="font-size:50%;font-weight: lighter;"> building data science apps with
                 Python</span>
         </h1>
         <hr />
-
-        <p class="lead">
-            Build Data Visualization apps for the web using Streamlit, Plotly and Python.
-        </p>
-        <p>
-            This site is maintained by <a href="https://alanjones2.github.io">Alan Jones</a>.
-            You can find me on:
-            <a href="https://alan-jones.medium.com/" target="_blank">Medium</a>,
-            <a href="https://twitter.com/MrAlanJones" target="_blank">Twitter as @MrAlanJones</a>,
-            <a rel="me" href="https://c.im/@alanjones" target="_blank">Mastodon</a>
-            and
-            <a href="https://www.linkedin.com/in/alan-jones-032699100/" target="_blank">LinkedIn</a>.
-        </p>
-
+        <span class = "text-secondary mr-4">
+        Streamlit is a framework for creating Data Science apps in Python.<br/> 
+        <b>Streamlit from Scratch</b> is an evolving onlne resource that will teach you how to get started with Streamlit<br/> 
+        from building fully functional data dashboard apps using Streamlit's layout and data presentation features.
+        </span>
     </div>
-<div class="container-fluid ml-4 mr-4">
-        <div class="row m-4">
-            <div class="col-sm-8 mb-4 lead">
-                Streamlit is a framework for creating Data Science apps in Python.
-                The articles and hints on this site will help get you started and will build into a significant
-                resource. (<i>Links to articles that are hosted on Medium are free to read 'Friend Links' that bypass the Medium paywall.</i> )
+
+    <div class="row">
+        <div class="col-sm-2 p-2 ml-4 mr-4 mb-4 bg-white border-left">
+            <div class="row ml-4">
+                <!-- menu-->
+                <h3>Contents</h3>
+            </div>
+            <div class="row ml-4">
+                
+                <ul class="nav flex-column">
+                            <li class="nav-item">
+                              <a class="nav-link active" onclick="getContent(0)" href="#">Introduction</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(1)" href="#">Installation</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(2)" href="#">Editors</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(3)" href="#">Displaying Text</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(4)" href="#">Including Media</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(5)" href="#">Representing data:intro</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(6)" href="#">Representing data: text</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(7)" href="#">Representing data: Streamlit charts</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(8)" href="#">Representing data: PyPlot</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(9)" href="#">Representing data: Altair</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(10)" href="#">Representing data: Plotly</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(11)" href="#">Representing data: Bokeh</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(12)" href="#">Representing data: Vega-Lite</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(13)" href="#">Layout and Dashboards</a>
+                            </li>
+                          </ul>       
             </div>
         </div>
-        <div class="row m-4">
-            <div class="col-sm-8 h5">
-                <h4>Streamlit from Scratch Articles</h4>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-1">
-                        <!--<img width="100%" src="images/hamlet2textscreenshot.png" />-->
-                        <div class="display-1 text-center">1</div>
-                    </div>
-                    <div class="col-sm-10">
-                        <p><a href="https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493?sk=2c009fc4106a896467bda51901e31086"
-                                target="_blank">
-                                Streamlit from Scratch: Getting Started
-                            </a></p>
-                        <p class="font-weight-light">
-                            Finding the tools you need and how to use them to create your first interactive web app in
-                            Python and Streamlit
+        <div class="col-sm-6 p-4 ml-4 mr-4 mb-4 bg-white">           
+            <div id="content" data-prismjs-copy-timeout="500" data-prismjs-copy="Copy code"></div>
+            <ul class="navbar navbar-expand-sm" style="background-color: lightgray;padding-left: 0%;font-weight:bold;font-size:120%">
+                <a class="nav-link active" onclick="previousPage()" href="#">< Previous</a>
+                <a class="nav-link active" onclick="firstPage()" href="#">Back to start</a>
+                <a class="nav-link active" onclick="nextPage()" href="#">Next ></a>
+            </ul>
+        </div>
+        <div class="col-sm-3 p-4 ml-4 mr-4 mb-4 bg-white">           
+        </div>
+    </div>
+    <script>
+        contentIndex = 0;
+        contentPages = ["sfs-Intro.div",
+                        "sfs-Installation.div",
+                        "sfs-editors.div",
+                        "sfs-text.div",
+                        "sfs-media.div",
+                        "sfs-data-intro.div",
+                        "sfs-data-text.div",
+                        "sfs-data-stcharts.div",
+                        "sfs-data-pyplot.div",
+                        "sfs-data-altair.div",
+                        "sfs-data-plotly.div",
+                        "sfs-data-bokeh.div",
+                        "sfs-data-vega-lite.div",
+                        "sfs-dashboard-layouts.div"
+                        ]
+        async function getContent(i){
+            let response = await fetch(contentPages[i]);
+            if (response.ok) {
+                let result = await response.text();  
+                    document.getElementById("content").innerHTML=result;
+            } else {
+                alert(response.status);
+            }
+            window.scrollTo(0, 0);
+            Prism.highlightAll();
+        }
+        function nextPage(){
+            contentIndex++;
+            if (contentIndex >= contentPages.length) contentIndex = contentPages.length-1;
+            getContent(contentIndex); 
 
-                        </p>
+        }
+        function previousPage(){
+            contentIndex--;
+            if (contentIndex < 0) contentIndex = 0;
+            getContent(contentIndex); 
+        }
+        function firstPage(){
+            contentIndex = 0;
+            getContent(contentIndex); 
+        }
+        firstPage();
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        <!--<img width="100%" src="images/eagleapp.png" />-->
-                        <div class="display-1 text-center">2</div>
         
-                    </div>
-                    <div class="col-sm-10">
-                        <p><a href="https://towardsdatascience.com/streamlit-from-scratch-embedding-images-video-and-audio-8b2e8b98fad4?sk=df84eef479683e1b50ab2666c624f5d8"
-                                target="_blank">
-                                Streamlit from Scratch: Embedding Images, Video and Audio
-                            </a></p>
-                        <p class="font-weight-light">
-                            Streamlit was designed to help data scientists but it’s not just about data, adding media
-                            to your apps helps to communicate your ideas
+    </script>
 
-                        </p>
-                    </div>
-                </div>
+    <footer class="text-right text-secondary p-4 m-4">
 
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-1 text-center">3</div>
+        <i class="m-4">&copy; 2022, Alan Jones</i>
 
-                    </div>
-                    <div class="col-sm-10">
-                        <p><a href="https://towardsdatascience.com/streamlit-from-scratch-presenting-data-d5b0c77f9622?sk=ab53df2ace41e7f337f79a790f9fd399"
-                                target="_blank">
-                                Streamlit from Scratch: Presenting Data
-                            </a></p>
-                        <p class="font-weight-light">
-                            From text and tables to sophisticated charts. From Pandas dataframes to Matplotlib, Plotly,
-                            Altair and other charts. Streamlit provides a comprehensive set of tools for presenting your
-                            data
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-1 text-center">4</div>
-                    </div>
-                    <div class="col-sm-10">
-                        <p><a href="https://towardsdatascience.com/streamlit-from-scratch-build-a-data-dashboard-with-streamlits-layout-and-ui-features-a2fc2f0a6a59?sk=70e6b7b65cc87093fb7fd5727ced6c0b"
-                                target="_blank">
-                                Streamlit from Scratch: Build a Data Dashboard with Streamlit's Layout and
-                                UI features</a>
-                        <p class="font-weight-light">Streamlit has simple but effective components for user interaction
-                            and layout
-                            which let us build effective and attractive data science and dashboard applications
-                        </p>
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        <img width="100%" src="" />
-                    </div>
-                    <div class="col-sm-10">
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-4  h5">
-                <h4>Other related content</h4>
-                <hr />
-                <p><a href="https://github.com/alanjones2/streamlitfromscratch/raw/main/code/code.zip">
-                    <li>Download the complete <i>Streamlit from Scratch</i> source code</li>
-                </a></p>
-                <p><a
-                        href="https://towardsdatascience.com/publish-your-streamlit-apps-in-the-cloud-3ac5a5fe3d51?sk=83e2deb4d2cf42d2399de06ae83adc7c">
-                        <li>Publish Your Streamlit Apps in the Cloud</li>
-                    </a></p>
-                    <p class="font-weight-light">
-                        Share your Streamlit apps with these free tools: Streamlit Cloud, Github and VSCode                    </p>
-                    <p><a
-                        href="https://towardsdatascience.com/3-ways-to-create-a-multi-page-streamlit-app-1825b5b07c0f?sk=89d1e06d84cdc1005dfa014665a55c3c">
-                        <li>4 Ways to Create a Multi-Page Streamlit App</li>
-                    </a></p>
-                    <p class="font-weight-light">
-                        Streamlit may not have been designed for 
-                        full-blown websites, but it is fairly straightforward to create multiple pages in a single app                    </p>
-
-                    <p><a href="https://medium.com/technofile/streamlit-has-a-new-theme-for-plotly-d4a7109a7f55?sk=99a4d5ca2f7cfd0b0312589d9392e581">
-                        <li>Streamlit has a new Theme for Plotly</li>
-                    </a></p>
-                    <p class="font-weight-light">
-                        Streamlit has a set of colours that is consistent throughout the app but Plotly did not conform — with Streamlit 1.16, this has changed.
-                    </p>    
-                    <p><a href="https://github.com/alanjones2/streamlitfromscratch/raw/main/code/plotlytheme.py">
-                        Download the code for the article above  
-                    </a></p>
-                    <p><a href="./mdcolour/mdcolour.html">
-                        <li>Streamlit Markdown Text Just Got Colourful</li>
-                    </a></p>
-                    <p class="font-weight-light">
-                        Streamlit has a set of colours that is consistent throughout the app but Plotly did not conform — with Streamlit 1.16, this has changed.
-                    </p>    
-                    <p><a href="./mdcolour/mdcolour.py">
-                        Download the code for the article above  
-                    </a></p>
-
-            </div>
-        </div>
-
-    </div>
-
-
-
-    <div style="margin: 20px;">
-        <footer class="text-right text-secondary p-4">
-            <i>Please note that the author is not affiliated with Streamlit in any way.<br />
-                All the software referred to here
-                is written for educational purposes and should not be considered suitable for production
-                code</i>
-            <br />
-            <i>&copy; 2022, Alan Jones</i> &nbsp;
-
-        </footer>
-    </div>
-
+    </footer>
 </body>
 
 </html>
