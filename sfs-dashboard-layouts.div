@@ -1,0 +1,297 @@
+<h1>Build a Dashboard with Streamlit's Layout and UI features</h1>
+<p><em>This part of the course is not yet ready so please refer to the original article on Medium (no paywall)</em></p>
+<h2><a href="https://towardsdatascience.com/streamlit-from-scratch-build-a-data-dashboard-with-streamlits-layout-and-ui-features-a2fc2f0a6a59?sk=70e6b7b65cc87093fb7fd5727ced6c0b"
+        target="_blank">
+        Streamlit from Scratch: Build a Data Dashboard with Streamlit's Layout and
+        UI features</a>
+</h2>
+
+<h2>---</h2>
+<h2>---</h2>
+<p>To be updated...</p>
+<h2>Streamlit has simple but effective components for user interaction and layout which let us build effective and attractive dashboard applications</h2>
+<p>TK image</p>
+<p>We are going to explore some of the layout and user interface features of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.</p>
+<p>TK image of app(s)</p>
+<p>Streamlit tries to make life simple for the app developer and so does not have the vast number of UI options that are available in other technologies such as HTML and Javascript UI libraries. But using its layout components you can easily design an attractive and capable web page.</p>
+<p>A Streamlit app is constructed with various container elements and user interface components such as a slider and select boxes, and we will look a a few of them.</p>
+<p>But first we need some data to work with.</p>
+<p>The code below gets four data files from my Github repository <a href="https://github.com/alanjones2/CO2">CO2</a>. They contain data on world-wide carbon dioxide emissions over the last couple of hundred years. The original data comes from Our World in Data[1] and I have simply broken that down into four different subsets. The first contains data for each country in the world, the second breaks it down by continent, the third is for the whole world and the last one represents groups of countries by income type.</p>
+<p>I've also included all of the libraries that we will use in this article.</p>
+<h2>Fetch the data and cache it</h2>
+<pre><code class="language-Python">import streamlit as st
+import plotly.express as px
+import pandas as pd
+import numpy as np
+
+@st.cache
+def get_countries_data(): 
+    url = &quot;https://github.com/alanjones2/CO2/raw/master/data/countries_df.csv&quot;
+    return pd.read_csv(url)
+@st.cache
+def get_continent_data():
+    url = 'https://github.com/alanjones2/CO2/raw/master/data/continents_df.csv'
+    return pd.read_csv(url)
+@st.cache
+def get_world_data():
+    url = 'https://github.com/alanjones2/CO2/raw/master/data/world_df.csv'
+    return pd.read_csv(url)
+@st.cache
+def get_group_data():
+    url = 'https://github.com/alanjones2/CO2/raw/master/data/income_types_df.csv'
+    return pd.read_csv(url)
+
+df_countries= get_countries_data()
+df_continents= get_continent_data()
+df_world = get_world_data()
+df_groups = get_group_data()
+</code></pre>
+<p>You may wonder why I've written functions to download and create a dataframe for each of the files. The reason for this is indicated by the Python decorator <code>@st.cache</code>.</p>
+<p>Whenever the user interacts with a Streamlit app, to enter a value, or change a setting, for example, the entire Streamlit app is re-run from the beginning. This may appear to be inefficient but it is the way that Streamlit works and doesn't normally impact the user experience too badly.</p>
+<p>Except that there are occasions when it does and that impact could be significant.</p>
+<p>If a lot of data is downloaded from an external source, this will take time. And while this maybe acceptable when the app first starts up, you don't really want a long pause in the middle of the user changing something. And this is what the <code>@st.cache</code> decorator is all about. </p>
+<p>Marking a function in this way tells Streamlit to cache any resulting data and stops the function being called again unless the parameters passed to it have changed. Instead the cached data is returned to the caller.</p>
+<p>In our functions there are no parameters and so the the functions will only ever be called once. This is exactly what we want as the data is not going to change and so it will only be fetched the first time the functions are called and, thereafter, the cached data will be used.</p>
+<p>The dataframes all look something like this:</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png" /></p>
+<p>They contain columns for the 
+- <em>Entity</em>: country, continent, income group or 'World'
+- <em>Code</em>: the ISO country code (if it is a country)
+- <em>Year</em>
+- <em>Annual CO2 Emissions</em>: from burning fossil fuel and industrial processes
+- <em>Annual CO2 Emissions including land-use change</em>: the sum of the previous column and next one
+- <em>Annual CO2 Emissions from land-use change</em></p>
+<p>We'll be using the first four columns in each table to show the emissions over time for each of the entity-types.</p>
+<p>Our first focus will be the World. We'll show the how emissions have changed in all countries of the world on a map. The user will select a year and the countries will be shaded according to the level of their emissions.</p>
+<p>This is where we come across our first Streamlit UI component. We will use a slider to allow the user to select a year.</p>
+<h2>Sliders</h2>
+<p>Sliders are very easy to use:</p>
+<p>```Python
+year = st.slider('Select year',1850,2020)</p>
+<pre><code>
+The ``st.slider`` method requires three parameters, a prompt string and two numerical limits. The return value is a value between the limits corresonding to the position of the slider. In the image below the range is between 1850 and 2020 and the return value will be 1978.
+
+![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/slider.png)
+
+Remember that when a UI control changes, the whole of the app is re-run. Only when the slider is moved will the return value be updated.
+
+A fourth parameter can be given to set a default value for the slider, e.g.
+
+```Python
+year = st.slider('Select year',1850,2020,1950)
+</code></pre>
+<p>We are going to use the year value in a Plotly choropleth which will give us a figure like this one, below.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png" /></p>
+<p>Here is the code. There is nothing particularly difficult in creating the choropleth. Plotly does all the hard work for you, we just have to provide the appropriate values.</p>
+<pre><code class="language-Python">max = df_countries['Annual CO₂ emissions'].max()
+
+year = st.slider('Select year',1850,2020)
+fig1 = px.choropleth(df_countries[df_countries['Year']==year], locations=&quot;Code&quot;,
+                    color=&quot;Annual CO₂ emissions&quot;,
+                    hover_name=&quot;Entity&quot;,
+                    range_color=(0,max),
+                    color_continuous_scale=px.colors.sequential.Blues)
+st.plotly_chart(fig1)
+</code></pre>
+<p>In the code we have used the value of <code>year</code> to filter the dataframe and that is the data that the choropleth will use. We have also calculated the maximum value of CO2 emissions in tha table and this is used to set the range of colours that will be used on the map. In addition to the data, the other parameters are:</p>
+<ul>
+<li><code>locations</code>: the ISO codes that will be used to identify areas on the map</li>
+<li><code>color</code>: the value that wil be used to set the colour</li>
+<li><code>hover_name</code>: the string that will be shown when hovering over the map, i.e. the country name</li>
+<li><code>range_color</code>: the range of values that will be mapped onto the colours</li>
+<li><code>color_continuous_scale</code>: the list of colours that will be used (in this case a range of continuous blues provided in Plotly Express)</li>
+</ul>
+<p>The detail of this figure is a little difficult to see but if you use the expander control (which expands the image to fullscreen) and/or the zoom facility individual countries can be easily seen.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png" /></p>
+<p>Sliders can also be used for categorical values and these also support a range. For example:</p>
+<pre><code class="language-Python">start_month, end_month = st.select_slider(
+    'Select a range of months',
+    options=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 
+             'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    value=('Jan', 'Dec'))
+
+st.write('You selected months between', start_month, 'and', end_month)
+</code></pre>
+<p>This lets the user select the beginning and end of a list of months with the default result being 'Jan' and 'Dec'. Here is the result:</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png" /></p>
+<h2>Select boxes</h2>
+<p>Streamlit provides two <em>selectbox</em> methods: one for selecting a single item and another for selecting multiple items.</p>
+<p>Below is an example of the single <em>selectbox</em>. It let's you select a continent and shows the CO2 emissions for that continent as a line graph. First, we need to create a list of continents and store that in <code>continents</code> then we see the <em>selectbox</em> which will let the user choose a continent. Using that value we filter the dataframe and plot a line chart with Plotly.</p>
+<pre><code class="language-Python">continents = df_continents['Entity'].unique()
+
+selected_continent = st.selectbox('Select country or group',continents)
+
+df = df_continents[df_continents['Entity'] == selected_continent]
+
+fig2 = px.line(df,&quot;Year&quot;,&quot;Annual CO₂ emissions&quot;)
+
+st.plotly_chart(fig2, use_container_width=True)
+</code></pre>
+<p>The result looks like this.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box_continents.png" /></p>
+<p>Clicking in the field that displays the continent will bring down a menu from which other values can be selected.</p>
+<p>If we want to run something similar but where we can compare countries then the <em>muliple selectbox</em> is what we need.</p>
+<p>Here is a similar function that uses <code>st.multiselect()</code>. This lets the user select from a drop-down menu in a similar way but once selected the value is kept in a list which is displayed in box above the menu. To remove an item from the list you click <em>x</em> for that item and it will reappear in the menu.</p>
+<p>The code is very similar to the previous function except that instead of filtering the dataframe on a single value, we use the <code>isin()</code> method to check if the continent name is in the selected list. I've also restricted the number of years so that the figure is more readable.</p>
+<pre><code class="language-Python">continents = df_continents['Entity'].unique()
+
+selected_continents = st.multiselect('Select country or group',
+                                      continents, continents)
+df = df_continents[df_continents['Year'] &gt;= 2010]
+df = df[df_continents['Entity'].isin(selected_continents)]
+
+fig = px.bar(df,&quot;Year&quot;,&quot;Annual CO₂ emissions&quot;,color=&quot;Entity&quot;, barmode='group')
+st.plotly_chart(fig, use_container_width=True)
+</code></pre>
+<p>Here is the result with five continents selected.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/multiple_select_box_continents.png" /></p>
+<h2>Radio buttons</h2>
+<p>The next UI component that we will look at is one that implemements radio buttons.</p>
+<p>The code should look familiar, first a propmpt and then a list of items that can be selected. Following this is a set of <code>if</code> statements that test the value of <code>chart</code> and display the correct chart from the ones that we created earlier.</p>
+<pre><code class="language-Python">chart = st.radio(
+    &quot;Select the chart that you would like to display&quot;,
+    ('World Map', 'Continent Emissions', 'Comparing continents'))
+
+if chart == 'World Map': 
+    st.plotly_chart(fig1)
+if chart == 'Continent Emissions': 
+    st.plotly_chart(fig2)
+if chart == 'Comparing continents': 
+    st.plotly_chart(fig3)
+</code></pre>
+<p>The result looks like this.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/radio_button_example.png" /></p>
+<h2>Layout</h2>
+<p>There are several other UI components that Streamlit provides but we'll leave it at that for now because in order to construct an effective app, we need to know how to layout the components that we have seen so far.</p>
+<p>We'll now turn our attention to layout. Streamlit provides a number of layout elements, containers, columns and a sidebar. We are going to use these features to construct two versions of a dashboard application based on the data that we have been looking at.</p>
+<p>However, before we start let's look at the two methods of using layput components - object notation and <code>with</code>.</p>
+<h3>Using object notation or <code>with:</code></h3>
+<p>Layout components can be programmed using object notation or with the <code>with:</code> keyword. Here is a piece of fictional code that shows the difference.</p>
+<pre><code class="language-Python"># Object notation
+layoutcomponent1.write('This will be written inside component 1')
+layoutcomponent1.write('This will also be written inside component 1')
+
+# 'with' notation
+with layoutcomponent2:
+    st.write('This will be written inside component 2')
+    st.write('This will also be written inside component 2')
+</code></pre>
+<p>Both of these examples work in the same way and produce the same results.</p>
+<p>With object notation, the name of the layout object replaces <code>st</code> so where you might write <code>st.write("stuff")</code> to write something that is not contained in a layout component, when writing inside such a component you replace <code>st</code> with the component name.</p>
+<p>When using <code>with</code> notation you open a block using <code>with component_name</code>. Anything written inside the block is displayed in the layout component and the normal <code>st</code> prfix is used.</p>
+<p>Using <code>with:</code> lets you group the operations on the layout component together, whereas object notation gives you the freedom to scatter those operation throughout the code. It's entirely up to you to decide which to use but I tend to go for the <code>with:</code> option where possible - I think it is more rational to keep the code together in a block, if you can.</p>
+<p>If this is not entirely clear, it will become so when we deal with some concrete examples.</p>
+<p>Let's do just that.</p>
+<h2>Sidebar layout</h2>
+<p>The sidebar was one of the first layout components that featured in Streamlit. This allows you to group user input controls in an area to the side of the screen and display the rest of the app in the main window.</p>
+<p>Here is an illustration of how it can be used. The sidebar contains three radio buttons that let you select one of three charts to be displayed in the main window. (For brevity, I have put comments where the code that we have already seen would go. The downloadable code is, however, complete.)</p>
+<pre><code class="language-Python">#
+# Code to import libraries and get the data goes here
+#
+
+# The side bar that contains radio buttons for selection of charts
+with st.sidebar:
+    st.header('Select an chart to be displayed')
+    chart = st.radio(
+    &quot;Select the image that you would like to display&quot;,
+    ('World Map', 'Continent Emissions', 'Comparing continents'))
+
+# The main window
+
+st.title(&quot;A Simple CO2 Emissions Dashboard&quot;)
+st.write(&quot;an example of a Streamlit layout using a sidebar&quot;)
+
+with st.container():
+
+    if chart == 'World Map': 
+
+        # code to draw the choropleth
+
+    if chart == 'Continent Emissions': 
+
+        # code to draw a bar chart
+
+    if chart == 'Comparing continents': 
+
+        # code to draw the multiple bar chart
+</code></pre>
+<p>You can see that I have used <code>with</code> blocks to contain the display code: one for the sidebar and another, that will be displayed in the main window, for a <code>st.container()</code> which is just a general-purpose container that does really do anything very special.</p>
+<p>The result is actually a simple but complete dashboard app and it looks like this.</p>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_app.png" /></p>
+<h3>Column layout</h3>
+<p>Columns allow you place the components side-by-side on the screen and we will see how we can create a column-based version of our emissions app.
+ The simplest way of creating columns is this:</p>
+<pre><code class="language-Python">col1, col2 = st.column(2)
+</code></pre>
+<p>The call to <code>st.column()</code> returns a list of column objects the number of which is determined by the value of the parameter. They will be displayed next to each other in the main window or in another layout component.</p>
+<p>You can also adjust the gap between the columns with an additional parameter, e.g.</p>
+<pre><code class="language-Python">    col1, col2 = st.columns(2, gap=&quot;large&quot;)
+</code></pre>
+<p>We will use the <em>large</em> gap in our example app but the value can also be <em>small</em> (the default) or <em>medium</em>.</p>
+<pre><code class="language-Python">st.set_page_config(layout = &quot;wide&quot;)
+
+# Code to import libraries and get the data goes here
+
+# The main window
+st.title(&quot;A Simple CO2 Emissions Dashboard&quot;)
+st.info(&quot;An example of a Streamlit layout using columns&quot;)
+
+with st.container():
+    col1, col2, col3 = st.columns((25,50,25))
+
+    with col2:
+        st.header(&quot;Global emissions since 1850&quot;)
+        st.info(&quot;&quot;&quot;Select a year with the slider to see the intensity
+                of emissions change in each country&quot;&quot;&quot;)
+
+        # code to draw the choropleth
+
+with st.container():
+    col1, col2 = st.columns(2, gap=&quot;large&quot;)
+    with col1:
+        st.header(&quot;Continental emissions since 1850&quot;)  
+        st.info(&quot;Select a single continent or compare continents&quot;)
+
+        # code to draw the single continent data
+
+    with col2:
+        st.header(&quot;Continental emissions since 1850&quot;)
+        st.info(&quot;To add a continent select it from the menu. You can also delete one, too&quot;)
+
+        # code to draw the compared continent data
+
+</code></pre>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/column_app.png" /></p>
+<h3>Tabs</h3>
+<p>Another layout feature that we shall use is the tabs components. </p>
+<pre><code class="language-Python"># Code to import libraries and get the data goes here
+
+st.set_page_config(layout = &quot;wide&quot;)
+
+# The main window
+
+st.title(&quot;A Simple CO2 Emissions Dashboard&quot;)
+st.info(&quot;An example of a Streamlit layout using columns&quot;)
+
+with st.container():
+    col1, col2 = st.columns(2, gap=&quot;large&quot;)
+
+    with col1:
+        # code to draw the choropleth
+    with col2:
+        st.header(&quot;Continental emissions since 1850&quot;)  
+        st.info(&quot;Select a single continent or compare continents&quot;)
+
+        tab1, tab2 = st.tabs([&quot;Continental emissions since 1850&quot;, 
+                              &quot;Continental emissions compared since 1850&quot;])
+        with tab1:
+            # code to draw the single continent data
+        with tab2:
+            # code to draw the compared continent data
+</code></pre>
+<p><img alt="" src="https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png" /></p>
+<h3>Conclusion</h3>
+<p>TK Deployment</p>
+<hr />
+<h3>Notes</h3>
+<p>[1] <a href="https://ourworldindata.org/">Our World in Data</a> is a treasure trove of information whose mission is to publish <em>"research and data to make progress against the world’s largest problems"</em>. All of their work is made available under the <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons BY license</a>.</p>

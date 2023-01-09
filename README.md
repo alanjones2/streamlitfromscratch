@@ -1,5 +1,7 @@
 # Streamlit From Scratch
 
+An online course based on...
+
 A series of articles that explores how to use Streamlit to create pure Python web app from the bottom up.
 
 The code for each article can be found in the [code](./code) directory.

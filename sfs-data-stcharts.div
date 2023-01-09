@@ -1,0 +1,32 @@
+<h1>Streamlit charts</h1>
+<p>Streamlit supports several charting packages and also has three built-in charts that are essentially wrappers around their  <em>Altair</em> equivalents.</p>
+<p>The built-in charts are <code>st.line_chart()</code>, <code>st.bar_chart()</code> and <code>st.area_chart()</code>. They are attractive and easy to use but not very flexible.</p>
+<p>Here is a line chart that shows the decline of Bitcoin and Ethereum over most of 2022.</p>
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.line-btc-eth.png)-->
+<p><img src="./images/st.line-btc-eth.png" width="50%"></p>
+<p>And here is the code that produced it. </p>
+<pre><code class="language-Python">st.line_chart(df, x='Month')
+</code></pre>
+<p>The built-in charts require a data source, <code>df</code> and a data column to use as the x-axis. If the y-axis is left undefined then all of the remaining columns will be plotted. Otherwise, the y-axis should be a single column name, or a list of column names.</p>
+<p>Here is a bar chart of the just the Bitcoin data.</p>
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/st.bar-btc.png)-->
+
+<p><img src="./images/st.bar-btc.png" width=50%"></p>
+<pre><code class="language-Python">st.bar_chart(df, y = 'Bitcoin', x='Month')
+</code></pre>
+<p>I have only plotted one column, here, because the default behaviour of this chart is to plot a stacked bar chart which means that we are adding one or more sets of values in order to construct the bar. </p>
+<p>This would be entirely suitable for a sales chart where individual items can be accumulated to form a total. Like this one that tracks the sales of items manufactured by the <em>The Incredible Widget Company</em> over a year. Their flagship product is the <em>Widget</em> but they have two other products, the <em>Wodget</em> and the <em>Wudget</em> and we can see how well they are selling, below.</p>
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-bar.png)-->
+<p><img src="./images/widget-sales-bar.png" width=50%"></p>
+<p>From this chart we can see that overall sales are not improving despite the apparent popularity of <em>Wodgets</em>. Sales of <em>Widgets</em>, their staple product, are holding up but the decline in the sales of <em>Wudgets</em> is letting the company down.</p>
+<p>Here is the code to produce that chart.</p>
+<pre><code class="language-Python">st.bar_chart(salesdf, x='Quarter')
+</code></pre>
+<p>Notice that the y-axis is not defined, so all remaining columns are plotted.</p>
+<p>The last built-in chart is the area chart. Here are the sales data again.</p>
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/widget-sales-area.png)-->
+<p><img src="./images/widget-sales-area.png" width="50%"></p>
+<pre><code class="language-Python">st.area_chart(salesdf, x='Quarter')
+</code></pre>
+<p>Here you can see the relative performance of the sales lines, although in the area chart they not additive, so we do not easily get a view of the overall sales performance.</p>
+<p>I have to say, I am not a great fan of this default colour scheme and there doesn’t seem to be any obvious way of changing it.</p>
