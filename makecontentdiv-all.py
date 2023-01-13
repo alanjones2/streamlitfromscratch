@@ -13,7 +13,8 @@ names = ["sfs-Intro",
         "sfs-data-plotly",
         "sfs-data-bokeh",
         "sfs-data-vega-lite",
-        "sfs-dashboard-layouts"]
+        "sfs-dashboard-layouts",
+        "sfs-conclusion"]
 
 for name in names:
     print(name)

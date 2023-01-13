@@ -18,11 +18,9 @@ _This part of the course is not yet ready so please refer to the original articl
 To be updated...
 ## Streamlit has simple but effective components for user interaction and layout which let us build effective and attractive dashboard applications
 
-TK image
-
 We are going to explore some of the layout and user interface features of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.
 
-TK image of app(s)
+<img src="./images/3-apps.webp" width="100%">
 
 Streamlit tries to make life simple for the app developer and so does not have the vast number of UI options that are available in other technologies such as HTML and Javascript UI libraries. But using its layout components you can easily design an attractive and capable web page.
 
@@ -30,7 +28,7 @@ A Streamlit app is constructed with various container elements and user interfac
 
 But first we need some data to work with.
 
-The code below gets four data files from my Github repository [CO2](https://github.com/alanjones2/CO2). They contain data on world-wide carbon dioxide emissions over the last couple of hundred years. The original data comes from Our World in Data[1] and I have simply broken that down into four different subsets. The first contains data for each country in the world, the second breaks it down by continent, the third is for the whole world and the last one represents groups of countries by income type.
+The code below gets four data files from my Github repository [CO2](https://github.com/alanjones2/CO2). They contain data on world-wide carbon dioxide emissions over the last couple of hundred years. The original data comes from Our World in Data[1] and I have simply broken that down into four different subsets. The first contains data for each country in the world, the second breaks it down by continent, the third is for the whole world and the last one represents groups of countries by income type.  (We won’t use all of it so you can miss out so of the code below, but it’s there for you if you want it.)
 
 I've also included all of the libraries that we will use in this article.
 
@@ -79,7 +77,9 @@ In our functions there are no parameters and so the the functions will only ever
 
 The dataframes all look something like this:
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/co2-table-countries.png)-->
+
+<img src="./images/co2-table-countries.png">
 
 
 They contain columns for the 
@@ -106,18 +106,22 @@ year = st.slider('Select year',1850,2020)
 
 The ``st.slider`` method requires three parameters, a prompt string and two numerical limits. The return value is a value between the limits corresonding to the position of the slider. In the image below the range is between 1850 and 2020 and the return value will be 1978.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/slider.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/slider.png)-->
+
+<img src="./images/slider.png" width="50%">
 
 Remember that when a UI control changes, the whole of the app is re-run. Only when the slider is moved will the return value be updated.
 
 A fourth parameter can be given to set a default value for the slider, e.g.
 
-```Python
+``` Python
 year = st.slider('Select year',1850,2020,1950)
 ````
 We are going to use the year value in a Plotly choropleth which will give us a figure like this one, below.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth.png)-->
+
+<img src="./images/choropleth.png" width="50%">
 
 
 Here is the code. There is nothing particularly difficult in creating the choropleth. Plotly does all the hard work for you, we just have to provide the appropriate values.
@@ -126,11 +130,13 @@ Here is the code. There is nothing particularly difficult in creating the chorop
 max = df_countries['Annual CO₂ emissions'].max()
 
 year = st.slider('Select year',1850,2020)
-fig1 = px.choropleth(df_countries[df_countries['Year']==year], locations="Code",
+fig1 = px.choropleth(df_countries[df_countries['Year']==year], 
+                    locations="Code",
                     color="Annual CO₂ emissions",
                     hover_name="Entity",
                     range_color=(0,max),
                     color_continuous_scale=px.colors.sequential.Blues)
+
 st.plotly_chart(fig1)
 ````
 
@@ -144,7 +150,9 @@ In the code we have used the value of ``year`` to filter the dataframe and that 
 
 The detail of this figure is a little difficult to see but if you use the expander control (which expands the image to fullscreen) and/or the zoom facility individual countries can be easily seen.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/choropleth-full-screen.png)-->
+
+<img src="./images/choropleth-full-screen.png" width="50%">
 
 Sliders can also be used for categorical values and these also support a range. For example:
 
@@ -160,7 +168,9 @@ st.write('You selected months between', start_month, 'and', end_month)
 
 This lets the user select the beginning and end of a list of months with the default result being 'Jan' and 'Dec'. Here is the result:
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/select_slider.png)-->
+
+<img src="./images/select_slider.png" width="50%">
 
 ## Select boxes
 
@@ -181,7 +191,9 @@ st.plotly_chart(fig2, use_container_width=True)
 ````
 The result looks like this.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box_continents.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/single_select_box_continents.png)-->
+
+<img src="./images/single_select_box_continents.png" width="50%">
 
 Clicking in the field that displays the continent will bring down a menu from which other values can be selected.
 
@@ -204,8 +216,9 @@ st.plotly_chart(fig, use_container_width=True)
 ````
 Here is the result with five continents selected.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/multiple_select_box_continents.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/multiple_select_box_continents.png)-->
 
+<img src="./images/multiple_select_box_continents.png" width="50%">
 
 ## Radio buttons
 
@@ -228,7 +241,9 @@ if chart == 'Comparing continents':
 
 The result looks like this.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/radio_button_example.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/radio_button_example.png)-->
+
+<img src="./images/radio_button_example.png" width="50%">ç
 
 ## Layout
 
@@ -306,7 +321,9 @@ You can see that I have used ``with`` blocks to contain the display code: one fo
 
 The result is actually a simple but complete dashboard app and it looks like this.
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_app.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/sidebar_app.png)-->
+
+<img src="./images/sidebar_app.png" width="50%">
 
 
 ### Column layout
@@ -362,7 +379,8 @@ with st.container():
 
 ````
 
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/column_app.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/column_app.png)-->
+<img src="./images/column_app.png" width="50%">
 
 ### Tabs
 
@@ -396,13 +414,10 @@ with st.container():
         with tab2:
             # code to draw the compared continent data
 ````
-![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png)
+<!--![](https://github.com/alanjones2/streamlitfromscratch/raw/main/images/col_tab_app.png)-->
 
+<img src="./images/col_tab_app.png" width="50%">
 
-
-### Conclusion
-
-TK Deployment
 
 ---
 

@@ -80,6 +80,9 @@
                             <li class="nav-item">
                                 <a class="nav-link active" onclick="getContent(13)" href="#">Layout and Dashboards</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" onclick="getContent(14)" href="#">Conclusion</a>
+                            </li>
                           </ul>       
             </div>
         </div>
@@ -128,7 +131,8 @@
                         "sfs-data-plotly.div",
                         "sfs-data-bokeh.div",
                         "sfs-data-vega-lite.div",
-                        "sfs-dashboard-layouts.div"
+                        "sfs-dashboard-layouts.div",
+                        "sfs-conclusion.div"
                         ]
         async function getContent(i){
             let response = await fetch(contentPages[i]);
@@ -140,6 +144,7 @@
             }
             window.scrollTo(0, 0);
             Prism.highlightAll();
+            contentIndex = i;
         }
         function nextPage(){
             contentIndex++;
