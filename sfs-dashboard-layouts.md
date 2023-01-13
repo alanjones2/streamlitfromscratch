@@ -1,22 +1,5 @@
-# Build a Dashboard with Streamlit's Layout and UI features
+## Build a Dashboard with Streamlit's Layout and UI features
 
-_This part of the course is not yet ready so please refer to the original article on Medium (no paywall)_
-
-<h2><a href="https://towardsdatascience.com/streamlit-from-scratch-build-a-data-dashboard-with-streamlits-layout-and-ui-features-a2fc2f0a6a59?sk=70e6b7b65cc87093fb7fd5727ced6c0b"
-        target="_blank">
-        Streamlit from Scratch: Build a Data Dashboard with Streamlit's Layout and
-        UI features</a>
-</h2>
-
-
-
----
----
----
----
-
-To be updated...
-## Streamlit has simple but effective components for user interaction and layout which let us build effective and attractive dashboard applications
 
 We are going to explore some of the layout and user interface features of Streamlit so as to create a simple but effective dashboard app. In previous articles in this series, we have seen how to present text, media and data, now we use this knowledge and add layout and user interface components to create a complete application.
 
