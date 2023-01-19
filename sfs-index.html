@@ -1,7 +1,15 @@
 <html>
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDYY6RYRK1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
+        gtag('config', 'G-VDYY6RYRK1');
+    </script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
 
@@ -9,11 +17,13 @@
     <script src="./prism/prism.js"></script>
 
     <style>
-        pre {width:80%}
+        pre {
+            width: 80%
+        }
     </style>
 </head>
 
-<body  class = "p5 text-dark">
+<body class="p5 text-dark">
 
     <div class="jumbotron" style="padding:2rem">
         <h1 class="display-6" style="font-weight:bolder">Streamlit<span style="font-weight:lighter"> from Scratch</span>
@@ -21,10 +31,11 @@
                 Python</span>
         </h1>
         <hr />
-        <span class = "text-secondary mr-4">
-        Streamlit is a framework for creating Data Science apps in Python.<br/> 
-        <b>Streamlit from Scratch</b> is an evolving onlne resource that will teach you how to get started with Streamlit<br/> 
-        from building fully functional data dashboard apps using Streamlit's layout and data presentation features.
+        <span class="text-secondary mr-4">
+            Streamlit is a framework for creating Data Science apps in Python.<br />
+            <b>Streamlit from Scratch</b> is an evolving onlne resource that will teach you how to get started with
+            Streamlit<br />
+            from building fully functional data dashboard apps using Streamlit's layout and data presentation features.
         </span>
     </div>
 
@@ -35,110 +46,113 @@
                 <h3>Contents</h3>
             </div>
             <div class="row ml-4">
-                
+
                 <ul class="nav flex-column">
-                            <li class="nav-item">
-                              <a class="nav-link active" onclick="getContent(0)" href="#">Introduction</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(1)" href="#">Installation</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(2)" href="#">Editors</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(3)" href="#">Displaying Text</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(4)" href="#">Including Media</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(5)" href="#">Representing data:intro</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(6)" href="#">Representing data: text</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(7)" href="#">Representing data: Streamlit charts</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(8)" href="#">Representing data: PyPlot</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(9)" href="#">Representing data: Altair</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(10)" href="#">Representing data: Plotly</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(11)" href="#">Representing data: Bokeh</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(12)" href="#">Representing data: Vega-Lite</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" onclick="getContent(13)" href="#">Layout and Dashboards</a>
-                            </li>
-                          </ul>       
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(0)" href="#">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(1)" href="#">Installation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(2)" href="#">Editors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(3)" href="#">Displaying Text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(4)" href="#">Including Media</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(5)" href="#">Representing data:intro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(6)" href="#">Representing data: text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(7)" href="#">Representing data: Streamlit
+                            charts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(8)" href="#">Representing data: PyPlot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(9)" href="#">Representing data: Altair</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(10)" href="#">Representing data: Plotly</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(11)" href="#">Representing data: Bokeh</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(12)" href="#">Representing data: Vega-Lite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(13)" href="#">Layout and Dashboards</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="col-sm-6 p-4 ml-4 mr-4 mb-4 bg-white">           
+        <div class="col-sm-6 p-4 ml-4 mr-4 mb-4 bg-white">
             <div id="content" data-prismjs-copy-timeout="500" data-prismjs-copy="Copy code"></div>
-            <ul class="navbar navbar-expand-sm" style="background-color: lightgray;padding-left: 0%;font-weight:bold;font-size:120%">
-                <a class="nav-link active" onclick="previousPage()" href="#">< Previous</a>
-                <a class="nav-link active" onclick="firstPage()" href="#">Back to start</a>
-                <a class="nav-link active" onclick="nextPage()" href="#">Next ></a>
+            <ul class="navbar navbar-expand-sm"
+                style="background-color: lightgray;padding-left: 0%;font-weight:bold;font-size:120%">
+                <a class="nav-link active" onclick="previousPage()" href="#">
+                    < Previous</a>
+                        <a class="nav-link active" onclick="firstPage()" href="#">Back to start</a>
+                        <a class="nav-link active" onclick="nextPage()" href="#">Next ></a>
             </ul>
         </div>
-        <div class="col-sm-3 p-4 ml-4 mr-4 mb-4 bg-white">           
+        <div class="col-sm-3 p-4 ml-4 mr-4 mb-4 bg-white">
         </div>
     </div>
     <script>
         contentIndex = 0;
         contentPages = ["sfs-Intro.div",
-                        "sfs-Installation.div",
-                        "sfs-editors.div",
-                        "sfs-text.div",
-                        "sfs-media.div",
-                        "sfs-data-intro.div",
-                        "sfs-data-text.div",
-                        "sfs-data-stcharts.div",
-                        "sfs-data-pyplot.div",
-                        "sfs-data-altair.div",
-                        "sfs-data-plotly.div",
-                        "sfs-data-bokeh.div",
-                        "sfs-data-vega-lite.div",
-                        "sfs-dashboard-layouts.div"
-                        ]
-        async function getContent(i){
+            "sfs-Installation.div",
+            "sfs-editors.div",
+            "sfs-text.div",
+            "sfs-media.div",
+            "sfs-data-intro.div",
+            "sfs-data-text.div",
+            "sfs-data-stcharts.div",
+            "sfs-data-pyplot.div",
+            "sfs-data-altair.div",
+            "sfs-data-plotly.div",
+            "sfs-data-bokeh.div",
+            "sfs-data-vega-lite.div",
+            "sfs-dashboard-layouts.div"
+        ]
+        async function getContent(i) {
             let response = await fetch(contentPages[i]);
             if (response.ok) {
-                let result = await response.text();  
-                    document.getElementById("content").innerHTML=result;
+                let result = await response.text();
+                document.getElementById("content").innerHTML = result;
             } else {
                 alert(response.status);
             }
             window.scrollTo(0, 0);
             Prism.highlightAll();
         }
-        function nextPage(){
+        function nextPage() {
             contentIndex++;
-            if (contentIndex >= contentPages.length) contentIndex = contentPages.length-1;
-            getContent(contentIndex); 
+            if (contentIndex >= contentPages.length) contentIndex = contentPages.length - 1;
+            getContent(contentIndex);
 
         }
-        function previousPage(){
+        function previousPage() {
             contentIndex--;
             if (contentIndex < 0) contentIndex = 0;
-            getContent(contentIndex); 
+            getContent(contentIndex);
         }
-        function firstPage(){
+        function firstPage() {
             contentIndex = 0;
-            getContent(contentIndex); 
+            getContent(contentIndex);
         }
         firstPage();
 
-        
+
     </script>
 
     <footer class="text-right text-secondary p-4 m-4">
