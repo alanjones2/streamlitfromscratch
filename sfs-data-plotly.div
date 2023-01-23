@@ -1,5 +1,5 @@
 <h1>Plotly</h1>
-<p>Plotly is one of the most popular plotting packages for Python and the web. It is arguably easier to use than Altair and better looking than Pyplot — although there are some restrictions on its use in Streamlit.</p>
+<p>Plotly is one of the most popular plotting packages for Python and the web. It is arguably easier to use than Altair and better looking than Pyplot — although there are some restrictions on its use in Streamlit. Plotly charts are also interactive. Hovering over them shows you the data points and you can also pan and zoom in on a plot.</p>
 <p>We will use the package recommended by Plotly, Plotly Express, and to use it we import it like this.</p>
 <pre><code class="language-Python">import plotly.express as px
 </code></pre>
@@ -23,6 +23,8 @@ st.plotly_chart(c)
 st.plotly_chart(c)
 </code></pre>
 <p>We are employing <code>px.bar()</code> to draw the chart but apart from that the only difference between this and the line chart is that can you specify the barmode which is either group or stack.</p>
-<p>Plotly is one of the simplest packages to get started with but I have a slight problem with the default colour scheme, I don’t really like it that much - I admit this is a purely personal gripe.</p>
-<p><strong>Note: Streamlit have now changed the default theme for Plotly and it is now much more in keeping with the rest of Streamlit - a big improvement. This part of the tutorial will be updated to reflect the change.</strong></p>
-<p>Plotly charts are interactive. Hovering over them shows you the data points and you can also pan and zoom in on a plot.</p>
+<p>Plotly is one of the simplest packages to get started with but there are restrictions when used with Streamlit. Streamlit imposes its own theme that overrides the default Plotly one. You can revert to the Plotly theme like this:</p>
+<pre><code class="language-Python">st.plotly_chart(c, theme=None)
+</code></pre>
+<p>The argument <code>theme</code> can take one of two values, <code>Streamlit</code> or <code>None</code>, which give you the Streamlit theme and the default Plotly theme, respectively.</p>
+<p>Personally, I don't much like the default Plotly theme, so the (relatively new) Streamlit one is quite welcome but it is a shame that other themes cannot be used - there is a way around this, however and I shall add an update in the near future to address this omission.</p>
