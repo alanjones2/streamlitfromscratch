@@ -1,7 +1,7 @@
 import markdown
 
 #names = ["StreamlitFromScratch0""StreamlitFromScratch1""StreamlitFromScratch2""StreamlitFromScratch3""StreamlitFromScratch4"]
-name = "sfs-dashboard-layouts"
+name = "./deploytocloud/deploytocloud"
 with open(f'./{name}.md', 'r') as reader:
     md = reader.read()
 
