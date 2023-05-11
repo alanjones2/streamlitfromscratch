@@ -1,0 +1,221 @@
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://alanjones2.github.io/streamlitfromscratch/images/3-apps.webp">
+    <meta name="twitter:image:src" content="https://alanjones2.github.io/streamlitfromscratch/images/3-apps.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="article:author" content="https://alanjones2.github.io/streamlitfromscratch">
+    <meta name="twitter:creator" content="@MrAlanJones">
+    <meta name="author" content="Alan Jones">
+
+
+    <meta content="Streamlit from Scratch: easily create compelling data science apps with the Streamlit framework"
+        name="description">
+    <meta content="https://alanjones2.github.io/streamlitfromscratch" property="og:url">
+    <meta content="Streamlit from Scratch" property="og:title">
+
+
+
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDYY6RYRK1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-VDYY6RYRK1');
+    </script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+
+    <link rel="stylesheet" href="./prism/prism.css">
+    <script src="./prism/prism.js"></script>
+
+    <style>
+        pre {
+            width: 80%
+        }
+    </style>
+</head>
+
+<body class="p5 text-dark">
+
+    <div class="jumbotron" style="padding:2rem">
+        <h1 class="display-6" style="font-weight:bolder">Streamlit<span style="font-weight:lighter"> from Scratch</span>
+            <span class="text-secondary" style="font-size:50%;font-weight: lighter;"> building data science apps with
+                Python</span>
+        </h1>
+        <hr />
+        <span class="text-secondary mr-4">
+            Streamlit is a framework for creating Data Science apps in Python.<br />
+            <b>Streamlit from Scratch</b> is an online resource that will teach you how to get started with
+            Streamlit<br />
+            from you first simple text-based web app, then adding media, presenting data, and finally building fully
+            functional data dashboard apps<br />
+            using Streamlit's layout and data presentation features.
+        </span>
+
+
+    </div>
+
+    <ul class="navbar navbar-expand-lg navbar-light lead  mr-4">
+        <a class="nav-link active ml-auto" href="index.html">Home</a>
+        <a class="nav-link active" href="sfs-resources.html">Resources</a>
+        <a class="nav-link active" href="sfs-about.html">About</a>
+    </ul>
+
+
+    <div class="row">
+        <div class="col-sm-2 p-2 ml-4 mr-4 mb-4 bg-white border-left">
+            <div class="row ml-4">
+                <!-- menu-->
+                <h3>Contents</h3>
+            </div>
+            <div class="row ml-4">
+
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(0)" href="#">Introduction</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(1)" href="#">Installation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(2)" href="#">Editors</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(3)" href="#">Displaying Text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(4)" href="#">Including Media</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(5)" href="#">Representing data:intro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(6)" href="#">Representing data: text</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(7)" href="#">Representing data: Streamlit
+                            charts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(8)" href="#">Representing data: PyPlot</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(9)" href="#">Representing data: Altair</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(10)" href="#">Representing data: Plotly</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(11)" href="#">Representing data: Bokeh</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(12)" href="#">Representing data: Vega-Lite</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(13)" href="#">Layout and Dashboards</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="getContent(14)" href="#">Conclusion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-6 p-4 ml-4 mr-4 mb-4 bg-white">
+            <div id="content" data-prismjs-copy-timeout="500" data-prismjs-copy="Copy code"></div>
+            <ul class="navbar navbar-expand-lg navbar-light bg-light lead  mr-4">
+                <a class="nav-link active" onclick="previousPage()" href="#">
+                    < Previous</a>
+                        <a class="nav-link active" onclick="firstPage()" href="#">Back to start</a>
+                        <a class="nav-link active" onclick="nextPage()" href="#">Next ></a>
+            </ul>
+        </div>
+        <div class="col-sm-3 p-4 ml-4 mr-4 mb-4 bg-white ">
+
+            <div class="lead">
+                <h1>Streamlit from Scratch is now a book!</h1>
+                <p>That means that this site will be retired, soon and the newsletter on Substack will cease, too.</p>
+                <p>It's not bad news, though. You can get the book from Gumroad for only $1 (for a limited time). 
+                And that is good news because it means that for the investment of only a dollar, <i>you will be able to 
+                download any future updates and improvements for <b>free</b></i>.</p>
+                <h3>
+                <a href="https://alanjones.gumroad.com/l/streamlitfromscratch" target="_blank"><b>Get the book here for only $1</b></a>
+                </h3>
+                <p> 
+                And dont' forget this is a limited offer - the price will go up in the future.
+                </p>
+
+
+            </div>
+            <hr />
+
+
+        </div>
+    </div>
+    <script>
+        contentIndex = 0;
+        contentPages = ["sfs-Intro.div",
+            "sfs-Installation.div",
+            "sfs-editors.div",
+            "sfs-text.div",
+            "sfs-media.div",
+            "sfs-data-intro.div",
+            "sfs-data-text.div",
+            "sfs-data-stcharts.div",
+            "sfs-data-pyplot.div",
+            "sfs-data-altair.div",
+            "sfs-data-plotly.div",
+            "sfs-data-bokeh.div",
+            "sfs-data-vega-lite.div",
+            "sfs-dashboard-layouts.div",
+            "sfs-conclusion.div"
+        ]
+        async function getContent(i) {
+            let response = await fetch(contentPages[i]);
+            if (response.ok) {
+                let result = await response.text();
+                document.getElementById("content").innerHTML = result;
+            } else {
+                alert(response.status);
+            }
+            window.scrollTo(0, 0);
+            Prism.highlightAll();
+            contentIndex = i;
+        }
+        function nextPage() {
+            contentIndex++;
+            if (contentIndex >= contentPages.length) contentIndex = contentPages.length - 1;
+            getContent(contentIndex);
+
+        }
+        function previousPage() {
+            contentIndex--;
+            if (contentIndex < 0) contentIndex = 0;
+            getContent(contentIndex);
+        }
+        function firstPage() {
+            contentIndex = 0;
+            getContent(contentIndex);
+        }
+        firstPage();
+
+
+    </script>
+
+
+
+    <footer class="text-right text-secondary p-4 m-4">
+
+        <i class="m-4">&copy; 2022, Alan Jones</i>
+
+    </footer>
+</body>
+
+</html>
