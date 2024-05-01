@@ -1,207 +1,114 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <meta property="og:image" content="https://alanjones2.github.io/streamlitfromscratch/images/3-apps.webp">
-    <meta name="twitter:image:src" content="https://alanjones2.github.io/streamlitfromscratch/images/3-apps.webp">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta property="article:author" content="https://alanjones2.github.io/streamlitfromscratch">
-    <meta name="twitter:creator" content="@MrAlanJones">
-    <meta name="author" content="Alan Jones">
-
-
-    <meta content="Streamlit from Scratch: easily create compelling data science apps with the Streamlit framework"
-        name="description">
-    <meta content="https://alanjones2.github.io/streamlitfromscratch" property="og:url">
-    <meta content="Streamlit from Scratch" property="og:title">
-
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VDYY6RYRK1"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-
-        gtag('config', 'G-VDYY6RYRK1');
-    </script>
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamlit from Scratch</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    /* Custom styles */
+  </style>
 </head>
 
-<body class="container">
+<body>
 
-    <div class="jumbotron" style="padding:2rem">
-        <hr />
-        <h1 class="display-6" style="font-weight:bolder;color: darkblue;">Streamlit<span style="font-weight:lighter">
-                from Scratch</span>
-            <span class="text-secondary" style="font-size:50%;font-weight: lighter;color: darkblue;"> building data
-                science apps with
-                Python</span>
-        </h1>
-        <hr />
-        <span class="lead">
-            <p>Streamlit is a framework for creating Data Science apps in Python.</p>
-            <div>
-                <p><b>Streamlit from Scratch</b> will teach you how to get started with Streamlit in 5 steps:</p>
-                <div class="row">
-                    <div class="col-sm-6 ">
-                        <ul>
-                            <li>First, we show you the tools that you will need</li>
-                            <li>We start coding with a simple text-based web app</li>
-                            <li>Then we add media - images, video, and audio</li>
-                        </ul>
-                    </div>
-                    <div class="col-sm-6 ">
-                        <ul>
-                            <li>Next we present data - charts and maps using Matplotlib, Plotly and other charting tools
-                            </li>
-                            <li>Finally, we create fully interactive data dashboard apps using Streamlit's simple but
-                                powerful
-                                layout capabilities</li>
-                        </ul>
-                    </div>
-                <div>Maintained by <a href="https://alanjones2.github.io" target='_blank'>Alan Jones</a></div>
-                </div>
-
-            </div>
-        </span>
+  <!-- Header -->
+  <header class="bg-dark text-light py-4">
+    <div class="container">
+      <h1 class="display-4">Streamlit from Scratch</h1>
+      <p class="lead">Streamlit is a framework for developing data science and vizualization applications.
+        <i>Streamlit from Scratch</i> is a a book that will quickly get you up to speed developing those apps.
+      </p>
     </div>
-    <!--
-    <ul class="navbar navbar-expand-lg navbar-light lead  mr-4">
-        <a class="nav-link active ml-auto" href="book-index.html">Home</a>
-        <a class="nav-link active" href="book-resources.html">Resources</a>
-        <a class="nav-link active" href="book-about.html">About</a>
-    </ul>
+  </header>
+
+  <!-- Book Details Section -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <img src="sfscover.png" class="img-fluid" alt="Book Cover">
+          <h3>Author</h3>
+
+          <p>Alan Jones is an experienced developer, teacher and writer. 
+          He has spend many years in industry as well as teaching in a university in London, UK.
+        He now spends hs time writing about Data Science, Data Visualization, AI and related subjects. </p>
+          
+          <p>Release Date: May, 2024</p>
+          <!--<p>ISBN: 978-1-234567-89-0</p>-->
+          <a href="#" class="btn btn-primary">Buy Now</a>
+        </div>
+        <div class="col-md-6">
+
+          <p>
+            Streamlit is one of the most exciting things to have happened in the Python world.
+            It is a framework for creating simple and elegant web applications in pure Python.
+            Although it is aimed primarily at Data Scientists and Analysts, you can also use it as a general-
+            purpose tool for creating web applications.
+
+            No knowledge of HTML or JavaScript is needed.
+
+            <i>Streamlit from Scratch</i> will take from building a simple we page through to creating fully finctional
+            interactive
+            data dashboards.
+
+            It covers:
+          <ul>
+            <li>Installing Python and Streamlit</li>
+            <li>Choosing and editor</li>
+            <li>Displaying text - including plain text as well as special formats such as Markdown and LaTeX</li>
+            <li>Using Media - Images, Video and Audio</li>
+            <li>Presenting Data</li>
+            <li>Tables and dataframes</li>
+            <li>Charts and Graphs</li>
+            <li>Charting libraries such as Plotly and Altair and others</li>
+            <li>Building a Data Dashboard with Streamlit's Layout and UI features</li>
+            <li>Designing the User interface with UI components such as sliders, select boxes, and radio buttons</li>
+            <li>Creating a layout with columns, tabs and a sidebar</li>
+          </ul>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews/Testimonials Section -->
+  <!--
+<section class="bg-light py-5">
+  <div class="container">
+    <h2>Reviews & Testimonials</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">"This book changed my life! Highly recommended!"</p>
+            <p class="card-text"><small class="text-muted">- John Doe</small></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card mb-3">
+          <div class="card-body">
+            <p class="card-text">"Couldn't put it down. Brilliantly written!"</p>
+            <p class="card-text"><small class="text-muted">- Jane Smith</small></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 -->
-
-
-    <div class="row">
-        <div class="col-sm-8 text-right">
-            <div class="lead">
-                <h3>Streamlit from Scratch is an ebook available in PDF or ePub format.</h3>
-                <p>You can get the book from Gumroad from only $5.
-                    And that is good news because it means that for the investment of only a few dollars, you will be
-                        able to download any future updates and improvements for <b>free</b>.</p>
-            </div>
-            <h3>
-                <a href="https://alanjones.gumroad.com/l/streamlitfromscratch" target="_blank"><b>Download from 
-                        $5</b></a>
-            </h3>
-
-            <div class="lead ">
-                You can find more Streamlit resources and other data science, data visualisation and programming
-                articles on
-                <a href="https://alanjones2.github.io" target="_blank">my web site</a>
-            </div>
-            <div class="row pt-4">
-       
-                <div class="col-sm-12">
-                   
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4 ">
-            <h4>Related articles...</h4>
-            <li><span class="lead"><a href="deploytocloud/deploytocloud2.html" target="_blank">
-                    Deploy a Streamlit App to the Cloud</a></span></li>
-            <li><span class="lead"><a href="mdcolour/mdcolour.html" target="_blank">
-                    Using Colour in Streamlit Markdown</a></span></li>
-
-            
-            <!--
-            <div>
-                <h4>The original Streamlit from Scratch Articles</h4>
-                <hr />
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-4 text-center">1</div>
-                    </div>
-                    <div class="col-sm-10">
-                        <h5><a href="https://towardsdatascience.com/streamlit-from-scratch-getting-started-f4baa7dd6493?sk=2c009fc4106a896467bda51901e31086"
-                                target="_blank">
-                                Streamlit from Scratch: Getting Started
-                            </a></h5>
-                        <p class="font-weight-light">
-                            Get the tools you need and how to use them to create your first interactive web app in
-                            Python and Streamlit
-
-                        </p>
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-4 text-center">2</div>
-
-                    </div>
-                    <div class="col-sm-10">
-                        <h5><a href="https://towardsdatascience.com/streamlit-from-scratch-embedding-images-video-and-audio-8b2e8b98fad4?sk=df84eef479683e1b50ab2666c624f5d8"
-                                target="_blank">
-                                Streamlit from Scratch: Embedding Images, Video and Audio
-                            </a></h5>
-                        <p class="font-weight-light">
-                            Streamlit was designed to help data scientists but it’s not just about data, adding media
-                            to your apps helps to communicate your ideas
-
-                        </p>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-4 text-center">3</div>
-
-                    </div>
-                    <div class="col-sm-10">
-                        <h5><a href="https://towardsdatascience.com/streamlit-from-scratch-presenting-data-d5b0c77f9622?sk=ab53df2ace41e7f337f79a790f9fd399"
-                                target="_blank">
-                                Streamlit from Scratch: Presenting Data
-                            </a></h5>
-                        <p class="font-weight-light">
-                            From text and tables to sophisticated charts. From Pandas dataframes to Matplotlib, Plotly,
-                            Altair and other charts. Streamlit provides a comprehensive set of tools for presenting your
-                            data
-                        </p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-1">
-                        <div class="display-4 text-center">4</div>
-                    </div>
-                    <div class="col-sm-10">
-                        <h5><a href="https://towardsdatascience.com/streamlit-from-scratch-build-a-data-dashboard-with-streamlits-layout-and-ui-features-a2fc2f0a6a59?sk=70e6b7b65cc87093fb7fd5727ced6c0b"
-                                target="_blank">
-                                Streamlit from Scratch: Build a Data Dashboard with Streamlit's Layout and
-                                UI features</a></h5>
-                        <p class="font-weight-light">Streamlit has simple but effective components for user interaction
-                            and layout
-                            which let us build effective and attractive data science and dashboard applications
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-            -->
-        </div>
+  <!-- Footer -->
+  <footer class="bg-dark text-light py-4">
+    <div class="container text-center">
+      <p>&copy; 2024 Book Title</p>
     </div>
+  </footer>
 
-    <div class="row">
-
-    </div>
-
-
-
-    <div class="row m-4">
-        < <footer class="text-right text-secondary p-4 m-4">
-
-            <!--<i class="text-right">&copy; 2024, Alan Jones</i>-->
-
-            </footer>
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
